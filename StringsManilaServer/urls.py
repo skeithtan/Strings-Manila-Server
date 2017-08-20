@@ -16,8 +16,14 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from admin_auth.views import SignInView
+from graphene_django.views import GraphQLView
+from entity_management.urls import entity_management_urls
+from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     url(r'^database/', admin.site.urls),
-    url(r'^admin/sign-in/', SignInView.as_view())
+    url(r'^admin/sign-in/', SignInView.as_view()),
+    url(r'^graphiql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
 ]
+
+urlpatterns += entity_management_urls

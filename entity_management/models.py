@@ -6,7 +6,6 @@ from django.db.models import (
     ForeignKey,
     PositiveIntegerField,
     CASCADE,
-    FileField,
     BooleanField,
     DateTimeField
 )
@@ -15,6 +14,10 @@ from django.db.models import (
 class Stall(Model):
     name = CharField(max_length=64)
     is_active = BooleanField(default=True)
+
+    @staticmethod
+    def all_active():
+        return Stall.objects.filter(is_active=True)
 
     def deactivate(self):
         self.is_active = False
@@ -30,10 +33,14 @@ class Stall(Model):
 class Product(Model):
     name = CharField(max_length=64)
     description = CharField(max_length=256)
-    photo = CharField(max_length=256)
+    image = CharField(max_length=256, default="http://i.imgur.com/a0HmrDW.png")
     stall = ForeignKey(Stall, on_delete=CASCADE)
     quantity = PositiveIntegerField(default=0)
     is_active = BooleanField(default=True)
+
+    @staticmethod
+    def all_active():
+        return Product.objects.filter(is_active=True)
 
     def deactivate(self):
         if self.is_active:

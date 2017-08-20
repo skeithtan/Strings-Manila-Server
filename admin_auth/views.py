@@ -8,6 +8,7 @@ class SignInView(APIView):
     @staticmethod
     def post(request):
         if "username" not in request.data or "password" not in request.data:
+            print(request.data)
             return Response(data={
                 "error": "Missing username or password"
             }, status=400)
@@ -29,7 +30,6 @@ class SignInView(APIView):
             "user": user
         })[0]
 
-        print(token.key)
         return Response(data={
             "token": token.key
         }, status=200)

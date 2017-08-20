@@ -38,8 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'graphene_django',
+    'entity_management'
 ]
+
+GRAPHENE = {
+    'SCHEMA': 'StringsManilaServer.schema.schema'
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

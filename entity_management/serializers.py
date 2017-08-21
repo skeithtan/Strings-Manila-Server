@@ -14,3 +14,4 @@ class ProductSerializer(ModelSerializer):
         model = Product
         fields = ('name', 'description', 'image', 'stall', 'id', 'is_active')
         read_only_fields = ('id', 'is_active')
+

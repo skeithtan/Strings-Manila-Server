@@ -19,6 +19,10 @@ class Stall(Model):
     def all_active():
         return Stall.objects.filter(is_active=True)
 
+    @property
+    def active_products(self):
+        return self.product_set.filter(is_active=True)
+
     def deactivate(self):
         self.is_active = False
         for product in self.product_set.all():

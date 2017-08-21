@@ -2,6 +2,7 @@ from .models import *
 from graphene_django.types import DjangoObjectType
 from graphene import (
     AbstractType,
+    ObjectType,
     Float,
     List,
     Field,
@@ -9,16 +10,21 @@ from graphene import (
 )
 
 
-class StallType(DjangoObjectType):
-    class Meta:
-        model = Stall
-
-
 class ProductType(DjangoObjectType):
-    current_price = Float(source='current_price_history')
+    current_price = Float(source='current_price')
 
     class Meta:
         model = Product
+
+
+class StallType(DjangoObjectType):
+    active_products = List(ProductType)
+
+    def resolve_active_products(self, args, context, info):
+        return Stall.objects.get(id=self.id).active_products
+
+    class Meta:
+        model = Stall
 
 
 class PriceHistoryType(DjangoObjectType):

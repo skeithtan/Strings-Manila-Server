@@ -99,3 +99,43 @@ class ProductDetail(APIView):
         product = get_object_or_404(Product, id=product_id)
         product.deactivate()
         return Response(status=200)
+
+
+class RestockProductView(APIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated, IsSuperuser)
+
+    @staticmethod
+    def post(request, product_id):
+        product = get_object_or_404(Product, id=product_id)
+
+        if "quantity" not in request.data or "add" not in request.data:
+            return Response({
+                "error": '"quantity" and "add" required'
+            }, status=400)
+
+        quantity = request.data["quantity"]
+        is_add = request.data["add"]
+
+        try:
+            quantity = int(quantity)
+        except:
+            return Response({
+                "error": '"quantity" must be an integer'
+            }, status=400)
+
+        if quantity < 0:
+            return Response({
+                "error": '"quantity" must be greater than 0'
+            }, status=400)
+
+        if is_add:
+            product.quantity += quantity
+        else:
+            if quantity >= product.quantity:
+                product.quantity = 0
+            else:
+                product.quantity -= quantity
+
+        product.save()
+        return Response(status=200)

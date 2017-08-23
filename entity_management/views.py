@@ -117,6 +117,15 @@ class RestockProductView(APIView):
         quantity = request.data["quantity"]
         is_add = request.data["add"]
 
+        if is_add == "true":
+            is_add = True
+        elif is_add == "false":
+            is_add = False
+        else:
+            return Response({
+                "error": '"add" must be true or false'
+            }, status=400)
+
         try:
             quantity = int(quantity)
         except:

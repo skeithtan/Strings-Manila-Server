@@ -38,9 +38,9 @@ class StallType(DjangoObjectType):
 
 class Query(AbstractType):
     stalls = List(StallType)
-    products = List(ProductDescription)
+    products = List(ProductDescriptionType)
     stall = Field(StallType, id=Int())
-    product = Field(ProductDescription, id=Int())
+    product = Field(ProductDescriptionType, id=Int())
 
     def resolve_stall(self, args, context, info):
         id = args.get('id')

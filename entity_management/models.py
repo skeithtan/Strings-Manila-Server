@@ -79,6 +79,9 @@ class ProductTier(Model):
         # Take most recent entry
         return price_histories[0].price
 
+    def __str__(self):
+        return f"{self.product_description.name} - {self.name}"
+
 
 class PriceHistory(Model):
     product_tier = ForeignKey(ProductTier, on_delete=CASCADE)

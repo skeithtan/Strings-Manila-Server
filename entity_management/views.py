@@ -1,3 +1,5 @@
+import json
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -52,21 +54,16 @@ class ProductList(APIView):
 
     @staticmethod
     def post(request, stall_id):
-        request_data = request.data.copy()
-        request_data["stall"] = stall_id
-        serializer = ProductSerializer(data=request_data)
+        stall = get_object_or_404(Stall, id=stall_id)
+        product_serializer = ProductSerializer(data=json.loads(request.body.decode("utf-8")))
+        product_serializer.stall = stall
 
-        if "price" not in request_data:
-            return Response({
-                "error": "Price required"
-            }, 400)
-
-        if serializer.is_valid():
-            product = serializer.create(serializer.validated_data)
-            PriceHistory.objects.create(product=product, price=request_data["price"])
+        if product_serializer.is_valid():
+            product_serializer.create(product_serializer.validated_data)
             return Response(status=200)
+
         else:
-            return Response(serializer.errors, 400)
+            return Response(product_serializer.errors, 400)
 
 
 class ProductDetail(APIView):
@@ -75,28 +72,18 @@ class ProductDetail(APIView):
 
     @staticmethod
     def patch(request, product_id):
-        product = get_object_or_404(Product, id=product_id)
-        serializer = ProductSerializer(instance=product, data=request.data, partial=True)
-
-        if "price" not in request.data:
-            return Response({
-                "error": "Price required"
-            }, 400)
-
-        request_product_price = request.data["price"]
-
-        if request_product_price != product.current_price:
-            PriceHistory.objects.create(product=product, price=request_product_price)
+        product_description = get_object_or_404(ProductDescription, id=product_id)
+        serializer = ProductSerializer(data=json.loads(request.body.decode("utf-8")), partial=True)
 
         if serializer.is_valid():
-            serializer.save()
+            serializer.update(instance=product_description, validated_data=serializer.validated_data)
             return Response(status=200)
         else:
             return Response(serializer.errors, 400)
 
     @staticmethod
     def delete(request, product_id):
-        product = get_object_or_404(Product, id=product_id)
+        product = get_object_or_404(ProductDescription, id=product_id)
         product.discontinue()
         return Response(status=200)
 

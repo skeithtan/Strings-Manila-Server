@@ -61,16 +61,18 @@ class ProductTier(Model):
 
     @property
     def current_price_history(self):
-        return self.pricehistory_set.all().order_by('-effective_from')[0]
+        return self.pricehistory_set.all().order_by('-effective_from')[0] if self.pricehistory_set.count() > 0 else None
 
     @property
     def current_price(self):
-        return self.current_price_history.price
+        return self.current_price_history.price if self.current_price_history else None
 
-    def change_price(self, new_price):
-        current_price_history = self.current_price_history
-        current_price_history.effective_to = datetime.now()
-        current_price_history.save()
+    def set_price(self, new_price):
+        if self.current_price_history:
+            current_price_history = self.current_price_history
+            current_price_history.effective_to = datetime.now()
+            current_price_history.save()
+
         self.pricehistory_set.create(price=new_price)
 
     def price_for_date(self, date):

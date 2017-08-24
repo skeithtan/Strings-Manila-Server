@@ -6,5 +6,5 @@ entity_management_urls = [
     url(r'^stalls/(?P<stall_id>(\d+))/$', StallDetail.as_view()),
     url(r'^stalls/(?P<stall_id>(\d+))/products/$', ProductList.as_view()),
     url(r'^products/(?P<product_id>(\d+))/$', ProductDetail.as_view()),
-    url(r'^products/(?P<product_id>(\d+))/restock/$', RestockProductView.as_view()),
+    url(r'^product-tiers/(?P<tier_id>(\d+))/restock/$', RestockTierView.as_view()),
 ]

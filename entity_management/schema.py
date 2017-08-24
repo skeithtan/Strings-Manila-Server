@@ -1,7 +1,8 @@
-from .models import *
+from .models import Stall, ProductDescription, ProductTier
 from graphene_django.types import DjangoObjectType
 from graphene import (
     AbstractType,
+    Boolean,
     Float,
     List,
     Field,
@@ -11,6 +12,7 @@ from graphene import (
 
 class ProductTierType(DjangoObjectType):
     current_price = Float(source='current_price')
+    is_singular = Boolean(source='is_singular')
 
     class Meta:
         model = ProductTier
@@ -37,21 +39,29 @@ class StallType(DjangoObjectType):
 
 
 class Query(AbstractType):
+    # Plural
     stalls = List(StallType)
     products = List(ProductDescriptionType)
+    tiers = List(ProductTierType)
+    # Singular
     stall = Field(StallType, id=Int())
     product = Field(ProductDescriptionType, id=Int())
+    tier = Field(ProductTierType, id=Int())
 
     def resolve_stall(self, args, context, info):
-        id = args.get('id')
-        return Stall.all_active().get(pk=id)
+        return Stall.all_active().get(pk=args.get('id'))
 
     def resolve_product(self, args, context, info):
-        id = args.get('id')
-        return ProductDescription.all_active().get(pk=id)
+        return ProductDescription.all_active().get(pk=args.get('id'))
+
+    def resolve_tier(self, args, context, info):
+        return ProductTier.objects.get(pk=args.get('id'))
 
     def resolve_stalls(self, args, context, info):
         return Stall.all_active()
 
     def resolve_products(self, args, context, info):
         return ProductDescription.all_active()
+
+    def resolve_tiers(self, args, context, info):
+        return ProductTier.objects.all().filter(product_description__is_active=True)

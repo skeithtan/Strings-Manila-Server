@@ -88,13 +88,13 @@ class ProductDetail(APIView):
         return Response(status=200)
 
 
-class RestockProductView(APIView):
+class RestockTierView(APIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated, IsSuperuser)
 
     @staticmethod
-    def post(request, product_id):
-        product = get_object_or_404(Product, id=product_id)
+    def post(request, tier_id):
+        product_tier = get_object_or_404(ProductTier, id=tier_id)
 
         if "quantity" not in request.data or "add" not in request.data:
             return Response({
@@ -126,12 +126,12 @@ class RestockProductView(APIView):
             }, status=400)
 
         if is_add:
-            product.quantity += quantity
+            product_tier.quantity += quantity
         else:
-            if quantity >= product.quantity:
-                product.quantity = 0
+            if quantity >= product_tier.quantity:
+                product_tier.quantity = 0
             else:
-                product.quantity -= quantity
+                product_tier.quantity -= quantity
 
-        product.save()
+        product_tier.save()
         return Response(status=200)

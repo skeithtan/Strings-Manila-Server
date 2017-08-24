@@ -67,6 +67,10 @@ class ProductTier(Model):
     def current_price(self):
         return self.current_price_history.price if self.current_price_history else None
 
+    @property
+    def is_singular(self):
+        return self.product_description.producttier_set.count() == 1
+
     def set_price(self, new_price):
         if self.current_price_history:
             current_price_history = self.current_price_history

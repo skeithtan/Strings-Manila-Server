@@ -42,7 +42,7 @@ class StallDetail(APIView):
     @staticmethod
     def delete(request, stall_id):
         stall = get_object_or_404(Stall, id=stall_id)
-        stall.deactivate()
+        stall.discontinue()
         return Response(status=200)
 
 
@@ -97,7 +97,7 @@ class ProductDetail(APIView):
     @staticmethod
     def delete(request, product_id):
         product = get_object_or_404(Product, id=product_id)
-        product.deactivate()
+        product.discontinue()
         return Response(status=200)
 
 

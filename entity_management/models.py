@@ -23,10 +23,10 @@ class Stall(Model):
     def active_products(self):
         return self.productdescription_set.filter(is_active=True)
 
-    def deactivate(self):
+    def discontinue(self):
         self.is_active = False
         for product in self.productdescription_set.all():
-            product.deactivate()
+            product.discontinue()
 
         self.save()
 
@@ -45,7 +45,7 @@ class ProductDescription(Model):
     def all_active():
         return ProductDescription.objects.filter(is_active=True)
 
-    def deactivate(self):
+    def discontinue(self):
         if self.is_active:
             self.is_active = False
             self.save()

@@ -21,11 +21,11 @@ class Stall(Model):
 
     @property
     def active_products(self):
-        return self.product_set.filter(is_active=True)
+        return self.productdescription_set.filter(is_active=True)
 
     def deactivate(self):
         self.is_active = False
-        for product in self.product_set.all():
+        for product in self.productdescription_set.all():
             product.deactivate()
 
         self.save()
@@ -34,22 +34,30 @@ class Stall(Model):
         return self.name if self.is_active else f"DEACTIVATED - {self.name}"
 
 
-class Product(Model):
+class ProductDescription(Model):
     name = CharField(max_length=64)
     description = CharField(max_length=256)
     image = CharField(max_length=256, default="http://i.imgur.com/a0HmrDW.png")
     stall = ForeignKey(Stall, on_delete=CASCADE)
-    quantity = PositiveIntegerField(default=0)
     is_active = BooleanField(default=True)
 
     @staticmethod
     def all_active():
-        return Product.objects.filter(is_active=True)
+        return ProductDescription.objects.filter(is_active=True)
 
     def deactivate(self):
         if self.is_active:
             self.is_active = False
             self.save()
+
+    def __str__(self):
+        return f"{self.name}" if self.is_active else f"DEACTIVATED - {self.name}"
+
+
+class ProductTier(Model):
+    name = CharField(max_length=32)
+    product_description = ForeignKey(ProductDescription, on_delete=CASCADE)
+    quantity = PositiveIntegerField(default=0)
 
     @property
     def current_price_history(self):
@@ -71,12 +79,9 @@ class Product(Model):
         # Take most recent entry
         return price_histories[0].price
 
-    def __str__(self):
-        return f"{self.name}" if self.is_active else f"DEACTIVATED - {self.name}"
-
 
 class PriceHistory(Model):
-    product = ForeignKey(Product)
+    product_tier = ForeignKey(ProductTier, on_delete=CASCADE)
     price = DecimalField(decimal_places=2, max_digits=10)
     effective_from = DateTimeField(auto_now_add=True)
 

@@ -10,7 +10,8 @@ class ProductsBrowser extends React.Component {
                     <Stalls stalls={this.props.stalls}
                             activeStall={this.props.activeStall}
                             setActiveStall={this.props.setActiveStall}/>
-                    <Products products={this.props.showingProducts} activeStall={this.props.activeStall}/>
+                    <Products products={this.props.showingProducts}
+                              activeStall={this.props.activeStall}/>
                 </div>
             </div>
         )
@@ -72,9 +73,10 @@ class StallItem extends React.Component {
 
     inactiveItem() {
         return (
-            <li className="list-group-item" onClick={() => {
-                this.props.setActiveStall(this.props.stall);
-            }}>{this.props.stall.name}</li>
+            <li className="list-group-item"
+                onClick={() => {
+                    this.props.setActiveStall(this.props.stall);
+                }}>{this.props.stall.name}</li>
         )
     }
 
@@ -119,13 +121,14 @@ class Products extends React.Component {
     }
 
     cards() {
-        if(this.props.products === null) {
+        if (this.props.products === null) {
             //TODO: Return loading state
             return null;
         }
 
         return this.props.products.map(product => {
-            return <ProductCard key={product.id} product={product}/>
+            return <ProductCard key={product.id}
+                                product={product}/>
         });
     }
 
@@ -133,7 +136,8 @@ class Products extends React.Component {
         return (
             <div className="col-lg-9">
                 {this.header()}
-                <div className="card-deck p-3 pt-5 pb-5" id="products">
+                <div className="card-deck p-3 pt-5 pb-5"
+                     id="products">
                     {this.cards()}
                 </div>
             </div>
@@ -148,7 +152,10 @@ class ProductCard extends React.Component {
 
     render() {
         return (
-            <div className="card bg-dark text-light mb-3">
+            <div className="card bg-dark text-light mb-3"
+                 data-toggle="modal"
+                 data-target="#product-card-modal"
+                 onClick={() => onProductCardClick(this.props.product)}>
                 <img className="card-img-top"
                      src={this.props.product.image}
                      alt={this.props.product.name}/>
@@ -157,9 +164,57 @@ class ProductCard extends React.Component {
                     <p className="card-text">{this.props.product.description}</p>
                 </div>
                 <div className="card-footer">
-                    <h5 className="mb-auto">₱{this.props.product.producttierSet[0].currentPrice}</h5>
+                    <h5 className="mb-0">₱{this.props.product.producttierSet[0].currentPrice}</h5>
                 </div>
             </div>
         )
     }
+}
+
+function onProductCardClick(product) {
+    $('#product-modal-product-name').html(product.name);
+    $('#product-modal-product-price').html("₱" + product.producttierSet[0].currentPrice); //TODO
+    $('#product-modal-product-description').html(product.description);
+    $('#product-modal-main-product-img').attr('src', product.image);
+
+    if (product.isSingular) {
+        $('#product-modal-tiers').hide();
+    } else {
+        setUpTieredProduct(product.producttierSet)
+    }
+
+}
+
+function setUpTieredProduct(tiers) {
+    $('#product-modal-tiers').show();
+    let isFirst = true;
+
+    function setActiveTier(tier) {
+        $('#product-modal-selected-tier').val(tier.id);
+        $('#product-modal-product-price').html("₱" + tier.currentPrice);
+    }
+
+    $('#product-modal-tier-choices').html(''); //Clear first
+
+    tiers.forEach(tier => {
+        const clone = $('#product-modal-tier-button-clone').clone();
+        clone.removeAttr('id');
+        clone.append(tier.name);
+        clone.click(() => {
+            setActiveTier(tier);
+        });
+
+        const radioButton = $(clone.find('input')[0]);
+        radioButton.val(tier.id);
+
+        if (isFirst) {
+            console.log(isFirst);
+            isFirst = false;
+            clone.addClass('active');
+            radioButton.attr('checked', true);
+            setActiveTier(tier);
+        }
+
+        $('#product-modal-tier-choices').append(clone);
+    })
 }

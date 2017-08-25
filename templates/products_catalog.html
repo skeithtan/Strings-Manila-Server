@@ -7,10 +7,14 @@
     {% load static %}
 
     <!--Stylesheets-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
-          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static "stylesheets/navbar.css" %}">
-    <link rel="stylesheet" href="{% static "stylesheets/general.css" %}">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="{% static "stylesheets/navbar.css" %}">
+    <link rel="stylesheet"
+          href="{% static "stylesheets/general.css" %}">
 
 
     <!--JS-->
@@ -26,90 +30,23 @@
 </head>
 <body class="bg-light">
 
-<div id="app-container" class="container-fluid p-0 m-0 h-100"></div>
-
-
-
-{#<div class="container site-margin mt-3">#}
-{#    <div class="row">#}
-{##}
-{#        <div class="col-lg-9">#}
-{#            <h1 class="mb-5 mt-5 text-center">The National</h1>#}
-{#            <div class="card-deck" id="products">#}
-{#                <div class="card bg-dark text-light mb-3">#}
-{#                    <img class="card-img-top"#}
-{#                         src="https://cbp.s3.amazonaws.com/img/0/0/4/8/3/9/tn050010-the-national-high-violet-2x12-vinyl-g-6.png"#}
-{#                         alt="Card image cap">#}
-{#                    <div class="card-body">#}
-{#                        <h4 class="card-title">High Violet</h4>#}
-{#                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of#}
-{#                            the card's content.</p>#}
-{##}
-{##}
-{#                    </div>#}
-{#                    <div class="card-footer">#}
-{#                        <h5 class="mb-auto">₱1200</h5>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="card bg-dark text-light mb-3" data-toggle="modal"#}
-{#                        data-target="#product-card-modal">#}
-{#                    <img class="card-img-top"#}
-{#                         src="https://cbp.s3.amazonaws.com/img/0/0/4/8/4/5/tn050016-the-national-trouble-will-find-me-2x12-vinyl-g-3.png"#}
-{#                         alt="Card image cap">#}
-{#                    <div class="card-body">#}
-{#                        <h4 class="card-title">Trouble Will Find Me</h4>#}
-{#                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of#}
-{#                            the card's content.</p>#}
-{##}
-{##}
-{#                    </div>#}
-{#                    <div class="card-footer">#}
-{#                        <h5 class="mb-auto">₱1200</h5>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="card bg-dark text-light mb-3">#}
-{#                    <img class="card-img-top"#}
-{#                         src="https://cbp.s3.amazonaws.com/img/0/0/4/8/3/2/tn050003-the-national-alligator-12-vinyl-g-7.png"#}
-{#                         alt="Card image cap">#}
-{#                    <div class="card-body">#}
-{#                        <h4 class="card-title">Alligator</h4>#}
-{#                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of#}
-{#                            the card's content.</p>#}
-{##}
-{##}
-{#                    </div>#}
-{#                    <div class="card-footer">#}
-{#                        <h5 class="mb-auto">₱1200</h5>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="card bg-dark text-light mb-3">#}
-{#                    <img class="card-img-top" src="https://pbs.twimg.com/media/C7SWYt8XQAAAsm1.jpg"#}
-{#                         alt="Card image cap">#}
-{#                    <div class="card-body">#}
-{#                        <h4 class="card-title">Sad Songs Vinyl</h4>#}
-{#                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of#}
-{#                            the card's content.</p>#}
-{##}
-{##}
-{#                    </div>#}
-{#                    <div class="card-footer">#}
-{#                        <h5 class="mb-auto">₱1200</h5>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
-
+<div id="app-container"
+     class="container-fluid p-0 m-0 h-100"></div>
 <!--Modals-->
 
 <!--Product card modal-->
-<div class="modal fade" id="product-card-modal">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade"
+     id="product-card-modal">
+    <div class="modal-dialog modal-lg"
+         role="document">
         <div class="card bg-dark text-white">
             <div class="card-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" class="text-white">&times;</span>
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true"
+                          class="text-white">&times;</span>
                 </button>
 
                 <div class="row">
@@ -120,28 +57,35 @@
                     </div>
 
                     <div class="col-lg-6 p-4">
-                        <h3>Trouble Will Find Me</h3>
-                        <h5 class="mb-auto">₱1200</h5>
-                        <div class="btn-group mb-4 mt-4" data-toggle="buttons">
-                            <label class="btn btn-secondary active">
-                                <input type="radio" name="options" id="option1" autocomplete="off" checked> Small
-                            </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option2" autocomplete="off"> Medium
-                            </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option3" autocomplete="off"> Large
-                            </label>
+                        <h3 id="product-modal-product-name">Trouble Will Find Me</h3>
+                        <h5 id="product-modal-product-price"
+                            class="mb-3">₱1200</h5>
+
+                        <div id="product-modal-tiers">
+                            <input type="hidden"
+                                   id="product-modal-selected-tier">
+                            <div class="product-modal-tier-choices btn-group mb-3 mt-3"
+                                 id="product-modal-tier-choices"
+                                 data-toggle="buttons">
+
+                            </div>
+
                         </div>
 
-                        <div class="d-flex flex-row align-content-center mb-3">
+                        <div class="d-flex flex-row align-content-center mb-4 mt-3">
                             <input type="number"
                                    class="form-control bg-dark text-white border-light col-3 d-inline-block mr-2"
-                                   min="1" max="100" value="1" name="quantity" title="Quantity" placeholder="Quantity">
+                                   min="1"
+                                   max="100"
+                                   value="1"
+                                   name="quantity"
+                                   title="Quantity"
+                                   placeholder="Quantity">
                             <button class="btn btn-secondary">Add to cart</button>
                         </div>
 
-                        <p class="text-muted mb-5">
+                        <p id="product-modal-product-description"
+                           class="text-muted mb-5">
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.
                         </p>
@@ -151,7 +95,8 @@
                         <div id="recommended-products">
                             <h5 class="mt-4">People that bought this product also bought</h5>
 
-                            <div id="mini-cards" class="card-deck mt-4">
+                            <div id="mini-cards"
+                                 class="card-deck mt-4">
                                 <div class="card bg-dark border-secondary text-white">
                                     <img class="card-img-top"
                                          src="https://cbp.s3.amazonaws.com/img/0/0/4/8/3/9/tn050010-the-national-high-violet-2x12-vinyl-g-6.png"
@@ -186,8 +131,18 @@
     </div>
 </div>
 
-<script crossorigin src="https://unpkg.com/react@15/dist/react.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+<!--Product Modal Tier Button Clone-->
+<label class="btn btn-secondary"
+       id="product-modal-tier-button-clone">
+    <input type="radio"
+           name="options"
+           autocomplete="off">
+</label>
+
+<script crossorigin
+        src="https://unpkg.com/react@15/dist/react.min.js"></script>
+<script crossorigin
+        src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
 <script src="{% static "dist/static/scripts/graphql.js" %}"></script>
 <script src="{% static "dist/static/scripts/navbar.js" %}"></script>
 <script src="{% static "dist/static/scripts/products_browser.js" %}"></script>

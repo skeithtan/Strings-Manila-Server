@@ -10,6 +10,12 @@
     }
 }
 
+@media (min-width : 1500px) {
+    .modal-lg {
+        max-width : 1300px;
+    }
+}
+
 nav a.navbar-brand {
     letter-spacing : 0.1em;
 }
@@ -40,4 +46,9 @@ nav a.navbar-brand {
 
 #mini-cards .card {
     width : 200px
+}
+
+/*Clones*/
+#product-modal-tier-button-clone {
+    display: none !important;
 }

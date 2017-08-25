@@ -11,7 +11,8 @@ class ProductsBrowser extends React.Component {
                             activeStall={this.props.activeStall}
                             setActiveStall={this.props.setActiveStall}/>
                     <Products products={this.props.showingProducts}
-                              activeStall={this.props.activeStall}/>
+                              activeStall={this.props.activeStall}
+                              searchQuery={this.props.searchQuery}/>
                 </div>
             </div>
         )
@@ -93,26 +94,26 @@ class Products extends React.Component {
     }
 
     header() {
-        if (this.props.activeStall === null) {
-            return null;
-        }
-
-        if (this.props.search) {
+        if (this.props.searchQuery) {
             if (this.props.activeStall) {
                 return (
                     <h2 className="mt-5 text-center">Searching for
-                        <span className="text-muted">{this.props.search}</span>
+                        <span className="text-muted"> {this.props.searchQuery} </span>
                         in
-                        <span className="text-muted">{this.props.activeStall.name}</span>
+                        <span className="text-muted"> {this.props.activeStall.name} </span>
                     </h2>
                 )
             } else {
                 return (
                     <h2 className="mt-5 text-center">Searching for
-                        <span className="text-muted">{this.props.search}</span>
+                        <span className="text-muted"> {this.props.searchQuery} </span>
                     </h2>
                 )
             }
+        }
+
+        if (this.props.activeStall === null) {
+            return null;
         }
 
         return (
@@ -208,7 +209,6 @@ function setUpTieredProduct(tiers) {
         radioButton.val(tier.id);
 
         if (isFirst) {
-            console.log(isFirst);
             isFirst = false;
             clone.addClass('active');
             radioButton.attr('checked', true);

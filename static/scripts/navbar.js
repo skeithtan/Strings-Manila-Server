@@ -1,6 +1,12 @@
 class Navbar extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.search = this.search.bind(this);
+    }
+
+    search(event) {
+        const query = event.target.value;
+        this.props.search(query);
     }
 
     render() {
@@ -8,7 +14,7 @@ class Navbar extends React.Component {
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark d-block">
                 <div className="container site-margin">
                     <a className="navbar-brand m-0 mr-4 text-uppercase font-weight-bold"
-                       onClick={this.props.removeActiveStall}
+                       onClick={this.props.resetState}
                        href="#">Strings Manila</a>
                     <button className="navbar-toggler"
                             type="button"
@@ -23,7 +29,8 @@ class Navbar extends React.Component {
                     <div className="collapse navbar-collapse"
                          id="navbarNavDropdown">
                         <input className="form-control w-100 mr-auto"
-                               placeholder="Search products"/>
+                               placeholder="Search products"
+                               onChange={this.search}/>
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
                                 <button className="btn btn-secondary ml-5">Cart</button>

@@ -21,11 +21,8 @@ nav a.navbar-brand {
 }
 
 #products.card-deck .card {
-    max-width  : 400px;
-    min-width  : 260px;
-    cursor     : pointer;
-    box-shadow : 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition : all 0.3s cubic-bezier(.25, .8, .25, 1);
+    min-width : 260px;
+    cursor    : pointer;
 }
 
 #products.card-deck .card img.card-img-top {
@@ -33,7 +30,14 @@ nav a.navbar-brand {
     object-fit : cover;
 }
 
-#products.card-deck .card:hover {
+#products.card-deck .card,
+#mini-cards .card {
+    box-shadow : 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition : all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+#products.card-deck .card:hover,
+#mini-cards .card:hover {
     box-shadow : 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
@@ -45,10 +49,10 @@ nav a.navbar-brand {
 }
 
 #mini-cards .card {
-    width : 200px
+    max-width : 200px
 }
 
 /*Clones*/
 #product-modal-tier-button-clone {
-    display: none !important;
+    display : none !important;
 }

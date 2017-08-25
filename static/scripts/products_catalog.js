@@ -101,18 +101,35 @@ class App extends React.Component {
             return null;
         }
 
+        let products;
+
         if (this.state.activeStall === null) {
             //Collect all products
-            return this.state.stalls
+            products = this.state.stalls
                 .map(stall => {
                     return stall.activeProducts
                 })
                 .reduce((a, b) => {
                     return a.concat(b);
-                })
+                });
+        } else {
+            products = this.state.activeStall.activeProducts;
         }
 
-        return this.state.activeStall.activeProducts;
+        if (this.state.search) {
+            // Lower casing allows case insensitivity
+            const searchQuery = this.state.search.toLowerCase();
+
+            products = products.filter(product => {
+                const productName = product.name.toLowerCase();
+                const productDescription = product.description.toLowerCase();
+
+                return productName.includes(searchQuery) || productDescription.includes(searchQuery);
+            })
+        }
+
+
+        return products;
     }
 
     render() {
@@ -122,19 +139,27 @@ class App extends React.Component {
             })
         };
 
-        const removeActiveStall = () => {
+        const resetState = () => {
             this.setState({
-                activeStall: null
+                activeStall: null,
+            });
+        };
+
+        const search = query => {
+            this.setState({
+                search: query
             })
         };
 
         return (
             <div class="container-fluid p-0 m-0 h-100">
-                <Navbar removeActiveStall={removeActiveStall}/>
+                <Navbar resetState={resetState}
+                        search={search}/>
                 <ProductsBrowser stalls={this.state.stalls}
                                  activeStall={this.state.activeStall}
                                  setActiveStall={setActiveStall}
-                                 showingProducts={this.showingProducts()}/>
+                                 showingProducts={this.showingProducts()}
+                                 searchQuery={this.state.search}/>
             </div>
         );
     }

@@ -1,0 +1,15 @@
+{
+  "name": "Strings-Manila-Server",
+  "version": "0.0.1",
+  "dependencies": {
+    "lokka": "^1.7.0",
+    "lokka-transport-http": "^1.6.1",
+    "react": "^15.6.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^3.5.5"
+  }
+}

@@ -45,6 +45,10 @@ class ProductDescription(Model):
     def all_active():
         return ProductDescription.objects.filter(is_active=True)
 
+    @property
+    def is_singular(self):
+        return self.producttier_set.count() == 1
+
     def discontinue(self):
         if self.is_active:
             self.is_active = False
@@ -66,10 +70,6 @@ class ProductTier(Model):
     @property
     def current_price(self):
         return self.current_price_history.price if self.current_price_history else None
-
-    @property
-    def is_singular(self):
-        return self.product_description.producttier_set.count() == 1
 
     def set_price(self, new_price):
         if self.current_price_history:

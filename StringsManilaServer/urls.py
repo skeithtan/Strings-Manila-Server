@@ -17,8 +17,10 @@ from django.conf.urls import url
 from django.contrib import admin
 from admin_auth.views import SignInView
 from graphene_django.views import GraphQLView
-from entity_management.urls import entity_management_urls
 from django.views.decorators.csrf import csrf_exempt
+
+from entity_management.urls import entity_management_urls
+from products_catalog.urls import products_catalog_urls
 
 urlpatterns = [
     url(r'^database/', admin.site.urls),
@@ -27,3 +29,4 @@ urlpatterns = [
 ]
 
 urlpatterns += entity_management_urls
+urlpatterns += products_catalog_urls

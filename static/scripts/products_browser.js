@@ -1,0 +1,165 @@
+class ProductsBrowser extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        return (
+            <div className="container site-margin mt-3">
+                <div className="row">
+                    <Stalls stalls={this.props.stalls}
+                            activeStall={this.props.activeStall}
+                            setActiveStall={this.props.setActiveStall}/>
+                    <Products products={this.props.showingProducts} activeStall={this.props.activeStall}/>
+                </div>
+            </div>
+        )
+    }
+}
+
+class Stalls extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.stallItems = this.stallItems.bind(this);
+    }
+
+    stallItems() {
+        if (this.props.stalls === null) {
+            return null;
+        }
+
+        const activeStall = this.props.activeStall;
+
+        const stalls = this.props.stalls.map(stall => {
+            const isActive = activeStall === null ? false : stall.id === activeStall.id;
+
+            return <StallItem key={stall.id}
+                              stall={stall}
+                              isActive={isActive}
+                              setActiveStall={this.props.setActiveStall}/>
+        });
+
+        return (
+            <li className="list-group">
+                {stalls}
+            </li>
+        )
+    }
+
+    render() {
+        return (
+            <div className="col-lg-3">
+                <h2 className="mb-3 mt-3">Stalls</h2>
+                {this.stallItems()}
+            </div>
+        )
+    }
+}
+
+class StallItem extends React.Component {
+    constructor(props) {
+        super(props);
+        this.activeItem = this.activeItem.bind(this);
+        this.inactiveItem = this.inactiveItem.bind(this);
+    }
+
+    activeItem() {
+        return (
+            <li className="list-group-item bg-dark text-light">{this.props.stall.name}</li>
+        )
+    }
+
+    inactiveItem() {
+        return (
+            <li className="list-group-item" onClick={() => {
+                this.props.setActiveStall(this.props.stall);
+            }}>{this.props.stall.name}</li>
+        )
+    }
+
+    render() {
+        return this.props.isActive ? this.activeItem() : this.inactiveItem();
+    }
+}
+
+class Products extends React.Component {
+    constructor(props) {
+        super(props);
+        this.header = this.header.bind(this);
+        this.cards = this.cards.bind(this);
+    }
+
+    header() {
+        if (this.props.activeStall === null) {
+            return null;
+        }
+
+        if (this.props.search) {
+            if (this.props.activeStall) {
+                return (
+                    <h2 className="mt-5 text-center">Searching for
+                        <span className="text-muted">{this.props.search}</span>
+                        in
+                        <span className="text-muted">{this.props.activeStall.name}</span>
+                    </h2>
+                )
+            } else {
+                return (
+                    <h2 className="mt-5 text-center">Searching for
+                        <span className="text-muted">{this.props.search}</span>
+                    </h2>
+                )
+            }
+        }
+
+        return (
+            <h2 className="mt-5 text-center">{this.props.activeStall.name}</h2>
+        )
+    }
+
+    cards() {
+        if(this.props.products === null) {
+            //TODO: Return loading state
+            return null;
+        }
+
+        return this.props.products.map(product => {
+            return <ProductCard key={product.id} product={product}/>
+        });
+    }
+
+    render() {
+        return (
+            <div className="col-lg-9">
+                {this.header()}
+                <div className="card-deck p-3 pt-5 pb-5" id="products">
+                    {this.cards()}
+                </div>
+            </div>
+        )
+    }
+}
+
+class ProductCard extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div className="card bg-dark text-light mb-3">
+                <img className="card-img-top"
+                     src={this.props.product.image}
+                     alt={this.props.product.name}/>
+                <div className="card-body">
+                    <h4 className="card-title">{this.props.product.name}</h4>
+                    <p className="card-text">{this.props.product.description}</p>
+                </div>
+                <div className="card-footer">
+                    <h5 className="mb-auto">₱{this.props.product.producttierSet[0].currentPrice}</h5>
+                </div>
+            </div>
+        )
+    }
+}

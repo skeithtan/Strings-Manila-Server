@@ -12,7 +12,6 @@ from graphene import (
 
 class ProductTierType(DjangoObjectType):
     current_price = Float(source='current_price')
-    is_singular = Boolean(source='is_singular')
 
     class Meta:
         model = ProductTier
@@ -20,6 +19,7 @@ class ProductTierType(DjangoObjectType):
 
 class ProductDescriptionType(DjangoObjectType):
     tiers = List(ProductTierType)
+    is_singular = Boolean(source='is_singular')
 
     def resolve_tiers(self, args, context, info):
         return ProductDescription.objects.get(id=self.id).producttier_set.all()

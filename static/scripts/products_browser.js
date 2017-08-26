@@ -12,7 +12,8 @@ class ProductsBrowser extends React.Component {
                             setActiveStall={this.props.setActiveStall}/>
                     <Products products={this.props.showingProducts}
                               activeStall={this.props.activeStall}
-                              searchQuery={this.props.searchQuery}/>
+                              searchQuery={this.props.searchQuery}
+                              addToCart={this.props.addToCart}/>
                 </div>
             </div>
         )
@@ -129,7 +130,8 @@ class Products extends React.Component {
 
         return this.props.products.map(product => {
             return <ProductCard key={product.id}
-                                product={product}/>
+                                product={product}
+                                addToCart={this.props.addToCart}/>
         });
     }
 
@@ -156,7 +158,7 @@ class ProductCard extends React.Component {
             <div className="card bg-dark text-light mb-3"
                  data-toggle="modal"
                  data-target="#product-card-modal"
-                 onClick={() => onProductCardClick(this.props.product)}>
+                 onClick={() => onProductCardClick(this.props.product, this.props.addToCart)}>
                 <img className="card-img-top"
                      src={this.props.product.image}
                      alt={this.props.product.name}/>
@@ -172,49 +174,3 @@ class ProductCard extends React.Component {
     }
 }
 
-function onProductCardClick(product) {
-    $('#product-modal-product-name').html(product.name);
-    $('#product-modal-product-price').html("₱" + product.producttierSet[0].currentPrice); //TODO
-    $('#product-modal-product-description').html(product.description);
-    $('#product-modal-main-product-img').attr('src', product.image);
-
-    if (product.isSingular) {
-        $('#product-modal-tiers').hide();
-    } else {
-        setUpTieredProduct(product.producttierSet)
-    }
-
-}
-
-function setUpTieredProduct(tiers) {
-    $('#product-modal-tiers').show();
-    let isFirst = true;
-
-    function setActiveTier(tier) {
-        $('#product-modal-selected-tier').val(tier.id);
-        $('#product-modal-product-price').html("₱" + tier.currentPrice);
-    }
-
-    $('#product-modal-tier-choices').html(''); //Clear first
-
-    tiers.forEach(tier => {
-        const clone = $('#product-modal-tier-button-clone').clone();
-        clone.removeAttr('id');
-        clone.append(tier.name);
-        clone.click(() => {
-            setActiveTier(tier);
-        });
-
-        const radioButton = $(clone.find('input')[0]);
-        radioButton.val(tier.id);
-
-        if (isFirst) {
-            isFirst = false;
-            clone.addClass('active');
-            radioButton.attr('checked', true);
-            setActiveTier(tier);
-        }
-
-        $('#product-modal-tier-choices').append(clone);
-    })
-}

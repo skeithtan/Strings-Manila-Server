@@ -39,84 +39,104 @@
      id="product-card-modal">
     <div class="modal-dialog modal-lg"
          role="document">
-        <div class="card bg-dark text-white">
-            <div class="card-body">
-                <button type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close">
-                    <span aria-hidden="true"
-                          class="text-white">&times;</span>
-                </button>
+        <div class="bg-dark text-white">
+            <div class="row w-100 m-0">
+                <div class="col-lg-5 bg-light d-flex justify-content-center align-items-center rounded-left">
+                    <img src="#"
+                         alt="Card image cap"
+                         id="product-modal-main-product-img"
+                         class="w-100">
+                </div>
 
-                <div class="row">
-                    <div class="col-lg-6 d-flex justify-content-center align-items-center">
-                        <img src="#"
-                             alt="Card image cap"
-                             id="product-modal-main-product-img">
+                <div class="col-lg-7 p-5">
+                    <button type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true"
+                                  class="text-white">&times;</span>
+                    </button>
+
+
+                    <h3 id="product-modal-product-name">Product name</h3>
+                    <h5 id="product-modal-product-price"
+                        class="mb-3">Product price</h5>
+
+                    <p id="product-modal-product-description"
+                       class="text-muted mb-4">
+                        Product description
+                    </p>
+
+                    <div class="alert border-success row ml-auto justify-content-center align-items-center"
+                         id="product-modal-in-cart-message">
+                        <p class="mb-0 text-success mr-auto"><b>✓</b> This product is already in your cart.</p>
+                        <button class="btn btn-sm btn-success">View cart</button>
                     </div>
 
-                    <div class="col-lg-6 p-4">
-                        <h3 id="product-modal-product-name">Product name</h3>
-                        <h5 id="product-modal-product-price"
-                            class="mb-3">Product price</h5>
-
-                        <div id="product-modal-tiers">
-                            <input type="hidden"
-                                   id="product-modal-selected-tier">
-                            <div class="product-modal-tier-choices btn-group mb-3 mt-3"
-                                 id="product-modal-tier-choices"
-                                 data-toggle="buttons">
-
-                            </div>
-
+                    <div id="product-modal-tiers">
+                        <input type="hidden"
+                               id="product-modal-selected-tier">
+                        <div class="product-modal-tier-choices btn-group mb-2 mt-2"
+                             id="product-modal-tier-choices"
+                             data-toggle="buttons">
                         </div>
+                    </div>
+                    <div class="d-flex flex-row align-content-center mb-5 mt-3">
+                        <select id="product-modal-quantity-selection"
+                                title="Quantity"
+                                class="custom-select mr-2 bg-dark border-secondary text-white">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                        </select>
+                        <button class="btn btn-secondary mr-3"
+                                id="product-modal-add-to-cart">Add to cart
+                        </button>
+                    </div>
 
-                        <div class="d-flex flex-row align-content-center mb-4 mt-3">
-                            <input type="number"
-                                   class="form-control bg-dark text-white border-light col-3 d-inline-block mr-2"
-                                   min="1"
-                                   max="100"
-                                   value="1"
-                                   name="quantity"
-                                   title="Quantity"
-                                   placeholder="Quantity">
-                            <button class="btn btn-secondary">Add to cart</button>
-                        </div>
+                    <hr class="border-secondary">
 
-                        <p id="product-modal-product-description"
-                           class="text-muted mb-5">
-                            Product description
-                        </p>
+                    <div id="recommended-products">
+                        <h5 class="mt-4">Customers that bought this product also bought</h5>
 
-                        <hr class="border-secondary">
-
-                        <div id="recommended-products">
-                            <h5 class="mt-4">People that bought this product also bought</h5>
-
-                            <div id="mini-cards"
-                                 class="card-deck mt-4">
-                                <div class="card bg-dark border-secondary text-white">
-                                    <img class="card-img-top"
-                                         src="https://cbp.s3.amazonaws.com/img/0/0/4/8/3/9/tn050010-the-national-high-violet-2x12-vinyl-g-6.png"
-                                         alt="Card image cap">
-                                    <div class="p-3">
-                                        <h6 class="mb-0">High Violet</h6>
-                                    </div>
+                        <div id="mini-cards"
+                             class="card-deck mt-4">
+                            <div class="card bg-dark border-secondary text-white">
+                                <img class="card-img-top"
+                                     src="https://cbp.s3.amazonaws.com/img/0/0/4/8/3/9/tn050010-the-national-high-violet-2x12-vinyl-g-6.png"
+                                     alt="Card image cap">
+                                <div class="p-3">
+                                    <h6 class="mb-0">High Violet</h6>
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
 
 <!--Product Modal Tier Button Clone-->
-<label class="btn btn-secondary"
+<label class="btn btn-outline-secondary"
        id="product-modal-tier-button-clone">
     <input type="radio"
            name="options"
@@ -131,6 +151,8 @@
 <script src="{% static "dist/static/scripts/navbar.js" %}"></script>
 <script src="{% static "dist/static/scripts/products_browser.js" %}"></script>
 <script src="{% static "dist/static/scripts/products_catalog.js" %}"></script>
+<script src="{% static "dist/static/scripts/modals.js" %}"></script>
+
 
 </body>
 </html>

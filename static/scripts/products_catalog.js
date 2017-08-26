@@ -75,7 +75,10 @@ class App extends React.Component {
         let cart = this.state.cart;
         let tierInCart = false;
 
+        console.log(quantity);
+
         cart.forEach(item => {
+            console.log(item);
             if (item.tier === tierID) {
                 tierInCart = true;
                 item.quantity += quantity;
@@ -159,7 +162,8 @@ class App extends React.Component {
                                  activeStall={this.state.activeStall}
                                  setActiveStall={setActiveStall}
                                  showingProducts={this.showingProducts()}
-                                 searchQuery={this.state.search}/>
+                                 searchQuery={this.state.search}
+                                 addToCart={this.addToCart}/>
             </div>
         );
     }

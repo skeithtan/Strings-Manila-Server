@@ -34,20 +34,13 @@ function onProductCardClick(product, addToCart) {
     $('#product-modal-main-product-img').attr('src', product.image);
 
     if (product.isSingular) {
-        $('#product-modal-tiers').hide();
-        const tier = product.producttierSet[0].id;
-        $('#product-modal-selected-tier').val(tier);
-
-        if (tierInCart(tier)) {
-            $('#product-modal-in-cart-message').show();
-        } else {
-            $('#product-modal-in-cart-message').hide();
-        }
+        const tier = product.producttierSet[0];
+        setUpSingularProduct(tier);
     } else {
         setUpTieredProduct(product.producttierSet)
     }
 
-    const addToCartButton = $('#product-modal-add-to-cart');
+    const addToCartButton = $('#product-modal-add-to-cart-button');
     addToCartButton.off('click'); //Unbind previous add to carts
 
     addToCartButton.click(() => {
@@ -66,6 +59,41 @@ function onProductCardClick(product, addToCart) {
     });
 }
 
+function showAddToCart(tier) {
+    //TODO: Do not show waitlisting if not logged in
+    if (tier.quantity === 0) {
+        $('#product-modal-waitlist').show();
+        $('#product-modal-add-to-cart').hide();
+        $('#product-modal-in-cart-message').hide();
+        return;
+    } else {
+        $('#product-modal-waitlist').hide();
+        $('#product-modal-add-to-cart').show();
+    }
+
+    if (tierInCart(tier.id)) {
+        $('#product-modal-in-cart-message').show();
+    } else {
+        $('#product-modal-in-cart-message').hide();
+    }
+}
+
+function setUpSingularProduct(tier) {
+    $('#product-modal-tiers').hide();
+    $('#product-modal-selected-tier').val(tier.id);
+
+    console.log(tier.quantity);
+    console.log(tier.quantity === 0);
+
+    showAddToCart(tier);
+
+    if (tierInCart(tier.id)) {
+        $('#product-modal-in-cart-message').show();
+    } else {
+        $('#product-modal-in-cart-message').hide();
+    }
+}
+
 function setUpTieredProduct(tiers) {
     $('#product-modal-tiers').show();
     let isFirst = true;
@@ -74,11 +102,7 @@ function setUpTieredProduct(tiers) {
         $('#product-modal-selected-tier').val(tier.id);
         $('#product-modal-product-price').html("₱" + tier.currentPrice);
 
-        if (tierInCart(tier.id)) {
-            $('#product-modal-in-cart-message').show();
-        } else {
-            $('#product-modal-in-cart-message').hide();
-        }
+        showAddToCart(tier);
     }
 
     $('#product-modal-tier-choices').html(''); //Clear first

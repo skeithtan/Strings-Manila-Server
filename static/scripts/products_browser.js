@@ -172,7 +172,7 @@ class ProductCard extends React.Component {
                  data-toggle="modal"
                  data-target="#product-card-modal"
                  onClick={() => onProductCardClick(this.props.product, this.props.addToCart)}>
-                <img className="card-img-top"
+                <img className="card-img-top bg-light"
                      src={this.props.product.image}
                      alt={this.props.product.name}/>
                 <div className="card-body">

@@ -1,6 +1,18 @@
-@media (min-width : 1200px) {
+@media (min-width : 1500px) {
     .site-margin {
         max-width : 1400px;
+    }
+}
+
+@media (min-width : 1800px) {
+    .site-margin {
+        max-width : 1600px;
+    }
+}
+
+@media (min-width : 2000px) {
+    .site-margin {
+        max-width : 1800px;
     }
 }
 
@@ -48,6 +60,10 @@ nav a.navbar-brand {
 
 #mini-cards .card {
     max-width : 200px
+}
+
+#product-card-modal .text-muted {
+    color : #b0b2b3 !important;
 }
 
 /*Clones*/

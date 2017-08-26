@@ -60,6 +60,7 @@ class App extends React.Component {
                 id
                 name
                 currentPrice
+                quantity
               }
             }
           }

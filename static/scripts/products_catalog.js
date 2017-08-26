@@ -157,7 +157,8 @@ class App extends React.Component {
         return (
             <div class="container-fluid p-0 m-0 h-100">
                 <Navbar resetState={resetState}
-                        search={search}/>
+                        search={search}
+                        cartCount={this.state.cart.length}/>
                 <ProductsBrowser stalls={this.state.stalls}
                                  activeStall={this.state.activeStall}
                                  setActiveStall={setActiveStall}

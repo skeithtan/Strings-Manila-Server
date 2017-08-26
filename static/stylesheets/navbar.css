@@ -43,8 +43,6 @@ nav a.navbar-brand {
 
 /*Product card modal*/
 #product-card-modal img#product-modal-main-product-img {
-    width      : 400px;
-    max-height : 400px;
     object-fit : cover;
 }
 

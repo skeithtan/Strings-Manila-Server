@@ -128,21 +128,34 @@ class Products extends React.Component {
             return null;
         }
 
-        return this.props.products.map(product => {
+        if (this.props.products.length === 0 && this.props.searchQuery) {
+            return (
+                <div className="container-fluid d-flex flex-column justify-content-center align-items-center h-100 p-5 mt-5 mb-5">
+                    <h3>No products found</h3>
+                    <h6 className="text-muted">Change your query and try your search again</h6>
+                </div>
+            )
+        }
+
+        const productCards = this.props.products.map(product => {
             return <ProductCard key={product.id}
                                 product={product}
                                 addToCart={this.props.addToCart}/>
         });
+
+        return (
+            <div className="card-deck p-3 pt-5 pb-5"
+                 id="products">
+                {productCards}
+            </div>
+        )
     }
 
     render() {
         return (
             <div className="col-lg-9">
                 {this.header()}
-                <div className="card-deck p-3 pt-5 pb-5"
-                     id="products">
-                    {this.cards()}
-                </div>
+                {this.cards()}
             </div>
         )
     }

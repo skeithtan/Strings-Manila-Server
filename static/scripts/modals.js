@@ -1,4 +1,4 @@
-function productIsInCart(product) {
+function tierInCart(tier) {
     let cart = [];
     try {
         cart = JSON.parse(localStorage.cart);
@@ -11,25 +11,20 @@ function productIsInCart(product) {
         return false;
     }
 
-    const tiers = product.producttierSet.map(tier => {
-        return tier.id
-    });
 
     cart = cart.map(item => {
         return item.tier;
     });
 
-    let productIsInCart = false;
+    let tierInCart = false;
 
     cart.forEach(tierID => {
-        tiers.forEach(tier => {
-            if (tierID === tier) {
-                productIsInCart = true;
-            }
-        });
+        if (tierID === tier) {
+            tierInCart = true;
+        }
     });
 
-    return productIsInCart;
+    return tierInCart;
 }
 
 function onProductCardClick(product, addToCart) {
@@ -38,15 +33,16 @@ function onProductCardClick(product, addToCart) {
     $('#product-modal-product-description').html(product.description);
     $('#product-modal-main-product-img').attr('src', product.image);
 
-    if (productIsInCart(product)) {
-        $('#product-modal-in-cart-message').show();
-    } else {
-        $('#product-modal-in-cart-message').hide();
-    }
-
     if (product.isSingular) {
         $('#product-modal-tiers').hide();
-        $('#product-modal-selected-tier').val(product.producttierSet[0].id);
+        const tier = product.producttierSet[0].id;
+        $('#product-modal-selected-tier').val(tier);
+
+        if (tierInCart(tier)) {
+            $('#product-modal-in-cart-message').show();
+        } else {
+            $('#product-modal-in-cart-message').hide();
+        }
     } else {
         setUpTieredProduct(product.producttierSet)
     }
@@ -55,6 +51,13 @@ function onProductCardClick(product, addToCart) {
     addToCartButton.off('click'); //Unbind previous add to carts
 
     addToCartButton.click(() => {
+        iziToast.success({
+            title: "Success",
+            message: "Product added to cart",
+            position: "bottomCenter",
+            timeout: 2500,
+            progressBar: false,
+        });
         const quantity = parseInt($('#product-modal-quantity-selection').val());
         const tierID = $('#product-modal-selected-tier').val();
 
@@ -70,6 +73,12 @@ function setUpTieredProduct(tiers) {
     function setActiveTier(tier) {
         $('#product-modal-selected-tier').val(tier.id);
         $('#product-modal-product-price').html("₱" + tier.currentPrice);
+
+        if (tierInCart(tier.id)) {
+            $('#product-modal-in-cart-message').show();
+        } else {
+            $('#product-modal-in-cart-message').hide();
+        }
     }
 
     $('#product-modal-tier-choices').html(''); //Clear first

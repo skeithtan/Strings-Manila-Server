@@ -2,11 +2,22 @@ class Navbar extends React.Component {
     constructor(props) {
         super(props);
         this.search = this.search.bind(this);
+        this.badge = this.badge.bind(this);
     }
 
     search(event) {
         const query = event.target.value;
         this.props.search(query);
+    }
+
+    badge() {
+        if (this.props.cartCount === 0) {
+            return null;
+        }
+
+        return (
+            <span className="badge badge-light ml-1">{this.props.cartCount}</span>
+        )
     }
 
     render() {
@@ -28,12 +39,13 @@ class Navbar extends React.Component {
 
                     <div className="collapse navbar-collapse"
                          id="navbarNavDropdown">
-                        <input className="form-control w-100 mr-auto"
+                        <input className="form-control w-100 mr-auto col-lg-5 bg-dark text-white border-secondary"
                                placeholder="Search products"
                                onChange={this.search}/>
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                                <button className="btn btn-secondary ml-5">Cart</button>
+                                <button className="btn btn-outline-secondary border-light text-light ml-5">
+                                    Cart {this.badge()}</button>
                             </li>
                         </ul>
                     </div>

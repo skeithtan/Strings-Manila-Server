@@ -1,3 +1,13 @@
+$(() => {
+    if(preloadedData.user.isAuthenticated) {
+        $('#sign-in-to-waitlist').hide();
+        $('#waitlist-button').show();
+    } else {
+        $('#waitlist-button').hide();
+        $('#sign-in-to-waitlist').show();
+    }
+});
+
 function tierInCart(tier) {
     let cart = [];
     try {
@@ -10,7 +20,6 @@ function tierInCart(tier) {
     if (!Array.isArray(cart)) {
         return false;
     }
-
 
     cart = cart.map(item => {
         return item.tier;

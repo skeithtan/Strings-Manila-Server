@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from admin_auth.views import SignInView
 from graphene_django.views import GraphQLView
@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^database/', admin.site.urls),
     url(r'^admin/sign-in/', SignInView.as_view()),
     url(r'^graphiql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    url(r'^accounts/', include('allauth.urls')),
 ]
 
 urlpatterns += entity_management_urls

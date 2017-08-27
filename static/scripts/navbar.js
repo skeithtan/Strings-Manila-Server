@@ -20,6 +20,38 @@ class Navbar extends React.Component {
         )
     }
 
+    signInButton() {
+        if (preloadedData.user.isAuthenticated) {
+            return (
+                <div className="btn-group ml-2">
+                    <button type="button"
+                            className="btn btn-secondary dropdown-toggle"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                        Hello, {user.name}
+                    </button>
+                    <div className="dropdown-menu">
+                        <a className="dropdown-item"
+                           href="#">Profile</a>
+                        <a className="dropdown-item"
+                           href="#">Orders</a>
+                        <a className="dropdown-item"
+                           href="#">Waitlists</a>
+                        <div className="dropdown-divider"></div>
+                        <button className="dropdown-item" id="sign-out-button" onClick={onSignOutButtonClick}>Sign out</button>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <a href="/accounts/facebook/login/?process=login"
+                   className="btn btn-primary ml-2">Sign in with
+                    Facebook</a>
+            )
+        }
+    }
+
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark d-block">
@@ -43,9 +75,12 @@ class Navbar extends React.Component {
                                placeholder="Search products"
                                onChange={this.search}/>
                         <ul className="navbar-nav ml-auto">
-                            <li className="nav-item">
+                            <li className="nav-item mr-2">
                                 <button className="btn btn-outline-secondary border-light text-light ml-5">
                                     Cart {this.badge()}</button>
+                            </li>
+                            <li className="nav-item d-flex align-items-center justify-content-center">
+                                {this.signInButton()}
                             </li>
                         </ul>
                     </div>
@@ -53,4 +88,21 @@ class Navbar extends React.Component {
             </nav>
         )
     }
+}
+
+function onSignOutButtonClick() {
+    console.log("Hello");
+
+    $.post({
+        url: "/accounts/logout/",
+        beforeSend: (xhr) => {
+            xhr.setRequestHeader('X-CSRFToken', preloadedData.csrf);
+        },
+        success: () => {
+            location.reload();
+        },
+        error: response => {
+            console.log(response);
+        }
+    })
 }

@@ -66,9 +66,19 @@ class App extends React.Component {
           }
         }
         `, result => {
+            function addStallNameToProducts(stall) {
+                stall.activeProducts.forEach(product => {
+                    product.stall = stall.name
+                });
+
+                return stall;
+            }
+
             this.setState({
-                stalls: result.stalls
-            })
+                stalls: result.stalls.map(stall => {
+                    return addStallNameToProducts(stall)
+                })
+            });
         });
     }
 
@@ -76,10 +86,7 @@ class App extends React.Component {
         let cart = this.state.cart;
         let tierInCart = false;
 
-        console.log(quantity);
-
         cart.forEach(item => {
-            console.log(item);
             if (item.tier === tierID) {
                 tierInCart = true;
                 item.quantity += quantity;
@@ -127,8 +134,9 @@ class App extends React.Component {
             products = products.filter(product => {
                 const productName = product.name.toLowerCase();
                 const productDescription = product.description.toLowerCase();
+                const stall = product.stall.toLowerCase();
 
-                return productName.includes(searchQuery) || productDescription.includes(searchQuery);
+                return productName.includes(searchQuery) || productDescription.includes(searchQuery) || stall.includes(searchQuery);
             })
         }
 

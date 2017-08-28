@@ -24,7 +24,7 @@ SECRET_KEY = 'po(&ne191ej3_ag$!65co8nh%ae2=ab$+(&@$iozor3t@#i997'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'graphene_django',
     'entity_management',
+    'waitlists',
 
     'allauth',
     'allauth.account',
@@ -139,6 +140,7 @@ STATICFILES_DIRS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     )
 }
 

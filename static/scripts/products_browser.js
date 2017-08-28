@@ -177,7 +177,7 @@ class ProductCard extends React.Component {
                      alt={this.props.product.name}/>
                 <div className="card-body">
                     <h4 className="card-title">{this.props.product.name}</h4>
-                    <p className="card-text">{this.props.product.description}</p>
+                    <p className="card-text text-muted">{this.props.product.description}</p>
                 </div>
                 <div className="card-footer">
                     <h5 className="mb-0">₱{this.props.product.producttierSet[0].currentPrice}</h5>

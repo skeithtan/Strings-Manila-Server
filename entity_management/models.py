@@ -62,6 +62,7 @@ class ProductTier(Model):
     name = CharField(max_length=32)
     product_description = ForeignKey(ProductDescription, on_delete=CASCADE)
     quantity = PositiveIntegerField(default=0)
+    total_waitlist_count = PositiveIntegerField(default=0)
 
     @property
     def current_price_history(self):
@@ -70,6 +71,10 @@ class ProductTier(Model):
     @property
     def current_price(self):
         return self.current_price_history.price if self.current_price_history else None
+
+    def increment_waitlist(self):
+        self.total_waitlist_count += 1
+        self.save()
 
     def set_price(self, new_price):
         if self.current_price_history:

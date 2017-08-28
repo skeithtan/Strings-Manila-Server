@@ -29,7 +29,7 @@ class Navbar extends React.Component {
                             data-toggle="dropdown"
                             aria-haspopup="true"
                             aria-expanded="false">
-                        Hello, {user.name}
+                        Hello, {preloadedData.user.name}
                     </button>
                     <div className="dropdown-menu">
                         <a className="dropdown-item"
@@ -38,10 +38,9 @@ class Navbar extends React.Component {
                            href="#">Orders</a>
                         <a className="dropdown-item"
                            href="#">Waitlists</a>
-                        <div className="dropdown-divider"></div>
+                        <hr className="dropdown-divider" />
                         <button className="dropdown-item"
-                                id="sign-out-button"
-                                onClick={onSignOutButtonClick}>Sign out
+                                id="sign-out-button">Sign out
                         </button>
                     </div>
                 </div>
@@ -81,8 +80,8 @@ class Navbar extends React.Component {
                                id="search-bar"/>
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item mr-2">
-                                <button className="btn btn-outline-secondary border-light text-light ml-5">
-                                    Cart {this.badge()}</button>
+                                <a href="/cart/" className="btn btn-outline-secondary border-light text-light ml-5">
+                                    Cart {this.badge()}</a>
                             </li>
                             <li className="nav-item d-flex align-items-center justify-content-center">
                                 {this.signInButton()}
@@ -93,21 +92,4 @@ class Navbar extends React.Component {
             </nav>
         )
     }
-}
-
-function onSignOutButtonClick() {
-    console.log("Hello");
-
-    $.post({
-        url: "/accounts/logout/",
-        beforeSend: (xhr) => {
-            xhr.setRequestHeader('X-CSRFToken', preloadedData.csrf);
-        },
-        success: () => {
-            location.reload();
-        },
-        error: response => {
-            console.log(response);
-        }
-    })
 }

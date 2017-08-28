@@ -21,6 +21,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from entity_management.urls import entity_management_urls
 from products_catalog.urls import products_catalog_urls
+from waitlists.urls import waitlist_urls
 
 urlpatterns = [
     url(r'^database/', admin.site.urls),
@@ -31,3 +32,4 @@ urlpatterns = [
 
 urlpatterns += entity_management_urls
 urlpatterns += products_catalog_urls
+urlpatterns += waitlist_urls

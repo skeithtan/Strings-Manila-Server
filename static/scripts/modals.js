@@ -1,12 +1,65 @@
 $(() => {
-    if(preloadedData.user.isAuthenticated) {
-        $('#sign-in-to-waitlist').hide();
-        $('#waitlist-button').show();
+    $('#sign-out-button').click(onSignOutButtonClick);
+    $('#product-card-modal').on('hidden.bs.modal', () => {
+        $('#product-modal-quantity-selection').val('1');
+    });
+
+    const waitlistButton = $('#waitlist-button');
+    waitlistButton.click(onWaitlistButtonClick);
+
+    const signInToWaitlist = $('#sign-in-to-waitlist');
+    if (preloadedData.user.isAuthenticated) {
+        signInToWaitlist.hide();
+        waitlistButton.show();
     } else {
-        $('#waitlist-button').hide();
-        $('#sign-in-to-waitlist').show();
+        waitlistButton.hide();
+        signInToWaitlist.show();
     }
 });
+
+function onWaitlistButtonClick() {
+    const tierID = $('#product-modal-selected-tier').val();
+
+    // Optimistic outcome - should not do in success function because
+    // user could be looking at a different card by the time response arrives
+    $('#waitlist-button').hide();
+    $('#in-waitlist-message').show();
+
+
+    // Add to waitlist
+    preloadedData.user.waitlisted.push(parseInt(tierID));
+
+    $.post({
+        url: "/waitlist/" + tierID + "/",
+        beforeSend: authorizeXHR,
+        success: response => {
+            console.log(response);
+            iziToast.success({
+                title: "Success",
+                message: "Product has been waitlisted",
+                position: "bottomCenter",
+                timeout: 2500,
+                progressBar: false,
+            });
+        },
+        error: response => {
+            console.log(response);
+        }
+    });
+}
+
+function onSignOutButtonClick() {
+    $.post({
+        url: "/accounts/logout/",
+        beforeSend: authorizeXHR,
+        success: () => {
+            location.reload();
+        },
+        error: response => {
+            console.log(response);
+        }
+    })
+}
 
 function tierInCart(tier) {
     let cart = [];
@@ -90,17 +143,23 @@ function showAddToCart(tier) {
 function setUpSingularProduct(tier) {
     $('#product-modal-tiers').hide();
     $('#product-modal-selected-tier').val(tier.id);
-
-    console.log(tier.quantity);
-    console.log(tier.quantity === 0);
-
     showAddToCart(tier);
+    showWaitlists(tier);
+}
 
-    if (tierInCart(tier.id)) {
-        $('#product-modal-in-cart-message').show();
+
+function showWaitlists(tier) {
+    const tierID = parseInt(tier.id);
+    const waitlist = preloadedData.user.waitlisted;
+
+    if (waitlist.includes(tierID)) {
+        $('#waitlist-button').hide();
+        $('#in-waitlist-message').show();
     } else {
-        $('#product-modal-in-cart-message').hide();
+        $('#waitlist-button').show();
+        $('#in-waitlist-message').hide();
     }
+
 }
 
 function setUpTieredProduct(tiers) {
@@ -112,6 +171,7 @@ function setUpTieredProduct(tiers) {
         $('#product-modal-product-price').html("₱" + tier.currentPrice);
 
         showAddToCart(tier);
+        showWaitlists(tier);
     }
 
     $('#product-modal-tier-choices').html(''); //Clear first
@@ -136,6 +196,10 @@ function setUpTieredProduct(tiers) {
 
         $('#product-modal-tier-choices').append(clone);
     })
+}
+
+function authorizeXHR(xhr) {
+    xhr.setRequestHeader('X-CSRFToken', preloadedData.csrf);
 }
 
 

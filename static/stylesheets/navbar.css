@@ -70,3 +70,23 @@ nav a.navbar-brand {
 #product-modal-tier-button-clone {
     display : none !important;
 }
+
+/*Search bar*/
+
+#search-bar {
+    flex       : 0 0 41.666667%;
+    max-width  : 41.666667%;
+    transition : all 500ms;
+}
+
+#search-bar:focus {
+    max-width    : 55% !important;
+    flex         : 0 0 100% !important;
+    border-color : white !important;;
+    color        : white;
+    background   : #40454b !important;;
+}
+
+input[type=search]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+}

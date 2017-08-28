@@ -39,7 +39,10 @@ class Navbar extends React.Component {
                         <a className="dropdown-item"
                            href="#">Waitlists</a>
                         <div className="dropdown-divider"></div>
-                        <button className="dropdown-item" id="sign-out-button" onClick={onSignOutButtonClick}>Sign out</button>
+                        <button className="dropdown-item"
+                                id="sign-out-button"
+                                onClick={onSignOutButtonClick}>Sign out
+                        </button>
                     </div>
                 </div>
             )
@@ -71,9 +74,11 @@ class Navbar extends React.Component {
 
                     <div className="collapse navbar-collapse"
                          id="navbarNavDropdown">
-                        <input className="form-control w-100 mr-auto col-lg-5 bg-dark text-white border-secondary"
+                        <input className="form-control w-100 mr-auto bg-dark text-white border-secondary"
+                               type="search"
                                placeholder="Search products"
-                               onChange={this.search}/>
+                               onChange={this.search}
+                               id="search-bar"/>
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item mr-2">
                                 <button className="btn btn-outline-secondary border-light text-light ml-5">

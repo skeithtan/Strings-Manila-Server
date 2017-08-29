@@ -13,15 +13,9 @@ $(() => {
         $.ajax({
             url: `/waitlist/${tierID}/`,
             method: 'DELETE',
-            beforeSend: xhr => {
-                xhr.setRequestHeader('X-CSRFToken', getCSRF());
-            },
-            success: () => {
-                $(`#row-${tierID}`).remove()
-            },
-            error: response => {
-                console.log(response);
-            }
+            beforeSend: xhr => xhr.setRequestHeader('X-CSRFToken', getCSRF()),
+            success: () => location.reload(),
+            error: response => console.log(response)
         });
     });
 });

@@ -14,14 +14,11 @@
           href="{% static "stylesheets/cart.css" %}">
 
     <!--Scripts-->
-    <script src="{% static "dist/static/scripts/cart.js" %}"></script>
     <script src="{% static "dist/static/scripts/csrf.js" %}"></script>
+    <script src="{% static "dist/static/scripts/cart.js" %}"></script>
 
 </head>
 <body class="bg-light">
-<script>
-    const csrf = "{{ csrf_token }}";
-</script>
 
 {% include 'navbar.html' %}
 

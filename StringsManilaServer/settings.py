@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'entity_management',
     'waitlists',
+    'customer_profile',
 
     'allauth',
     'allauth.account',

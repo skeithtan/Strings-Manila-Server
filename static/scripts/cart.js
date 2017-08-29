@@ -7,14 +7,13 @@ $(() => {
     cartTable.hide();
     emptyState.hide();
 
-    let totalPrice = 0;
     let itemPrice = [];
 
     $.post({
         url: window.location.href,
         data: localStorage.cart,
         beforeSend: xhr => {
-            xhr.setRequestHeader('X-CSRFToken', csrf);
+            xhr.setRequestHeader('X-CSRFToken', getCSRF());
         },
         success: response => {
             loadingIndicator.hide();

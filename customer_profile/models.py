@@ -3,7 +3,7 @@ from django.db.models import (
     Model,
     OneToOneField,
     CharField,
-    EmailField
+    EmailField,
 )
 
 

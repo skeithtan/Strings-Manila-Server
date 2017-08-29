@@ -33,7 +33,7 @@ class Navbar extends React.Component {
                     </button>
                     <div className="dropdown-menu">
                         <a className="dropdown-item"
-                           href="#">Profile</a>
+                           href="/profile/">Profile</a>
                         <a className="dropdown-item"
                            href="#">Orders</a>
                         <a className="dropdown-item"

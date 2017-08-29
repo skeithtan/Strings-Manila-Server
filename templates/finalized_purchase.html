@@ -1,0 +1,46 @@
+<body class="bg-dark">
+
+<script>
+    localStorage.cart = JSON.stringify([])
+</script>
+
+{% include 'navbar.html' %}
+
+<div class="container site-margin p-5 full-page d-flex">
+    <div class="ml-auto mr-auto col-lg-6 mb-5 text-white"
+         style="margin-top: -120px">
+        <h1 style="opacity: 0.05">谢谢!</h1>
+        <h1 style="opacity: 0.1">Grazie!</h1>
+        <h1 style="opacity: 0.2">고맙습니다!</h1>
+        <h1 style="opacity: 0.3">Merci!</h1>
+        <h1 style="opacity: 0.4">Gracias!</h1>
+        <h1 style="opacity: 0.5">ありがとう!</h1>
+        <h1 style="opacity: 0.6">Salamat!</h1>
+        <h1 class="mb-4">Thank you!</h1>
+        <h5>Please deposit your total amount of <span class="text-light">₱{{ order.total_price }}</span> in the
+            following
+            account immediately to begin processing your order:</h5>
+        <div class="mt-4">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Account Number</th>
+                    <td>0000000000</td>
+                </tr>
+                <tr>
+                    <th>Account Name</th>
+                    <td>Strings Manila</td>
+                </tr>
+
+            </table>
+            <p class="mb-5">You can view these instructions again in the order page.</p>
+
+            <div class="row ml-auto text-dark">
+                <a class="btn btn-lg btn-light mr-2">View Order</a>
+                <a href="/" class="btn btn-lg btn-light">Return to Home Page</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>

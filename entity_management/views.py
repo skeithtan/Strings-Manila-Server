@@ -124,6 +124,7 @@ class RestockTierView(APIView):
             return Response({
                 "error": '"quantity" must be greater than 0'
             }, status=400)
+        print(request.data)
 
         if is_add:
             product_tier.quantity += quantity

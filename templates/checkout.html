@@ -1,4 +1,11 @@
+{% load static %}
 <body class="bg-light">
+<script src="{% static "scripts/checkout.js" %}"></script>
+<script>
+    {% if local_storage_cart %}
+        localStorage.cart = '{{ local_storage_cart | safe }}';
+    {% endif %}
+</script>
 
 {% include 'navbar.html' %}
 
@@ -22,6 +29,65 @@
                     <a href="/cart/"
                        class="btn btn-outline-secondary">Return to cart</a>
                 </div>
+
+
+                {% if inactive_errors or out_of_stock_errors or changed_quantity %}
+                    <div class="alert alert-danger mt-3"
+                         role="alert">
+                        <strong>Oh snap!</strong>
+
+                        {% if out_of_stock_errors %}
+                            <p>The following items are no longer in stock and have been removed from your cart:</p>
+                            <ul>
+                                {% for tier in out_of_stock_errors %}
+                                    <li>
+                                        <b>{{ tier.product_description.name }}
+                                            {% if not tier.product_description.is_singular %}
+                                                - {{ tier.name }}
+                                            {% endif %}
+                                        </b>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+
+                        {% if changed_quantity %}
+
+                            <p>The following items exceeded inventory count:</p>
+                            <ul>
+                                {% for tier in changed_quantity %}
+                                    <li>
+                                        <b>{{ tier.product_description.name }}
+                                            {% if not tier.product_description.is_singular %}
+                                                - {{ tier.name }}
+                                            {% endif %}
+                                        </b>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+
+                            <p>The quantity has been updated to inventory maximum.</p>
+
+                        {% endif %}
+
+                        {% if inactive_errors %}
+                            <p>The following products were removed from your cart because they are no longer being
+                                offered:</p>
+                            <ul>
+                                {% for tier in dead_products %}
+                                    <li>
+                                        <b>{{ tier.product_description.name }}
+                                            {% if not tier.product_description.is_singular %}
+                                                - {{ tier.name }}
+                                            {% endif %}
+                                        </b>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+
+                {% endif %}
 
 
                 <table class="table">
@@ -53,7 +119,11 @@
                         <td></td>
                         <td><h4 class="mb-0">₱{{ total_price }}</h4></td>
                         <td>
-                            <button class="btn btn-lg btn-outline-dark">Finalize Purchase</button>
+                            {% if cart %}
+                                <button class="btn btn-lg btn-outline-dark"
+                                        id="finalize-button">Finalize Purchase
+                                </button>
+                            {% endif %}
                         </td>
                     </tr>
                     </tbody>

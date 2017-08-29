@@ -149,6 +149,11 @@ function setUpSingularProduct(tier) {
 
 
 function showWaitlists(tier) {
+    if (!preloadedData.user.isAuthenticated) {
+        $('#in-waitlist-message').hide();
+        return;
+    }
+
     const tierID = parseInt(tier.id);
     const waitlist = preloadedData.user.waitlisted;
 

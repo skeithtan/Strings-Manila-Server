@@ -1,11 +1,14 @@
 import json
+from json import JSONDecodeError
 
+from django.contrib.auth.decorators import login_required
 from django.views import View
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 
 from entity_management.models import ProductTier
+from customer_profile.models import Profile
 from waitlists.models import Waitlist
 
 
@@ -52,3 +55,106 @@ class CartView(View):
             })
 
         return JsonResponse(response, safe=False)
+
+
+class ReviewOrderView(View):
+    @staticmethod
+    def get(request):
+        # This does not exist.
+        return redirect('/cart/')
+
+    @staticmethod
+    @login_required
+    def post(request):
+        customer = request.user
+        if not Profile.exists_for_customer(customer):
+            return render(request, 'checkout.html', {
+                "missing_profile": True
+            })
+
+        profile = Profile.objects.get(customer=customer)
+
+        try:
+            cart = json.loads(request.body.decode("utf-8"))
+        except JSONDecodeError:
+            return redirect('/cart/')
+
+        inactive_errors = []
+        out_of_stock_errors = []
+        changed_quantity = []
+        response_cart = []
+
+        total_price = 0.00
+
+        for (index, item) in enumerate(cart):
+            tier_id = int(item["tier"])
+            cart_quantity = int(item["quantity"])
+
+            tiers = ProductTier.objects.filter(id=tier_id)
+
+            if len(tiers) == 0:
+                # Inexistent tier
+                del cart[index]
+                continue
+
+            tier = tiers[0]
+
+            if cart_quantity < 0:
+                # No reason to keep 0 or negative quantity
+                del cart[index]
+                continue
+
+            # Maximum of 20
+            cart_quantity = 20 if cart_quantity > 20 else cart_quantity
+
+            if not tier.product_description.is_active:
+                # Admin discontinued product, cannot check out
+                inactive_errors.append(tier)
+                del cart[index]
+                continue
+
+            if tier.quantity == 0:
+                # Tier is out of stock. Cannot check out
+                out_of_stock_errors.append(tier)
+                del cart[index]
+                continue
+
+            if tier.quantity < cart_quantity:
+                # Cannot support more quantity, so quantity is changed to max possible
+                cart_quantity = tier.quantity
+                changed_quantity.append(tier)
+
+            # Calculate total price
+            total_price += cart_quantity * float(tier.current_price)
+            response_cart.append({
+                "quantity": cart_quantity,
+                "tier": tier
+            })
+
+        return render(request, 'checkout.html', {
+            "total_price": total_price,
+            "cart": response_cart,
+            "inactive_errors": inactive_errors,
+            "out_of_stock_errors": out_of_stock_errors,
+            "changed_quantity": changed_quantity,
+            "profile": profile
+        })
+
+
+class CheckoutOrderView(View):
+    @staticmethod
+    def get(request):
+        # This does not exist.
+        return redirect('/cart/')
+
+
+class FinalizedOrderView(View):
+    @staticmethod
+    def get(request):
+        # This does not exist.
+        return redirect('/cart/')
+
+    @staticmethod
+    @login_required
+    def post(request):
+        pass

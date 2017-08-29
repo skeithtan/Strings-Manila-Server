@@ -12,9 +12,7 @@ $(() => {
     $.post({
         url: window.location.href,
         data: localStorage.cart,
-        beforeSend: xhr => {
-            xhr.setRequestHeader('X-CSRFToken', getCSRF());
-        },
+        beforeSend: authorizeXHR,
         success: response => {
             loadingIndicator.hide();
 
@@ -82,6 +80,16 @@ $(() => {
         calculateTotal();
     }
 
+    $('#proceed-to-checkout-button').click(() => {
+        $.post({
+            url: '/cart/review/',
+            beforeSend: authorizeXHR,
+            data: localStorage.cart,
+            success: response => $('body').html(response),
+            error: response => console.log(response),
+        });
+    });
+
     function calculateTotal() {
         const cart = JSON.parse(localStorage.cart);
         let total = 0;
@@ -94,6 +102,10 @@ $(() => {
         });
 
         $('#total-price').html("₱" + total);
-
     }
-});
+
+    function authorizeXHR(xhr) {
+        xhr.setRequestHeader('X-CSRFToken', getCSRF());
+    }
+})
+;

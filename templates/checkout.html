@@ -1,0 +1,113 @@
+<body class="bg-light">
+
+{% include 'navbar.html' %}
+
+{% if missing_profile %}
+    <div id="missing-profile-view">
+        <div class="container site-margin p-5 text-center d-flex flex-column align-items-center justify-content-center full-page">
+            <h2>We don't have your contact and shipping information yet.</h2>
+            <p class="text-muted">We need this information so we know where to ship.</p>
+            <a href="/profile/create/?redirect-to-cart=True"
+               class="btn btn-outline-dark">Fill out contact and shipping information</a>
+        </div>
+    </div>
+{% else %}
+    <div class="container site-margin p-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="d-flex flex-row align-items-center justify-content-center mb-5">
+                    <h2 class="mr-auto mb-0">Checkout Summary</h2>
+                    <a href="/"
+                       class="btn btn-outline-secondary mr-2">Continue Shopping</a>
+                    <a href="/cart/"
+                       class="btn btn-outline-secondary">Return to cart</a>
+                </div>
+
+
+                <table class="table">
+                    <thead class="thead-default">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Option</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in cart %}
+                        <tr>
+                            <td>{{ item.tier.product_description.name }}</td>
+                            <td>
+                                {% if item.tier.product_description.is_singular %}
+                                    <small class="text-muted">N/A</small>
+                                {% else %}
+                                    {{ item.tier.name }}
+                                {% endif %}
+                            </td>
+                            <td>₱{{ item.tier.current_price }}</td>
+                            <td>{{ item.quantity }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td><h4 class="mb-0">Total Price</h4></td>
+                        <td></td>
+                        <td><h4 class="mb-0">₱{{ total_price }}</h4></td>
+                        <td>
+                            <button class="btn btn-lg btn-outline-dark">Finalize Purchase</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-lg-4">
+                <div class="mb-5">
+                    <div class="d-flex flex-row mb-3 align-items-center justify-content-center">
+                        <h4 class="ml-2 mb-auto mr-auto">Contact Information</h4>
+                        <a href="/profile/?redirect-to-cart=True"
+                           class="btn btn-sm btn-outline-dark">Change</a>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th>Full Name</th>
+                            <td>{{ request.user.first_name }} {{ request.user.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Phone Number</th>
+                            <td>{{ profile.phone }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ profile.email }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <div class="d-flex flex-row mb-3 align-items-center justify-content-center">
+                        <h4 class="ml-2 mb-auto mr-auto">Shipping Information</h4>
+                        <a href="/profile/?redirect-to-cart=True"
+                           class="btn btn-sm btn-outline-dark">Change</a>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th>Address</th>
+                            <td>{{ profile.address }}</td>
+                        </tr>
+                        <tr>
+                            <th>City</th>
+                            <td>{{ profile.city }}</td>
+                        </tr>
+                        <tr>
+                            <th>Postal Code</th>
+                            <td>{{ profile.postal_code }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endif %}
+
+
+</body>

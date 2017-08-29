@@ -14,3 +14,7 @@ class Profile(Model):
     city = CharField(max_length=64)
     address = CharField(max_length=1024)
     postal_code = CharField(max_length=32)
+
+    @staticmethod
+    def exists_for_customer(customer):
+        return Profile.objects.filter(customer=customer).count() >= 1

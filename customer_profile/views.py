@@ -6,17 +6,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 
-def profile_exists(customer):
-    return Profile.objects.filter(customer=customer).count() >= 1
-
-
 class CustomerProfileView(View):
     @staticmethod
     @login_required
     def get(request):
         customer = request.user
 
-        if not profile_exists(customer):
+        if not Profile.exists_for_customer(customer):
             return redirect("/profile/create/")
 
         profile = Profile.objects.get(customer=customer)
@@ -33,8 +29,9 @@ class CustomerProfileView(View):
     @login_required
     def post(request):
         customer = request.user
+        redirect_to_cart = request.GET.get('redirect-to-cart', False)
 
-        if not profile_exists(customer):
+        if not Profile.exists_for_customer(customer):
             return redirect("/profile/create/")
 
         profile = Profile.objects.get(customer=customer)
@@ -48,13 +45,14 @@ class CustomerProfileView(View):
             profile.postal_code = serializer.validated_data["postal_code"]
             profile.save()
 
-            print(profile.address)
-
-            return render(request, 'profile.html', {
-                "view_profile": True,
-                "profile": profile,
-                "success_modify": True
-            })
+            if redirect_to_cart:
+                return redirect("/cart/")
+            else:
+                return render(request, 'profile.html', {
+                    "view_profile": True,
+                    "profile": profile,
+                    "success_modify": True
+                })
 
         else:
             return render(request, 'profile.html', {
@@ -70,7 +68,7 @@ class CreateCustomerProfileView(View):
     def get(request):
         customer = request.user
 
-        if profile_exists(customer):
+        if Profile.exists_for_customer(customer):
             return redirect("/profile/")
 
         return render(request, 'profile.html', {
@@ -81,8 +79,9 @@ class CreateCustomerProfileView(View):
     @login_required
     def post(request):
         customer = request.user
+        redirect_to_cart = request.GET.get('redirect-to-cart', False)
 
-        if profile_exists(customer):
+        if Profile.exists_for_customer(customer):
             return redirect("/profile/")
 
         serializer = ProfileSerializer(data=request.POST)
@@ -95,7 +94,11 @@ class CreateCustomerProfileView(View):
                                    address=serializer.validated_data["address"],
                                    postal_code=serializer.validated_data["postal_code"])
 
-            return redirect("/profile/?created=True")
+            if redirect_to_cart:
+                return redirect("/cart/")
+            else:
+                return redirect("/profile/?created=True")
+
         else:
             return render(request, 'profile.html', {
                 "errors": serializer.errors

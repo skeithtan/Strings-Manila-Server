@@ -24,7 +24,7 @@
 
 <div id="loading-indicator"
      class="full-page">
-    <div class="d-flex align-items-center justify-content-center">
+    <div class="d-flex align-items-center justify-content-center h-100">
         <div id="floatingCirclesG">
             <div class="f_circleG"
                  id="frotateG_01"></div>
@@ -58,20 +58,20 @@
 <div id="cart-table"
      class="container site-margin p-5 full-page"
      style="max-width:1200px">
-    <div class="row pl-4 pr-4 mt-auto">
+    <div class="row pl-4 pr-4 mb-5">
         <h2 class="mr-auto mb-0">Your Cart</h2>
         <a href="/"
-           class="btn btn-outline-dark">Continue Shopping</a>
+           class="btn btn-outline-secondary">Continue Shopping</a>
     </div>
     <div class="container-fluid mb-auto">
         <table class="table mt-4">
-            <thead>
+            <thead class="thead-default">
             <tr>
                 <th style="width: 60px;"></th>
                 <th>Product name</th>
                 <th>Option</th>
                 <th>Price</th>
-                <th style="width: 200px">Quantity</th>
+                <th style="width: 150px">Quantity</th>
                 <th style="width: 80px;"></th>
             </tr>
             </thead>
@@ -117,8 +117,11 @@
                 <td><h4 id="total-price"
                         class="mb-0">1200</h4></td>
                 {% if request.user.is_authenticated %}
-                    <td><a href="#"
-                           class="btn btn-outline-dark btn-lg">Proceed to Checkout</a></td>
+                    <td>
+                        <button id="proceed-to-checkout-button"
+                                class="btn btn-outline-dark btn-lg">Proceed to Checkout
+                        </button>
+                    </td>
                 {% else %}
                     <td></td>
                 {% endif %}
@@ -127,7 +130,6 @@
             </tbody>
 
         </table>
-
         {% if not request.user.is_authenticated %}
             <div class="d-flex flex-column justify-content-center align-items-center p-5 m-5">
                 <h4 class="mb-3">You need to be signed in to check out.</h4>

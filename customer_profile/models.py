@@ -18,3 +18,6 @@ class Profile(Model):
     @staticmethod
     def exists_for_customer(customer):
         return Profile.objects.filter(customer=customer).count() >= 1
+
+    def __str__(self):
+        return self.customer.get_full_name()

@@ -33,6 +33,9 @@ class Order(Model):
             total_price += float(order_item.line_price)
         return total_price
 
+    def __str__(self):
+        return f"Order {self.id} / {self.date_ordered} / {self.contact}"
+
 
 class OrderLineItem(Model):
     order = ForeignKey(Order, on_delete=CASCADE)
@@ -44,3 +47,6 @@ class OrderLineItem(Model):
         date_ordered = self.order.date_ordered
         price = self.tier.price_for_date(date=date_ordered)
         return float(price) * float(self.quantity)
+
+    def __str__(self):
+        return f"Order {self.order.id} - {self.tier.name} - {self.quantity}"

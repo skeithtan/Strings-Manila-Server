@@ -24,7 +24,6 @@
 <script>
 
     const preloadedData = {
-        csrf: "{{ csrf_token }}",
         user: {
             isAuthenticated: {{ request.user.is_authenticated|yesno:"true,false" }},
             name: "{{ request.user.first_name }} {{ request.user.last_name }}",
@@ -142,8 +141,8 @@
                         <div id="in-waitlist-message"
                              class="alert border-warning row ml-auto mr-auto justify-content-center align-items-center">
                             <p class="mb-0 text-warning mr-auto">This product is already in your waitlist.</p>
-                            <a href="/accounts/facebook/login/?process=login"
-                               class="btn btn-sm btn-warning">Show waitlists</a>
+                            <a href="/waitlist/"
+                               class="btn btn-sm btn-warning">View waitlist</a>
                         </div>
                     </div>
 
@@ -184,7 +183,7 @@
 <script crossorigin
         src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
 
-<script src="{% static "dist/static/scripts/graphql.js" %}"></script>
+<script src="{% static "dist/static/scripts/csrf.js" %}"></script>
 <script src="{% static "dist/static/scripts/navbar.js" %}"></script>
 <script src="{% static "dist/static/scripts/products_browser.js" %}"></script>
 <script src="{% static "dist/static/scripts/products_catalog.js" %}"></script>

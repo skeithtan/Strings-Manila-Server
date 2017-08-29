@@ -199,7 +199,5 @@ function setUpTieredProduct(tiers) {
 }
 
 function authorizeXHR(xhr) {
-    xhr.setRequestHeader('X-CSRFToken', preloadedData.csrf);
+    xhr.setRequestHeader('X-CSRFToken', getCSRF());
 }
-
-

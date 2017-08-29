@@ -3,5 +3,6 @@ from .views import *
 
 
 waitlist_urls = [
-    url(r'^waitlist/(?P<tier_id>(\d+))/$', WaitlistView.as_view()),
+    url(r'^waitlist/$', WaitlistListView.as_view()),
+    url(r'^waitlist/(?P<tier_id>(\d+))/$', WaitlistDetailView.as_view()),
 ]

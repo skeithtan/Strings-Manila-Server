@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Strings Manila | Waitlists</title>
+
+    {% load static %}
+    {% include 'bootstrap.html' %}
+
+    <!--Stylesheets-->
+    <link rel="stylesheet"
+          href="{% static "stylesheets/navbar.css" %}">
+    <link rel="stylesheet"
+          href="{% static "stylesheets/cart.css" %}">
+
+    <!--Scripts-->
+    <script src="{% static "dist/static/scripts/waitlists.js" %}"></script>
+</head>
+<body class="bg-light">
+
+{% include 'navbar.html' %}
+
+<div id="waitlist-table"
+     class="container site-margin p-5 full-page d-flex flex-column">
+    <div class="w-100 text-center p-5">
+        <h1>Waitlist</h1>
+        <p class="text-muted">These products will be converted into an order when stocks arrive.</p>
+    </div>
+
+    {% if rows %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th style="width: 60px"></th>
+                <th>Product Name</th>
+                <th>Option</th>
+                <th>Date Waitlisted</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in rows %}
+                <tr id="row-{row.tier_id}">
+                    <td><img src="{{ row.image }}"></td>
+                    <td>{{ row.product_name }}</td>
+
+                    <td>{% if row.tier_name %}
+                        {{ row.tier_name }}
+                    {% else %}
+                        <small class="text-muted">N/A</small>
+                    {% endif %}
+                    </td>
+
+                    <td>{{ row.waitlist_date | date:"DATE_FORMAT" }}</td>
+
+                    <td>
+                        <button class="btn btn-outline-danger remove-waitlist-button"
+                                data-toggle="modal"
+                                data-target="#remove-waitlist-modal"
+                                data-tier-id="{{ row.tier_id }}">Remove
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+
+        <div class="container h-100 d-flex flex-column align-items-center justify-content-center mb-5 pb-5">
+            <h2>There's nothing here</h2>
+            <p class="text-muted">When you add a product to your waitlist, you will see it here.</p>
+            <a href="/"
+               class="btn btn-outline-dark">Back to shopping</a>
+        </div>
+
+    {% endif %}
+</div>
+
+<div class="modal fade"
+     id="remove-waitlist-modal">
+    <div class="modal-dialog"
+         role="document">
+        <div class="modal-content border-danger">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">Are you sure you want to remove this from your waitlist?</h5>
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="remove-waitlist-tier-id">
+                <p>This cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="confirm-remove-waitlist"
+                        type="button"
+                        class="btn btn-danger">Confirm Remove
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -37,9 +37,14 @@ $(() => {
         const row = rowClone.clone();
 
         $(row.find('img')[0]).attr('src', item.image);
-        $(row.find('.product-name')[0]).html(item.name);
-        $(row.find('.product-price')[0]).html("₱" + item.price);
-        $(row.find('.product-tier')[0]).html(item.isSingular ? "<small>N/A</small>" : item.tierName);
+        $(row.find('.product-name')[0]).text(item.name);
+        $(row.find('.product-price')[0]).text("₱" + item.price);
+
+        if(item.isSingular) {
+            $(row.find('.product-tier')[0]).html("<small>N/A</small>");
+        } else {
+            $(row.find('.product-tier')[0]).text(item.tierName);
+        }
 
         const select = $(row.find('.custom-select')[0]);
         const removeButton = $(row.find('.remove-button')[0]);

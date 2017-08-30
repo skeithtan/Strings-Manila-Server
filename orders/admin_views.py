@@ -5,9 +5,13 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 
 from orders.models import Order
-from orders.serializers import OrderSerializer, OrderLineItemSerializer
 from admin_auth.permissions import IsSuperuser
 from customer_profile.serializers import ProfileSerializer
+from orders.serializers import (
+    OrderSerializer,
+    OrderSummarySerializer,
+    OrderLineItemSerializer,
+)
 
 
 class OrderList(APIView):
@@ -25,7 +29,7 @@ class OrderList(APIView):
             }, status=400)
 
         orders = Order.objects.filter(date_ordered__gte=start_date, date_ordered__lte=end_date)
-        serializer = OrderSerializer(orders, many=True)
+        serializer = OrderSummarySerializer(orders, many=True)
         return Response(data=serializer.data, status=200)
 
 

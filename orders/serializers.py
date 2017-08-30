@@ -9,6 +9,14 @@ class OrderLineItemSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class OrderSummarySerializer(ModelSerializer):
+    total_price = FloatField()
+
+    class Meta:
+        model = Order
+        fields = ('id', 'total_price', 'date_ordered', 'status')
+
+
 class OrderSerializer(ModelSerializer):
     total_price = FloatField()
 

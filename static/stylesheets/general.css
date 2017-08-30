@@ -20,6 +20,13 @@
 }
 
 /*Product card modal*/
+@media (min-width : 800px) {
+    .modal-dialog {
+        max-width : 800px;
+        margin    : 30px auto;
+    }
+}
+
 #product-card-modal img#product-modal-main-product-img {
     object-fit : cover;
 }
@@ -54,5 +61,5 @@
 }
 
 input[type=search]::-webkit-search-cancel-button {
-    -webkit-appearance: searchfield-cancel-button;
+    -webkit-appearance : searchfield-cancel-button;
 }

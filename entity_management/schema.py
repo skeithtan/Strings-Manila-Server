@@ -1,4 +1,5 @@
 from .models import Stall, ProductDescription, ProductTier
+
 from graphene_django.types import DjangoObjectType
 from graphene import (
     AbstractType,
@@ -15,6 +16,7 @@ class ProductTierType(DjangoObjectType):
 
     class Meta:
         model = ProductTier
+        exclude = ('orderlineitem_set', )
 
 
 class ProductDescriptionType(DjangoObjectType):

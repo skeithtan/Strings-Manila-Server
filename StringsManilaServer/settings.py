@@ -24,7 +24,7 @@ SECRET_KEY = 'po(&ne191ej3_ag$!65co8nh%ae2=ab$+(&@$iozor3t@#i997'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['vfujpwcmuq.localtunnel.me', '*']
 
 # Application definition
 

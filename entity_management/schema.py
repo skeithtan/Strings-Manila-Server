@@ -16,7 +16,7 @@ class ProductTierType(DjangoObjectType):
 
     class Meta:
         model = ProductTier
-        exclude = ('orderlineitem_set', )
+        exclude_fields = ('orderlineitem_set', )
 
 
 class ProductDescriptionType(DjangoObjectType):

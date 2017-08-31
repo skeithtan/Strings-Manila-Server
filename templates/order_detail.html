@@ -60,6 +60,14 @@
             {% endif %}
         </div>
 
+        {% if order.store_notes %}
+            <div class="alert alert-success p-4 mb-4"
+                 role="alert">
+                <h4 class="alert-heading">Store Notes</h4>
+                <p class="mb-0">{{ order.store_notes }}</p>
+            </div>
+        {% endif %}
+
         {% if order.status == 'U' %}
             <div class="alert alert-info p-4 mb-4"
                  role="alert">

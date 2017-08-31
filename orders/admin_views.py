@@ -54,7 +54,7 @@ class OrderDetail(APIView):
         return Response(data=order_data, status=200)
 
 
-class VerifyOrderPayment(APIView):
+class MarkOrderAsProcessingView(APIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated, IsSuperuser)
 
@@ -62,4 +62,16 @@ class VerifyOrderPayment(APIView):
     def post(request, order_id):
         order = get_object_or_404(Order, id=order_id)
         order.mark_as_processing()
+        return Response(status=200)
+
+
+class MarkOrderAsShippedView(APIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated, IsSuperuser)
+
+    @staticmethod
+    def post(request, order_id):
+        order = get_object_or_404(Order, id=order_id)
+        store_notes = request.POST.get('notes', None)
+        order.mark_as_shipped(store_notes)
         return Response(status=200)

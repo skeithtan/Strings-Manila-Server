@@ -34,6 +34,11 @@ class Order(Model):
             total_price += float(order_item.line_price)
         return total_price
 
+    def mark_as_shipped(self, store_notes):
+        self.status = 'S'
+        self.store_notes = store_notes
+        self.save()
+
     def mark_as_processing(self):
         self.status = 'P'
         self.save()

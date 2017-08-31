@@ -20,7 +20,7 @@
         <h5>Please deposit your total amount of <span class="text-light">₱{{ order.total_price }}</span> in the
             following
             account immediately to begin processing your order:</h5>
-        <div class="mt-4">
+        <div class="mt-4 mb-5">
             <table class="table table-bordered">
                 <tr>
                     <th class="border-secondary">Account Number</th>
@@ -35,7 +35,7 @@
             <p class="mb-5">You can view these instructions again in the order page.</p>
 
             <div class="row ml-auto text-dark">
-                <a class="btn btn-lg btn-light mr-2">View Order</a>
+                <a href="/orders/{{ order.id }}" class="btn btn-lg btn-light mr-2">View Order</a>
                 <a href="/" class="btn btn-lg btn-light">Return to Home Page</a>
             </div>
         </div>

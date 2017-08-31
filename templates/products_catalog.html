@@ -27,7 +27,6 @@
         user: {
             isAuthenticated: {{ request.user.is_authenticated|yesno:"true,false" }},
             name: "{{ request.user.first_name }} {{ request.user.last_name }}",
-            waitlisted: {{ waitlisted }}
         }
 
     };
@@ -74,7 +73,8 @@
                     <div class="alert border-success row ml-auto justify-content-center align-items-center"
                          id="product-modal-in-cart-message">
                         <p class="mb-0 text-success mr-auto"><b>✓</b> This product is already in your cart.</p>
-                        <a href="/cart/" class="btn btn-sm btn-success">View cart</a>
+                        <a href="/cart/"
+                           class="btn btn-sm btn-success">View cart</a>
                     </div>
 
                     <div id="product-modal-tiers">
@@ -86,7 +86,12 @@
                         </div>
                     </div>
 
-                    <div class="row ml-auto align-content-center mb-5 mt-3"
+                    <div class="alert border-warning row ml-auto mr-auto mb-4 mt-3 align-items-center"
+                         id="product-modal-out-of-stock-message">
+                        <p class="mb-0 text-warning mr-auto">This product is out of stock.</p>
+                    </div>
+
+                    <div class="row ml-auto align-content-center mb-4 mt-3"
                          id="product-modal-add-to-cart">
                         <select id="product-modal-quantity-selection"
                                 title="Quantity"
@@ -115,35 +120,6 @@
                         <button class="btn btn-secondary mr-3"
                                 id="product-modal-add-to-cart-button">Add to cart
                         </button>
-                    </div>
-
-                    <div id="product-modal-waitlist">
-                        <div class="border-warning mb-4">
-                            <hr class="border-secondary">
-                            <h4 class="text-left text-warning mt-4">Out of stock</h4>
-                            <p class="mb-0 text-muted mr-auto">
-                                This product is not currently in stock.
-                                However, you can waitlist this product. You can only waitlist one quantity of a product.
-                                When stocks arrive, your waitlist will automatically be converted into an order so you
-                                get this product before everyone else.
-                            </p>
-                        </div>
-                        <button id="waitlist-button"
-                                class="btn btn-outline-warning mb-2">Waitlist this product
-                        </button>
-                        <div id="sign-in-to-waitlist"
-                             class="alert border-warning row ml-auto mr-auto justify-content-center align-items-center">
-                            <p class="mb-0 text-warning mr-auto">You must be signed in to waitlist a product</p>
-                            <a href="/accounts/facebook/login/?process=login"
-                               class="btn btn-primary">Sign in with Facebook</a>
-                        </div>
-
-                        <div id="in-waitlist-message"
-                             class="alert border-warning row ml-auto mr-auto justify-content-center align-items-center">
-                            <p class="mb-0 text-warning mr-auto">This product is already in your waitlist.</p>
-                            <a href="/waitlist/"
-                               class="btn btn-sm btn-warning">View waitlist</a>
-                        </div>
                     </div>
 
                     <hr class="border-secondary">

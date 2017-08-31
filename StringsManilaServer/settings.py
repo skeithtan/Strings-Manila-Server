@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'graphene_django',
     'entity_management',
-    'waitlists',
     'customer_profile',
     'orders',
 

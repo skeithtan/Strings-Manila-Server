@@ -7,7 +7,6 @@ from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from waitlists.models import Waitlist
 from customer_profile.models import Profile
 from orders.models import Order, OrderLineItem
 from entity_management.models import ProductTier
@@ -16,14 +15,7 @@ from entity_management.models import ProductTier
 class ProductCatalogView(View):
     @staticmethod
     def get(request):
-        user = request.user
-
-        waitlists_for_user = [] if not user.is_authenticated else Waitlist.objects.filter(customer=user)
-        waitlist_tier_id = [waitlist.tier.id for waitlist in waitlists_for_user]
-
-        return render(request, 'products_catalog.html', {
-            "waitlisted": waitlist_tier_id
-        })
+        return render(request, 'products_catalog.html')
 
 
 class CartView(View):

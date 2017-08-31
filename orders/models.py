@@ -20,7 +20,7 @@ class Order(Model):
         ('C', 'Cancelled')
     )
 
-    date_ordered = DateTimeField(auto_now=True)
+    date_ordered = DateTimeField(auto_now_add=True)
     contact = ForeignKey(Profile, on_delete=CASCADE)
     status = CharField(max_length=2, choices=ORDER_STATUSES, default='U')
     deposit_photo = CharField(max_length=256, null=True, default=None)
@@ -32,6 +32,10 @@ class Order(Model):
         for order_item in order_items:
             total_price += float(order_item.line_price)
         return total_price
+
+    def cancel(self):
+        self.status = 'C'
+        self.save()
 
     def __str__(self):
         return f"Order {self.id} / {self.date_ordered} / {self.contact}"

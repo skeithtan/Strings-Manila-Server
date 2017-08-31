@@ -35,9 +35,7 @@ class Navbar extends React.Component {
                         <a className="dropdown-item"
                            href="/profile/">Profile</a>
                         <a className="dropdown-item"
-                           href="#">Orders</a>
-                        <a className="dropdown-item"
-                           href="/waitlist/">Waitlists</a>
+                           href="/orders/">Orders</a>
                         <hr className="dropdown-divider" />
                         <button className="dropdown-item"
                                 id="sign-out-button">Sign out

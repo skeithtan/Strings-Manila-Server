@@ -25,3 +25,7 @@ img.table-image {
 .table td, .table th {
     vertical-align : middle;
 }
+
+.text-warning {
+    color: #e0ab0c !important;
+}

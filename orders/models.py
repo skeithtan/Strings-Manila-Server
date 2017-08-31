@@ -24,6 +24,7 @@ class Order(Model):
     contact = ForeignKey(Profile, on_delete=CASCADE)
     status = CharField(max_length=2, choices=ORDER_STATUSES, default='U')
     deposit_photo = CharField(max_length=256, null=True, default=None)
+    store_notes = CharField(max_length=1024, null=True, default=None)
 
     @property
     def total_price(self):
@@ -32,6 +33,15 @@ class Order(Model):
         for order_item in order_items:
             total_price += float(order_item.line_price)
         return total_price
+
+    def mark_as_processing(self):
+        self.status = 'P'
+        self.save()
+
+    def set_payment(self, deposit_photo_link):
+        self.deposit_photo = deposit_photo_link
+        self.status = 'V'
+        self.save()
 
     def cancel(self):
         self.status = 'C'

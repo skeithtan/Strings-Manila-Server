@@ -106,11 +106,10 @@ $(() => {
             total += quantity * tierPrice;
         });
 
-        $('#total-price').html("₱" + total);
+        $('#total-price').text("₱" + total);
     }
 
     function authorizeXHR(xhr) {
         xhr.setRequestHeader('X-CSRFToken', getCSRF());
     }
-})
-;
+});

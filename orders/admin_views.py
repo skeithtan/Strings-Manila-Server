@@ -52,3 +52,14 @@ class OrderDetail(APIView):
         })
 
         return Response(data=order_data, status=200)
+
+
+class VerifyOrderPayment(APIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated, IsSuperuser)
+
+    @staticmethod
+    def post(request, order_id):
+        order = get_object_or_404(Order, id=order_id)
+        order.mark_as_processing()
+        return Response(status=200)

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Strings Manila | Orders</title>
+
+    {% load static %}
+    {% include 'bootstrap.html' %}
+
+    <!--Stylesheets-->
+    <link rel="stylesheet"
+          href="{% static "stylesheets/navbar.css" %}">
+    <link rel="stylesheet"
+          href="{% static "stylesheets/orders.css" %}">
+
+</head>
+<body class="bg-light">
+
+{% include 'navbar.html' %}
+
+<div class="container p-5 col-lg-7">
+
+    <h2 class="mb-5">Orders</h2>
+
+    <div class="cards">
+        {% for order in orders %}
+            <div class="card mb-5 w-100 order-card">
+                <div class="card-header">
+                    <div class="d-flex flex-row align-items-center">
+                        <h5 class="mb-0 mr-5">Order #{{ order.id }}</h5>
+
+                        <div class="d-flex flex-column mr-5">
+                            <small class="text-muted">Status</small>
+                            <p class="mb-0
+                                {% if order.status == 'V' %}
+                                    text-warning
+                                {% elif order.status == 'P' %}
+                                    text-primary
+                                {% elif order.status == 'S' %}
+                                    text-success
+                                {% elif order.status == 'C' %}
+                                    text-danger
+                                {% endif %}
+                            ">
+                                {{ order.get_status_display }}
+                            </p>
+                        </div>
+
+                        <div class="d-flex flex-column mr-5">
+                            <small class="text-muted">Order Total</small>
+                            <p class="mb-0">₱{{ order.total_price }}</p>
+                        </div>
+
+                        <div class="d-flex flex-column mr-auto">
+                            <small class="text-muted">Order Placed</small>
+                            <p class="mb-0">{{ order.date_ordered }}</p>
+                        </div>
+
+                        <button class="btn btn-outline-dark">View Details</button>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table mb-0">
+                        <thead class="thead-default">
+                        <tr>
+                            <th style="width: 80px"></th>
+                            <th>Product name</th>
+                            <th>Option</th>
+                            <th>Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for line_item in order.orderlineitem_set.all %}
+                            <tr>
+                                <td><img class="table-image"
+                                         src="{{ line_item.tier.product_description.image }}"></td>
+                                <td>{{ line_item.tier.product_description.name }}</td>
+                                <td>
+                                    {% if line_item.tier.product_description.is_singular %}
+                                        <small class="text-muted">N/A</small>
+                                    {% else %}
+                                        {{ line_item.tier.name }}
+                                    {% endif %}
+                                </td>
+                                <th>{{ line_item.quantity }}</th>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% empty %}
+            {#  TODO  #}
+        {% endfor %}
+    </div>
+
+
+    {% if orders %}
+        <div class="d-flex justify-content-center">
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+
+                    {% if not orders.has_previous %}
+                        <li class="page-item disabled">
+                            <button class="page-link"
+                                    disabled>Previous
+                            </button>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link text-dark"
+                               href="/orders/?page={{ orders.previous_page_number }}">Previous</a>
+                        </li>
+                    {% endif %}
+
+                    {% if orders.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link text-dark"
+                               href="/orders/?page={{ orders.previous_page_number }}">{{ orders.previous_page_number }}</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="page-item">
+                        <button class="page-link bg-dark text-light active">{{ orders.number }}</button>
+                    </li>
+
+                    {% if orders.has_next %}
+                        <li class="page-item">
+                            <a class="page-link text-dark"
+                               href="/orders/?page={{ orders.next_page_number }}">{{ orders.next_page_number }}</a>
+                        </li>
+                    {% endif %}
+
+                    {% if not orders.has_next %}
+                        <li class="page-item disabled">
+                            <button class="page-link text-muted" disabled>Next
+                            </button>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link text-dark"
+                               href="/orders/?page={{ orders.next_page_number }}">Next</a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

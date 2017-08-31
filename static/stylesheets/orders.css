@@ -1,0 +1,15 @@
+img.table-image {
+    width         : 50px;
+    height        : 50px;
+    border-radius : 50px;
+    object-fit    : cover;
+}
+
+.order-card {
+    transition : 250ms all;
+}
+
+.order-card.card:hover {
+    box-shadow : 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.1);
+    cursor     : pointer;
+}

@@ -1,3 +1,7 @@
+function authorizeXHR(xhr) {
+    xhr.setRequestHeader('X-CSRFToken', getCSRF());
+}
+
 function getCSRF() {
     function getCookie(name) {
         var cookieValue = null;

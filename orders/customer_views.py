@@ -1,5 +1,5 @@
 from django.views import View
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -36,4 +36,29 @@ class OrdersView(View):
 
         return render(request, 'orders.html', {
             "orders": orders
+        })
+
+
+class OrderDetailView(View):
+    @staticmethod
+    @login_required
+    def get(request, order_id):
+        user = request.user
+
+        if not Profile.exists_for_customer(user):
+            # You can't have an order without a profile.
+            return redirect('/orders/')
+
+        profile = Profile.objects.get(customer=user)
+        orders = Order.objects.filter(contact=profile)
+        orders = orders.filter(id=order_id)
+
+        if not orders:
+            # Either it's not the user's order or the order doesn't exist.
+            # Either way, show them the proverbial door.
+            return redirect('/orders/')
+
+        order = orders[0]
+        return render(request, 'order_detail.html', {
+            "order": order
         })

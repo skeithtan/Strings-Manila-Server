@@ -138,7 +138,3 @@ function setUpTieredProduct(tiers) {
         $('#product-modal-tier-choices').append(clone);
     })
 }
-
-function authorizeXHR(xhr) {
-    xhr.setRequestHeader('X-CSRFToken', getCSRF());
-}

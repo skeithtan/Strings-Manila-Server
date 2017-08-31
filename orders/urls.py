@@ -1,8 +1,8 @@
 from django.conf.urls import url
 
-from .admin_views import *
-from .customer_views import OrdersView
 from .shared_views import CancelOrderView
+from .admin_views import OrderList, OrderDetail
+from .customer_views import OrdersView, OrderDetailView
 
 order_api_urls = [
     url(r'^api/orders/$', OrderList.as_view()),
@@ -11,6 +11,7 @@ order_api_urls = [
 ]
 
 order_pages_urls = [
-    url(r'^orders/$', OrdersView.as_view())
+    url(r'^orders/$', OrdersView.as_view()),
+    url(r'^orders/(?P<order_id>(\d+))/$', OrderDetailView.as_view())
 ]
 

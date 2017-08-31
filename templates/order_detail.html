@@ -2,9 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Strings Manila | Order #</title>
+    <title>Strings Manila | Order #{{ order.id }}</title>
+
+    {% load static %}
+    {% include 'bootstrap.html' %}
+
+    <!--Stylesheets-->
+    <link rel="stylesheet"
+          href="{% static "stylesheets/navbar.css" %}">
+    <link rel="stylesheet"
+          href="{% static "stylesheets/orders.css" %}">
+
+    <!--Scripts-->
+    <script src="{% static "scripts/csrf.js" %}"></script>
+    <script src="{% static "scripts/orders.js" %}"></script>
+
 </head>
-<body>
+<body class="bg-light">
+
+{% include 'navbar.html' %}
+
+<input id="order-id"
+       type="hidden"
+       value="{{ order.id }}">
+
+<div class="container p-5 col-lg-7 orders-list">
+    <div class="">
+        <a href="/orders/"
+           class="btn btn-outline-dark mb-5">Return to orders list</a>
+        <div class="d-flex flex-row align-items-center mb-5">
+            <div class="d-flex flex-column mr-auto">
+                <h2 class="">Order #{{ order.id }}</h2>
+                <h5 class="text-muted">Order placed {{ order.date_ordered }}</h5>
+                <h5 class="text-muted">Status: <span class="{% if order.status == 'V' %}
+                                                            text-warning
+                                                         {% elif order.status == 'P' %}
+                                                            text-primary
+                                                         {% elif order.status == 'S' %}
+                                                            text-success
+                                                         {% elif order.status == 'C' %}
+                                                            text-danger
+                                                         {% endif %}">{{ order.get_status_display }}</span></h5>
+            </div>
+
+            {% if order.status == 'U' %}
+                <button class="btn btn-outline-danger"
+                        data-toggle="modal"
+                        data-target="#cancel-order-modal">Cancel this order
+                </button>
+            {% endif %}
+        </div>
+
+        <table class="table">
+            <thead class="thead-default">
+            <tr>
+                <th style="width: 80px"></th>
+                <th>Product name</th>
+                <th>Option</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for line_item in order.orderlineitem_set.all %}
+                <tr>
+                    <td><img class="table-image"
+                             src="{{ line_item.tier.product_description.image }}"></td>
+                    <td>{{ line_item.tier.product_description.name }}</td>
+                    <td>
+                        {% if line_item.tier.product_description.is_singular %}
+                            <small class="text-muted">N/A</small>
+                        {% else %}
+                            {{ line_item.tier.name }}
+                        {% endif %}
+                    </td>
+                    <td>₱{{ line_item.unit_price }}</td>
+                    <th>{{ line_item.quantity }}</th>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td><h4>Total Price</h4></td>
+                <td></td>
+                <td><h4>₱{{ order.total_price }}</h4></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--Confirm Cancel Order Modal-->
+<div class="modal fade"
+     id="cancel-order-modal"
+     tabindex="-1"
+     role="dialog">
+    <div class="modal-dialog"
+         role="document">
+        <div class="modal-content border-danger">
+            <!--Modal header-->
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">Are you sure you want to cancel this order?</h5>
+                <button type="button"
+                        class="close text-white"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                    <span>&times;</span>
+                </button>
+            </div>
+
+            <!--Modal body-->
+            <div class="modal-body">
+                <p>This cannot be undone.</p>
+            </div>
+
+            <!--Modal footer-->
+            <div class="modal-footer">
+                <button id="confirm-cancel-order-button"
+                        type="button"
+                        class="btn btn-danger"
+                        data-dismiss="modal">Confirm Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

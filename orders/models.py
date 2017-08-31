@@ -52,5 +52,11 @@ class OrderLineItem(Model):
         price = self.tier.price_for_date(date=date_ordered)
         return float(price) * float(self.quantity)
 
+    @property
+    def unit_price(self):
+        # Price at the time object was created
+        date_ordered = self.order.date_ordered
+        return self.tier.price_for_date(date=date_ordered)
+
     def __str__(self):
         return f"Order {self.order.id} - {self.tier.name} - {self.quantity}"

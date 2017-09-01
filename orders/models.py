@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from customer_profile.models import Profile
 from entity_management.models import ProductTier
 
@@ -33,6 +35,10 @@ class Order(Model):
         for order_item in order_items:
             total_price += float(order_item.line_price)
         return total_price
+
+    @property
+    def expiration_date(self):
+        return self.date_ordered + timedelta(days=3)
 
     def mark_as_shipped(self, store_notes):
         self.status = 'S'

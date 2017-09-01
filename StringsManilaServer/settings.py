@@ -165,3 +165,10 @@ CELERY_RESULT_BACKEND = 'django-db'
 CELERY_IMPORTS = (
     'orders.tasks',
 )
+
+# SendGrid
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'stringsmanilamail'
+EMAIL_HOST_PASSWORD = 'march2498'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

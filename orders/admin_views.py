@@ -13,6 +13,8 @@ from orders.serializers import (
     OrderLineItemSerializer,
 )
 
+from .tasks import mail_customer_now
+
 
 class OrderList(APIView):
     authentication_classes = (TokenAuthentication,)
@@ -62,6 +64,9 @@ class MarkOrderAsProcessingView(APIView):
     def post(request, order_id):
         order = get_object_or_404(Order, id=order_id)
         order.mark_as_processing()
+
+        mail_customer_now(order)
+
         return Response(status=200)
 
 
@@ -74,4 +79,7 @@ class MarkOrderAsShippedView(APIView):
         order = get_object_or_404(Order, id=order_id)
         store_notes = request.POST.get('notes', None)
         order.mark_as_shipped(store_notes)
+
+        mail_customer_now(order)
+
         return Response(status=200)

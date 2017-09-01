@@ -1,0 +1,37 @@
+Dear {{ order.contact.customer.first_name }},
+
+{% if order.status == 'U' %}
+Thank you for shopping with us at Strings Manila. This is a reminder that this order is not yet paid. This order will be cancelled automatically by {{ order.expiration_date }} if payment has not been received by then. To submit payment, deposit ₱{{ order.total_price }} to the following bank account and then upload the deposit slip.
+
+Account Number: 0000000000
+Account Name: Strings Manila
+{% endif %}
+
+
+{% if order.status == 'C' %}
+Unfortunately, your order has been cancelled. If you believe that this cancellation was made in error, please contact us at 000000000.
+{% endif %}
+
+
+{% if order.status == 'P' %}
+We've confirmed your payment and your order is now processing.
+{% endif %}
+
+{% if order.status == 'S' %}
+Your order has just finished processing and is now shipped. Thank you for shopping with us.
+
+{% if order.store_notes %}
+Store Notes: {{ order.store_notes }}
+{% endif %}
+
+{% endif %}
+
+Order #{{ order.id }}
+Order placed {{ order.date_ordered }}
+Status: {{ order.get_status_display }}
+Total Price: ₱{{ order.total_price }}
+
+Order Products:
+{% for line_item in order.orderlineitem_set.all %}
+- {{ line_item.tier.product_description.name }} - {{ line_item.quantity }}
+{% endfor %}

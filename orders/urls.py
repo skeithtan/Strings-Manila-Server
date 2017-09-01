@@ -5,7 +5,8 @@ from .shared_views import CancelOrderView
 from .customer_views import (
     OrdersView,
     OrderDetailView,
-    SubmitPaymentView
+    SubmitPaymentView,
+    Mail
 )
 
 from .admin_views import (
@@ -26,5 +27,6 @@ api_urls = [
 pages_urls = [
     url(r'^orders/$', OrdersView.as_view()),
     url(r'^orders/(?P<order_id>(\d+))/$', OrderDetailView.as_view()),
-    url(r'^orders/(?P<order_id>(\d+))/submit-payment/$', SubmitPaymentView.as_view())
+    url(r'^orders/(?P<order_id>(\d+))/submit-payment/$', SubmitPaymentView.as_view()),
+    url(r'^test/', Mail.as_view())
 ]

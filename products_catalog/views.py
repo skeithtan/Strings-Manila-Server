@@ -195,6 +195,8 @@ class FinalizeOrderView(View):
             order = to_order(cart, profile)
             set_order_to_expire(order)
 
+
+
             return render(request, 'finalized_purchase.html', {
                 "order": order
             })

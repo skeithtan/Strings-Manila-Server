@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'mail/bootstrap_minified.html' %}
+</head>
+
+<body class="bg-dark">
+
+<div class="container-fluid p-4 col-lg-7">
+    <b class="container navbar-brand text-uppercase font-weight-bold text-white"
+       style="letter-spacing: 0.1rem">Strings Manila</b>
+</div>
+
+<div class="container-fluid p-5 col-lg-7 orders-list bg-light">
+    <div class="">
+        <h4 class="mb-3">Dear {{ order.contact.customer.first_name }},</h4>
+
+        {% if order.status == 'U' %}
+
+            <p>Thank you for shopping with us at Strings Manila. This is a reminder that this order is not yet paid.
+                This order will be cancelled automatically by <strong>{{ order.expiration_date }}</strong> if payment
+                has not been received by then.
+                To submit payment, deposit <b>₱{{ order.total_price }}</b> to the following bank account
+                and then upload the deposit slip.</p>
+
+            <table class="table table-bordered mt-4 mb-5">
+                <tr>
+                    <th style="width:200px">Account Number</th>
+                    <td>0000000000</td>
+                </tr>
+                <tr>
+                    <th style="width:200px">Account Name</th>
+                    <td>Strings Manila</td>
+                </tr>
+
+            </table>
+        {% endif %}
+
+        {% if order.status == 'C' %}
+            <p class="mb-5">Unfortunately, your order has been cancelled. If you believe that this cancellation was made
+                in error, please contact us at 000000000.</p>
+        {% endif %}
+
+        {% if order.status == 'P' %}
+            <p class="mb-5">We've confirmed your payment and your order is now processing.</p>
+        {% endif %}
+
+        {% if order.status == 'S' %}
+            <p class="mb-5">Your order has just finished processing and is now shipped. Thank you for shopping with us.</p>
+
+            {% if order.store_notes %}
+                <div class="alert alert-success p-4 mb-5"
+                     role="alert">
+                    <h4 class="alert-heading">Store Notes</h4>
+                    <p class="mb-0">{{ order.store_notes }}</p>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <h4 class="">Order #{{ order.id }}</h4>
+        <p class="text-muted d-block mb-0">Order placed {{ order.date_ordered }}</p>
+        <p class="text-muted mb-4">Status: <span class="{% if order.status == 'V' %}
+                                                            text-warning
+                                                         {% elif order.status == 'P' %}
+                                                            text-primary
+                                                         {% elif order.status == 'S' %}
+                                                            text-success
+                                                         {% elif order.status == 'C' %}
+                                                            text-danger
+                                                         {% endif %}">{{ order.get_status_display }}</span></p>
+
+        <table class="table">
+            <thead class="thead-default">
+            <tr>
+                <th style="width: 80px"></th>
+                <th>Product name</th>
+                <th>Option</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for line_item in order.orderlineitem_set.all %}
+                <tr>
+                    <td><img class="table-image"
+                             src="{{ line_item.tier.product_description.image }}"
+                             style="width         : 50px;
+    height        : 50px;
+    border-radius : 50px;
+    object-fit    : cover;"></td>
+                    <td>{{ line_item.tier.product_description.name }}</td>
+                    <td>
+                        {% if line_item.tier.product_description.is_singular %}
+                            <small class="text-muted">N/A</small>
+                        {% else %}
+                            {{ line_item.tier.name }}
+                        {% endif %}
+                    </td>
+                    <td>₱{{ line_item.unit_price }}</td>
+                    <th>{{ line_item.quantity }}</th>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td><h4>Total Price</h4></td>
+                <td></td>
+                <td><h4>₱{{ order.total_price }}</h4></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

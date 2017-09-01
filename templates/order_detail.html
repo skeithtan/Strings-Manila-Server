@@ -72,7 +72,7 @@
             <div class="alert alert-info p-4 mb-4"
                  role="alert">
                 <h4 class="alert-heading">This order has not yet been paid.</h4>
-                <p>This order will be cancelled automatically by (date) if payment has not been received by then.
+                <p>This order will be cancelled automatically by <strong>{{ order.expiration_date }}</strong> if payment has not been received by then.
                     To submit payment, deposit <b>₱{{ order.total_price }}</b> to the following bank account
                     and then upload the deposit slip.</p>
                 <table class="table table-bordered mt-4 mb-4">

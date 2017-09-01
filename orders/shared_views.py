@@ -5,7 +5,8 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 
-from orders.models import Order
+from .models import Order
+from .tasks import mail_customer_now
 
 
 class CancelOrderView(APIView):
@@ -25,6 +26,7 @@ class CancelOrderView(APIView):
         # Administrator can cancel whatever he wants
         if user.is_superuser:
             order.cancel()
+            mail_customer_now(order)
             return Response(status=200)
 
         # Only admins can cancel orders that aren't Unpaid
@@ -34,6 +36,7 @@ class CancelOrderView(APIView):
         # Customers can only cancel their own orders
         if order.contact.customer == user:
             order.cancel()
+            mail_customer_now(order)
             return redirect(f"/orders/{order.id}/")
 
         return Response(status=403)

@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="en"
+      style="text-shadow: none !important; box-shadow: none !important; box-sizing: border-box; font-family: sans-serif; line-height: 1.15; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; -ms-overflow-style: scrollbar; -webkit-tap-highlight-color: transparent;">
+<head>
+
+</head>
+
+<body style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif; font-size: 1rem; font-weight: 400; line-height: 1.5; color: #212529; background-color: #343a40 !important; margin: 0;"
+      bgcolor="#343a40 !important">
+<style type="text/css">
+    ::after {
+        text-shadow : none !important;
+        box-shadow  : none !important;
+    }
+
+    ::before {
+        text-shadow : none !important;
+        box-shadow  : none !important;
+    }
+
+    a:visited {
+        text-decoration : underline !important;
+    }
+
+    abbr[title]::after {
+        content : " (" attr(title) ")" !important;
+    }
+
+    ::after {
+        box-sizing : inherit !important;
+    }
+
+    ::before {
+        box-sizing : inherit !important;
+    }
+
+    @-ms-viewport {
+        width : device-width !important;
+    }
+
+    [tabindex="-1"]:focus {
+        outline : 0 !important;
+    }
+
+    a:hover {
+        color           : #0056b3 !important;
+        text-decoration : underline !important;
+    }
+
+    a:not([href]):not([tabindex]):focus {
+        color           : inherit !important;
+        text-decoration : none !important;
+    }
+
+    a:not([href]):not([tabindex]):hover {
+        color           : inherit !important;
+        text-decoration : none !important;
+    }
+
+    a:not([href]):not([tabindex]):focus {
+        outline : 0 !important;
+    }
+
+    button:focus {
+        outline : 5px auto -webkit-focus-ring-color !important;
+    }
+
+    .blockquote-footer::before {
+        content : "\2014 \00A0" !important;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color : rgba(0, 0, 0, .075) !important;
+    }
+
+    .table-hover .table-primary:hover {
+        background-color : #9fcdff !important;
+    }
+
+    .table-hover .table-primary:hover > td {
+        background-color : #9fcdff !important;
+    }
+
+    .table-hover .table-primary:hover > th {
+        background-color : #9fcdff !important;
+    }
+
+    .table-hover .table-secondary:hover {
+        background-color : #cfd2d6 !important;
+    }
+
+    .table-hover .table-secondary:hover > td {
+        background-color : #cfd2d6 !important;
+    }
+
+    .table-hover .table-secondary:hover > th {
+        background-color : #cfd2d6 !important;
+    }
+
+    .table-hover .table-success:hover {
+        background-color : #b1dfbb !important;
+    }
+
+    .table-hover .table-success:hover > td {
+        background-color : #b1dfbb !important;
+    }
+
+    .table-hover .table-success:hover > th {
+        background-color : #b1dfbb !important;
+    }
+
+    .table-hover .table-info:hover {
+        background-color : #abdde5 !important;
+    }
+
+    .table-hover .table-info:hover > td {
+        background-color : #abdde5 !important;
+    }
+
+    .table-hover .table-info:hover > th {
+        background-color : #abdde5 !important;
+    }
+
+    .table-hover .table-warning:hover {
+        background-color : #ffe8a1 !important;
+    }
+
+    .table-hover .table-warning:hover > td {
+        background-color : #ffe8a1 !important;
+    }
+
+    .table-hover .table-warning:hover > th {
+        background-color : #ffe8a1 !important;
+    }
+
+    .table-hover .table-danger:hover {
+        background-color : #f1b0b7 !important;
+    }
+
+    .table-hover .table-danger:hover > td {
+        background-color : #f1b0b7 !important;
+    }
+
+    .table-hover .table-danger:hover > th {
+        background-color : #f1b0b7 !important;
+    }
+
+    .table-hover .table-light:hover {
+        background-color : #ececf6 !important;
+    }
+
+    .table-hover .table-light:hover > td {
+        background-color : #ececf6 !important;
+    }
+
+    .table-hover .table-light:hover > th {
+        background-color : #ececf6 !important;
+    }
+
+    .table-hover .table-dark:hover {
+        background-color : #b9bbbe !important;
+    }
+
+    .table-hover .table-dark:hover > td {
+        background-color : #b9bbbe !important;
+    }
+
+    .table-hover .table-dark:hover > th {
+        background-color : #b9bbbe !important;
+    }
+
+    .table-hover .table-active:hover {
+        background-color : rgba(0, 0, 0, .075) !important;
+    }
+
+    .table-hover .table-active:hover > td {
+        background-color : rgba(0, 0, 0, .075) !important;
+    }
+
+    .table-hover .table-active:hover > th {
+        background-color : rgba(0, 0, 0, .075) !important;
+    }
+
+    .table-inverse.table-hover tbody tr:hover {
+        background-color : rgba(255, 255, 255, .075) !important;
+    }
+
+    .form-control:focus {
+        color            : #495057 !important;
+        background-color : #fff !important;
+        border-color     : #80bdff !important;
+        outline          : 0 !important;
+    }
+
+    select.form-control:focus::-ms-value {
+        color            : #495057 !important;
+        background-color : #fff !important;
+    }
+
+    .custom-select.is-valid:focus {
+        box-shadow : 0 0 0 .2rem rgba(40, 167, 69, .25) !important;
+    }
+
+    .form-control.is-valid:focus {
+        box-shadow : 0 0 0 .2rem rgba(40, 167, 69, .25) !important;
+    }
+
+    .was-validated .custom-select:valid:focus {
+        box-shadow : 0 0 0 .2rem rgba(40, 167, 69, .25) !important;
+    }
+
+    .was-validated .form-control:valid:focus {
+        box-shadow : 0 0 0 .2rem rgba(40, 167, 69, .25) !important;
+    }
+
+    .custom-file-input.is-valid ~ .custom-file-control::before {
+        border-color : inherit !important;
+    }
+
+    .was-validated .custom-file-input:valid ~ .custom-file-control::before {
+        border-color : inherit !important;
+    }
+
+    .custom-file-input.is-valid:focus {
+        box-shadow : 0 0 0 .2rem rgba(40, 167, 69, .25) !important;
+    }
+
+    .was-validated .custom-file-input:valid:focus {
+        box-shadow : 0 0 0 .2rem rgba(40, 167, 69, .25) !important;
+    }
+
+    .custom-select.is-invalid:focus {
+        box-shadow : 0 0 0 .2rem rgba(220, 53, 69, .25) !important;
+    }
+
+    .form-control.is-invalid:focus {
+        box-shadow : 0 0 0 .2rem rgba(220, 53, 69, .25) !important;
+    }
+
+    .was-validated .custom-select:invalid:focus {
+        box-shadow : 0 0 0 .2rem rgba(220, 53, 69, .25) !important;
+    }
+
+    .was-validated .form-control:invalid:focus {
+        box-shadow : 0 0 0 .2rem rgba(220, 53, 69, .25) !important;
+    }
+
+    .custom-file-input.is-invalid ~ .custom-file-control::before {
+        border-color : inherit !important;
+    }
+
+    .was-validated .custom-file-input:invalid ~ .custom-file-control::before {
+        border-color : inherit !important;
+    }
+
+    .custom-file-input.is-invalid:focus {
+        box-shadow : 0 0 0 .2rem rgba(220, 53, 69, .25) !important;
+    }
+
+    .was-validated .custom-file-input:invalid:focus {
+        box-shadow : 0 0 0 .2rem rgba(220, 53, 69, .25) !important;
+    }
+
+    .btn:focus {
+        text-decoration : none !important;
+    }
+
+    .btn:hover {
+        text-decoration : none !important;
+    }
+
+    .btn:focus {
+        outline    : 0 !important;
+        box-shadow : 0 0 0 3px rgba(0, 123, 255, .25) !important;
+    }
+
+    .btn:active {
+        background-image : none !important;
+    }
+
+    .btn-primary:hover {
+        color            : #fff !important;
+        background-color : #0069d9 !important;
+        border-color     : #0062cc !important;
+    }
+
+    .btn-primary:focus {
+        box-shadow : 0 0 0 3px rgba(0, 123, 255, .5) !important;
+    }
+
+    .btn-primary:active {
+        background-color : #0069d9 !important;
+        background-image : none !important;
+        border-color     : #0062cc !important;
+    }
+
+    .btn-secondary:hover {
+        color            : #fff !important;
+        background-color : #727b84 !important;
+        border-color     : #6c757d !important;
+    }
+
+    .btn-secondary:focus {
+        box-shadow : 0 0 0 3px rgba(134, 142, 150, .5) !important;
+    }
+
+    .btn-secondary:active {
+        background-color : #727b84 !important;
+        background-image : none !important;
+        border-color     : #6c757d !important;
+    }
+
+    .btn-success:hover {
+        color            : #fff !important;
+        background-color : #218838 !important;
+        border-color     : #1e7e34 !important;
+    }
+
+    .btn-success:focus {
+        box-shadow : 0 0 0 3px rgba(40, 167, 69, .5) !important;
+    }
+
+    .btn-success:active {
+        background-color : #218838 !important;
+        background-image : none !important;
+        border-color     : #1e7e34 !important;
+    }
+
+    .btn-info:hover {
+        color            : #fff !important;
+        background-color : #138496 !important;
+        border-color     : #117a8b !important;
+    }
+
+    .btn-info:focus {
+        box-shadow : 0 0 0 3px rgba(23, 162, 184, .5) !important;
+    }
+
+    .btn-info:active {
+        background-color : #138496 !important;
+        background-image : none !important;
+        border-color     : #117a8b !important;
+    }
+
+    .btn-warning:hover {
+        color            : #111 !important;
+        background-color : #e0a800 !important;
+        border-color     : #d39e00 !important;
+    }
+
+    .btn-warning:focus {
+        box-shadow : 0 0 0 3px rgba(255, 193, 7, .5) !important;
+    }
+
+    .btn-warning:active {
+        background-color : #e0a800 !important;
+        background-image : none !important;
+        border-color     : #d39e00 !important;
+    }
+
+    .btn-danger:hover {
+        color            : #fff !important;
+        background-color : #c82333 !important;
+        border-color     : #bd2130 !important;
+    }
+
+    .btn-danger:focus {
+        box-shadow : 0 0 0 3px rgba(220, 53, 69, .5) !important;
+    }
+
+    .btn-danger:active {
+        background-color : #c82333 !important;
+        background-image : none !important;
+        border-color     : #bd2130 !important;
+    }
+
+    .btn-light:hover {
+        color            : #111 !important;
+        background-color : #e2e6ea !important;
+        border-color     : #dae0e5 !important;
+    }
+
+    .btn-light:focus {
+        box-shadow : 0 0 0 3px rgba(248, 249, 250, .5) !important;
+    }
+
+    .btn-light:active {
+        background-color : #e2e6ea !important;
+        background-image : none !important;
+        border-color     : #dae0e5 !important;
+    }
+
+    .btn-dark:hover {
+        color            : #fff !important;
+        background-color : #23272b !important;
+        border-color     : #1d2124 !important;
+    }
+
+    .btn-dark:focus {
+        box-shadow : 0 0 0 3px rgba(52, 58, 64, .5) !important;
+    }
+
+    .btn-dark:active {
+        background-color : #23272b !important;
+        background-image : none !important;
+        border-color     : #1d2124 !important;
+    }
+
+    .btn-outline-primary:hover {
+        color            : #fff !important;
+        background-color : #007bff !important;
+        border-color     : #007bff !important;
+    }
+
+    .btn-outline-primary:focus {
+        box-shadow : 0 0 0 3px rgba(0, 123, 255, .5) !important;
+    }
+
+    .btn-outline-primary:active {
+        color            : #fff !important;
+        background-color : #007bff !important;
+        border-color     : #007bff !important;
+    }
+
+    .btn-outline-secondary:hover {
+        color            : #fff !important;
+        background-color : #868e96 !important;
+        border-color     : #868e96 !important;
+    }
+
+    .btn-outline-secondary:focus {
+        box-shadow : 0 0 0 3px rgba(134, 142, 150, .5) !important;
+    }
+
+    .btn-outline-secondary:active {
+        color            : #fff !important;
+        background-color : #868e96 !important;
+        border-color     : #868e96 !important;
+    }
+
+    .btn-outline-success:hover {
+        color            : #fff !important;
+        background-color : #28a745 !important;
+        border-color     : #28a745 !important;
+    }
+
+    .btn-outline-success:focus {
+        box-shadow : 0 0 0 3px rgba(40, 167, 69, .5) !important;
+    }
+
+    .btn-outline-success:active {
+        color            : #fff !important;
+        background-color : #28a745 !important;
+        border-color     : #28a745 !important;
+    }
+
+    .btn-outline-info:hover {
+        color            : #fff !important;
+        background-color : #17a2b8 !important;
+        border-color     : #17a2b8 !important;
+    }
+
+    .btn-outline-info:focus {
+        box-shadow : 0 0 0 3px rgba(23, 162, 184, .5) !important;
+    }
+
+    .btn-outline-info:active {
+        color            : #fff !important;
+        background-color : #17a2b8 !important;
+        border-color     : #17a2b8 !important;
+    }
+
+    .btn-outline-warning:hover {
+        color            : #fff !important;
+        background-color : #ffc107 !important;
+        border-color     : #ffc107 !important;
+    }
+
+    .btn-outline-warning:focus {
+        box-shadow : 0 0 0 3px rgba(255, 193, 7, .5) !important;
+    }
+
+    .btn-outline-warning:active {
+        color            : #fff !important;
+        background-color : #ffc107 !important;
+        border-color     : #ffc107 !important;
+    }
+
+    .btn-outline-danger:hover {
+        color            : #fff !important;
+        background-color : #dc3545 !important;
+        border-color     : #dc3545 !important;
+    }
+
+    .btn-outline-danger:focus {
+        box-shadow : 0 0 0 3px rgba(220, 53, 69, .5) !important;
+    }
+
+    .btn-outline-danger:active {
+        color            : #fff !important;
+        background-color : #dc3545 !important;
+        border-color     : #dc3545 !important;
+    }
+
+    .btn-outline-light:hover {
+        color            : #fff !important;
+        background-color : #f8f9fa !important;
+        border-color     : #f8f9fa !important;
+    }
+
+    .btn-outline-light:focus {
+        box-shadow : 0 0 0 3px rgba(248, 249, 250, .5) !important;
+    }
+
+    .btn-outline-light:active {
+        color            : #fff !important;
+        background-color : #f8f9fa !important;
+        border-color     : #f8f9fa !important;
+    }
+
+    .btn-outline-dark:hover {
+        color            : #fff !important;
+        background-color : #343a40 !important;
+        border-color     : #343a40 !important;
+    }
+
+    .btn-outline-dark:focus {
+        box-shadow : 0 0 0 3px rgba(52, 58, 64, .5) !important;
+    }
+
+    .btn-outline-dark:active {
+        color            : #fff !important;
+        background-color : #343a40 !important;
+        border-color     : #343a40 !important;
+    }
+
+    .btn-link:active {
+        background-color : transparent !important;
+    }
+
+    .btn-link:active {
+        border-color : transparent !important;
+        box-shadow   : none !important;
+    }
+
+    .btn-link:focus {
+        border-color : transparent !important;
+        box-shadow   : none !important;
+    }
+
+    .btn-link:hover {
+        border-color : transparent !important;
+    }
+
+    .btn-link:focus {
+        color            : #0056b3 !important;
+        text-decoration  : underline !important;
+        background-color : transparent !important;
+    }
+
+    .btn-link:hover {
+        color            : #0056b3 !important;
+        text-decoration  : underline !important;
+        background-color : transparent !important;
+    }
+
+    .btn-link:disabled:focus {
+        text-decoration : none !important;
+    }
+
+    .btn-link:disabled:hover {
+        text-decoration : none !important;
+    }
+
+    .dropdown-toggle::after {
+        display        : inline-block !important;
+        width          : 0 !important;
+        height         : 0 !important;
+        margin-left    : .255em !important;
+        vertical-align : .255em !important;
+        content        : "" !important;
+        border-top     : .3em solid !important;
+        border-right   : .3em solid transparent !important;
+        border-left    : .3em solid transparent !important;
+    }
+
+    .dropdown-toggle:empty::after {
+        margin-left : 0 !important;
+    }
+
+    .dropup .dropdown-toggle::after {
+        border-top    : 0 !important;
+        border-bottom : .3em solid !important;
+    }
+
+    .dropdown-item:focus {
+        color            : #16181b !important;
+        text-decoration  : none !important;
+        background-color : #f8f9fa !important;
+    }
+
+    .dropdown-item:hover {
+        color            : #16181b !important;
+        text-decoration  : none !important;
+        background-color : #f8f9fa !important;
+    }
+
+    .dropdown-item:active {
+        color            : #fff !important;
+        text-decoration  : none !important;
+        background-color : #007bff !important;
+    }
+
+    .btn-group-vertical > .btn:hover {
+        z-index : 2 !important;
+    }
+
+    .btn-group > .btn:hover {
+        z-index : 2 !important;
+    }
+
+    .btn-group-vertical > .btn:active {
+        z-index : 2 !important;
+    }
+
+    .btn-group-vertical > .btn:focus {
+        z-index : 2 !important;
+    }
+
+    .btn-group > .btn:active {
+        z-index : 2 !important;
+    }
+
+    .btn-group > .btn:focus {
+        z-index : 2 !important;
+    }
+
+    .btn + .dropdown-toggle-split::after {
+        margin-left : 0 !important;
+    }
+
+    .input-group .form-control:active {
+        z-index : 3 !important;
+    }
+
+    .input-group .form-control:focus {
+        z-index : 3 !important;
+    }
+
+    .input-group .form-control:hover {
+        z-index : 3 !important;
+    }
+
+    .input-group-btn > .btn:active {
+        z-index : 3 !important;
+    }
+
+    .input-group-btn > .btn:focus {
+        z-index : 3 !important;
+    }
+
+    .input-group-btn > .btn:hover {
+        z-index : 3 !important;
+    }
+
+    .input-group-btn:not(:first-child) > .btn-group:active {
+        z-index : 3 !important;
+    }
+
+    .input-group-btn:not(:first-child) > .btn-group:focus {
+        z-index : 3 !important;
+    }
+
+    .input-group-btn:not(:first-child) > .btn-group:hover {
+        z-index : 3 !important;
+    }
+
+    .input-group-btn:not(:first-child) > .btn:active {
+        z-index : 3 !important;
+    }
+
+    .input-group-btn:not(:first-child) > .btn:focus {
+        z-index : 3 !important;
+    }
+
+    .input-group-btn:not(:first-child) > .btn:hover {
+        z-index : 3 !important;
+    }
+
+    .custom-control-input:focus ~ .custom-control-indicator {
+        box-shadow : 0 0 0 1px #fff, 0 0 0 3px #007bff !important;
+    }
+
+    .custom-control-input:active ~ .custom-control-indicator {
+        color            : #fff !important;
+        background-color : #b3d7ff !important;
+    }
+
+    .custom-select:focus {
+        border-color : #80bdff !important;
+        outline      : 0 !important;
+    }
+
+    .custom-select:focus::-ms-value {
+        color            : #495057 !important;
+        background-color : #fff !important;
+    }
+
+    .custom-file-control:lang(en):empty::after {
+        content : "Choose file..." !important;
+    }
+
+    .custom-file-control::before {
+        position         : absolute !important;
+        top              : -1px !important;
+        right            : -1px !important;
+        bottom           : -1px !important;
+        z-index          : 6 !important;
+        display          : block !important;
+        height           : 2.5rem !important;
+        padding          : .5rem 1rem !important;
+        line-height      : 1.5 !important;
+        color            : #495057 !important;
+        background-color : #e9ecef !important;
+        border           : 1px solid rgba(0, 0, 0, .15) !important;
+        border-radius    : 0 .25rem .25rem 0 !important;
+    }
+
+    .custom-file-control:lang(en)::before {
+        content : "Browse" !important;
+    }
+
+    .nav-link:focus {
+        text-decoration : none !important;
+    }
+
+    .nav-link:hover {
+        text-decoration : none !important;
+    }
+
+    .nav-tabs .nav-link:focus {
+        border-color : #e9ecef #e9ecef #ddd !important;
+    }
+
+    .nav-tabs .nav-link:hover {
+        border-color : #e9ecef #e9ecef #ddd !important;
+    }
+
+    .navbar-brand:focus {
+        text-decoration : none !important;
+    }
+
+    .navbar-brand:hover {
+        text-decoration : none !important;
+    }
+
+    .navbar-toggler:focus {
+        text-decoration : none !important;
+    }
+
+    .navbar-toggler:hover {
+        text-decoration : none !important;
+    }
+
+    .navbar-light .navbar-brand:focus {
+        color : rgba(0, 0, 0, .9) !important;
+    }
+
+    .navbar-light .navbar-brand:hover {
+        color : rgba(0, 0, 0, .9) !important;
+    }
+
+    .navbar-light .navbar-nav .nav-link:focus {
+        color : rgba(0, 0, 0, .7) !important;
+    }
+
+    .navbar-light .navbar-nav .nav-link:hover {
+        color : rgba(0, 0, 0, .7) !important;
+    }
+
+    .navbar-dark .navbar-brand:focus {
+        color : #fff !important;
+    }
+
+    .navbar-dark .navbar-brand:hover {
+        color : #fff !important;
+    }
+
+    .navbar-dark .navbar-nav .nav-link:focus {
+        color : rgba(255, 255, 255, .75) !important;
+    }
+
+    .navbar-dark .navbar-nav .nav-link:hover {
+        color : rgba(255, 255, 255, .75) !important;
+    }
+
+    .card-link:hover {
+        text-decoration : none !important;
+    }
+
+    .breadcrumb::after {
+        display : block !important;
+        clear   : both !important;
+        content : "" !important;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        display       : inline-block !important;
+        padding-right : .5rem !important;
+        padding-left  : .5rem !important;
+        color         : #868e96 !important;
+        content       : "/" !important;
+    }
+
+    .breadcrumb-item + .breadcrumb-item:hover::before {
+        text-decoration : underline !important;
+    }
+
+    .breadcrumb-item + .breadcrumb-item:hover::before {
+        text-decoration : none !important;
+    }
+
+    .page-link:focus {
+        color            : #0056b3 !important;
+        text-decoration  : none !important;
+        background-color : #e9ecef !important;
+        border-color     : #ddd !important;
+    }
+
+    .page-link:hover {
+        color            : #0056b3 !important;
+        text-decoration  : none !important;
+        background-color : #e9ecef !important;
+        border-color     : #ddd !important;
+    }
+
+    .badge-primary[href]:focus {
+        color            : #fff !important;
+        text-decoration  : none !important;
+        background-color : #0062cc !important;
+    }
+
+    .badge-primary[href]:hover {
+        color            : #fff !important;
+        text-decoration  : none !important;
+        background-color : #0062cc !important;
+    }
+
+    .badge-secondary[href]:focus {
+        color            : #fff !important;
+        text-decoration  : none !important;
+        background-color : #6c757d !important;
+    }
+
+    .badge-secondary[href]:hover {
+        color            : #fff !important;
+        text-decoration  : none !important;
+        background-color : #6c757d !important;
+    }
+
+    .badge-success[href]:focus {
+        color            : #fff !important;
+        text-decoration  : none !important;
+        background-color : #1e7e34 !important;
+    }
+
+    .badge-success[href]:hover {
+        color            : #fff !important;
+        text-decoration  : none !important;
+        background-color : #1e7e34 !important;
+    }
+
+    .badge-info[href]:focus {
+        color            : #fff !important;
+        text-decoration  : none !important;
+        background-color : #117a8b !important;
+    }
+
+    .badge-info[href]:hover {
+        color            : #fff !important;
+        text-decoration  : none !important;
+        background-color : #117a8b !important;
+    }
+
+    .badge-warning[href]:focus {
+        color            : #111 !important;
+        text-decoration  : none !important;
+        background-color : #d39e00 !important;
+    }
+
+    .badge-warning[href]:hover {
+        color            : #111 !important;
+        text-decoration  : none !important;
+        background-color : #d39e00 !important;
+    }
+
+    .badge-danger[href]:focus {
+        color            : #fff !important;
+        text-decoration  : none !important;
+        background-color : #bd2130 !important;
+    }
+
+    .badge-danger[href]:hover {
+        color            : #fff !important;
+        text-decoration  : none !important;
+        background-color : #bd2130 !important;
+    }
+
+    .badge-light[href]:focus {
+        color            : #111 !important;
+        text-decoration  : none !important;
+        background-color : #dae0e5 !important;
+    }
+
+    .badge-light[href]:hover {
+        color            : #111 !important;
+        text-decoration  : none !important;
+        background-color : #dae0e5 !important;
+    }
+
+    .badge-dark[href]:focus {
+        color            : #fff !important;
+        text-decoration  : none !important;
+        background-color : #1d2124 !important;
+    }
+
+    .badge-dark[href]:hover {
+        color            : #fff !important;
+        text-decoration  : none !important;
+        background-color : #1d2124 !important;
+    }
+
+    @-webkit-keyframes progress-bar-stripes {
+    }
+
+    @keyframes progress-bar-stripes {
+    }
+
+    .list-group-item-action:focus {
+        color            : #495057 !important;
+        text-decoration  : none !important;
+        background-color : #f8f9fa !important;
+    }
+
+    .list-group-item-action:hover {
+        color            : #495057 !important;
+        text-decoration  : none !important;
+        background-color : #f8f9fa !important;
+    }
+
+    .list-group-item-action:active {
+        color            : #212529 !important;
+        background-color : #e9ecef !important;
+    }
+
+    .list-group-item:focus {
+        text-decoration : none !important;
+    }
+
+    .list-group-item:hover {
+        text-decoration : none !important;
+    }
+
+    a.list-group-item-primary:focus {
+        color            : #004085 !important;
+        background-color : #9fcdff !important;
+    }
+
+    a.list-group-item-primary:hover {
+        color            : #004085 !important;
+        background-color : #9fcdff !important;
+    }
+
+    button.list-group-item-primary:focus {
+        color            : #004085 !important;
+        background-color : #9fcdff !important;
+    }
+
+    button.list-group-item-primary:hover {
+        color            : #004085 !important;
+        background-color : #9fcdff !important;
+    }
+
+    a.list-group-item-secondary:focus {
+        color            : #464a4e !important;
+        background-color : #cfd2d6 !important;
+    }
+
+    a.list-group-item-secondary:hover {
+        color            : #464a4e !important;
+        background-color : #cfd2d6 !important;
+    }
+
+    button.list-group-item-secondary:focus {
+        color            : #464a4e !important;
+        background-color : #cfd2d6 !important;
+    }
+
+    button.list-group-item-secondary:hover {
+        color            : #464a4e !important;
+        background-color : #cfd2d6 !important;
+    }
+
+    a.list-group-item-success:focus {
+        color            : #155724 !important;
+        background-color : #b1dfbb !important;
+    }
+
+    a.list-group-item-success:hover {
+        color            : #155724 !important;
+        background-color : #b1dfbb !important;
+    }
+
+    button.list-group-item-success:focus {
+        color            : #155724 !important;
+        background-color : #b1dfbb !important;
+    }
+
+    button.list-group-item-success:hover {
+        color            : #155724 !important;
+        background-color : #b1dfbb !important;
+    }
+
+    a.list-group-item-info:focus {
+        color            : #0c5460 !important;
+        background-color : #abdde5 !important;
+    }
+
+    a.list-group-item-info:hover {
+        color            : #0c5460 !important;
+        background-color : #abdde5 !important;
+    }
+
+    button.list-group-item-info:focus {
+        color            : #0c5460 !important;
+        background-color : #abdde5 !important;
+    }
+
+    button.list-group-item-info:hover {
+        color            : #0c5460 !important;
+        background-color : #abdde5 !important;
+    }
+
+    a.list-group-item-warning:focus {
+        color            : #856404 !important;
+        background-color : #ffe8a1 !important;
+    }
+
+    a.list-group-item-warning:hover {
+        color            : #856404 !important;
+        background-color : #ffe8a1 !important;
+    }
+
+    button.list-group-item-warning:focus {
+        color            : #856404 !important;
+        background-color : #ffe8a1 !important;
+    }
+
+    button.list-group-item-warning:hover {
+        color            : #856404 !important;
+        background-color : #ffe8a1 !important;
+    }
+
+    a.list-group-item-danger:focus {
+        color            : #721c24 !important;
+        background-color : #f1b0b7 !important;
+    }
+
+    a.list-group-item-danger:hover {
+        color            : #721c24 !important;
+        background-color : #f1b0b7 !important;
+    }
+
+    button.list-group-item-danger:focus {
+        color            : #721c24 !important;
+        background-color : #f1b0b7 !important;
+    }
+
+    button.list-group-item-danger:hover {
+        color            : #721c24 !important;
+        background-color : #f1b0b7 !important;
+    }
+
+    a.list-group-item-light:focus {
+        color            : #818182 !important;
+        background-color : #ececf6 !important;
+    }
+
+    a.list-group-item-light:hover {
+        color            : #818182 !important;
+        background-color : #ececf6 !important;
+    }
+
+    button.list-group-item-light:focus {
+        color            : #818182 !important;
+        background-color : #ececf6 !important;
+    }
+
+    button.list-group-item-light:hover {
+        color            : #818182 !important;
+        background-color : #ececf6 !important;
+    }
+
+    a.list-group-item-dark:focus {
+        color            : #1b1e21 !important;
+        background-color : #b9bbbe !important;
+    }
+
+    a.list-group-item-dark:hover {
+        color            : #1b1e21 !important;
+        background-color : #b9bbbe !important;
+    }
+
+    button.list-group-item-dark:focus {
+        color            : #1b1e21 !important;
+        background-color : #b9bbbe !important;
+    }
+
+    button.list-group-item-dark:hover {
+        color            : #1b1e21 !important;
+        background-color : #b9bbbe !important;
+    }
+
+    .close:focus {
+        color           : #000 !important;
+        text-decoration : none !important;
+        opacity         : .75 !important;
+    }
+
+    .close:hover {
+        color           : #000 !important;
+        text-decoration : none !important;
+        opacity         : .75 !important;
+    }
+
+    .tooltip.bs-tooltip-auto[x-placement^=top] .arrow::before {
+        margin-left      : -3px !important;
+        content          : "" !important;
+        border-width     : 5px 5px 0 !important;
+        border-top-color : #000 !important;
+    }
+
+    .tooltip.bs-tooltip-top .arrow::before {
+        margin-left      : -3px !important;
+        content          : "" !important;
+        border-width     : 5px 5px 0 !important;
+        border-top-color : #000 !important;
+    }
+
+    .tooltip.bs-tooltip-auto[x-placement^=right] .arrow::before {
+        margin-top         : -3px !important;
+        content            : "" !important;
+        border-width       : 5px 5px 5px 0 !important;
+        border-right-color : #000 !important;
+    }
+
+    .tooltip.bs-tooltip-right .arrow::before {
+        margin-top         : -3px !important;
+        content            : "" !important;
+        border-width       : 5px 5px 5px 0 !important;
+        border-right-color : #000 !important;
+    }
+
+    .tooltip.bs-tooltip-auto[x-placement^=bottom] .arrow::before {
+        margin-left         : -3px !important;
+        content             : "" !important;
+        border-width        : 0 5px 5px !important;
+        border-bottom-color : #000 !important;
+    }
+
+    .tooltip.bs-tooltip-bottom .arrow::before {
+        margin-left         : -3px !important;
+        content             : "" !important;
+        border-width        : 0 5px 5px !important;
+        border-bottom-color : #000 !important;
+    }
+
+    .tooltip.bs-tooltip-auto[x-placement^=left] .arrow::before {
+        right             : 0 !important;
+        margin-top        : -3px !important;
+        content           : "" !important;
+        border-width      : 5px 0 5px 5px !important;
+        border-left-color : #000 !important;
+    }
+
+    .tooltip.bs-tooltip-left .arrow::before {
+        right             : 0 !important;
+        margin-top        : -3px !important;
+        content           : "" !important;
+        border-width      : 5px 0 5px 5px !important;
+        border-left-color : #000 !important;
+    }
+
+    .tooltip .arrow::before {
+        position     : absolute !important;
+        border-color : transparent !important;
+        border-style : solid !important;
+    }
+
+    .popover .arrow::after {
+        position     : absolute !important;
+        display      : block !important;
+        border-color : transparent !important;
+        border-style : solid !important;
+    }
+
+    .popover .arrow::before {
+        position     : absolute !important;
+        display      : block !important;
+        border-color : transparent !important;
+        border-style : solid !important;
+    }
+
+    .popover .arrow::before {
+        content      : "" !important;
+        border-width : 11px !important;
+    }
+
+    .popover .arrow::after {
+        content      : "" !important;
+        border-width : 11px !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=top] .arrow::after {
+        border-bottom-width : 0 !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=top] .arrow::before {
+        border-bottom-width : 0 !important;
+    }
+
+    .popover.bs-popover-top .arrow::after {
+        border-bottom-width : 0 !important;
+    }
+
+    .popover.bs-popover-top .arrow::before {
+        border-bottom-width : 0 !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=top] .arrow::before {
+        bottom           : -11px !important;
+        margin-left      : -6px !important;
+        border-top-color : rgba(0, 0, 0, .25) !important;
+    }
+
+    .popover.bs-popover-top .arrow::before {
+        bottom           : -11px !important;
+        margin-left      : -6px !important;
+        border-top-color : rgba(0, 0, 0, .25) !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=top] .arrow::after {
+        bottom           : -10px !important;
+        margin-left      : -6px !important;
+        border-top-color : #fff !important;
+    }
+
+    .popover.bs-popover-top .arrow::after {
+        bottom           : -10px !important;
+        margin-left      : -6px !important;
+        border-top-color : #fff !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=right] .arrow::after {
+        margin-top        : -8px !important;
+        border-left-width : 0 !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=right] .arrow::before {
+        margin-top        : -8px !important;
+        border-left-width : 0 !important;
+    }
+
+    .popover.bs-popover-right .arrow::after {
+        margin-top        : -8px !important;
+        border-left-width : 0 !important;
+    }
+
+    .popover.bs-popover-right .arrow::before {
+        margin-top        : -8px !important;
+        border-left-width : 0 !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=right] .arrow::before {
+        left               : -11px !important;
+        border-right-color : rgba(0, 0, 0, .25) !important;
+    }
+
+    .popover.bs-popover-right .arrow::before {
+        left               : -11px !important;
+        border-right-color : rgba(0, 0, 0, .25) !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=right] .arrow::after {
+        left               : -10px !important;
+        border-right-color : #fff !important;
+    }
+
+    .popover.bs-popover-right .arrow::after {
+        left               : -10px !important;
+        border-right-color : #fff !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=bottom] .arrow::after {
+        margin-left      : -7px !important;
+        border-top-width : 0 !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=bottom] .arrow::before {
+        margin-left      : -7px !important;
+        border-top-width : 0 !important;
+    }
+
+    .popover.bs-popover-bottom .arrow::after {
+        margin-left      : -7px !important;
+        border-top-width : 0 !important;
+    }
+
+    .popover.bs-popover-bottom .arrow::before {
+        margin-left      : -7px !important;
+        border-top-width : 0 !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=bottom] .arrow::before {
+        top                 : -11px !important;
+        border-bottom-color : rgba(0, 0, 0, .25) !important;
+    }
+
+    .popover.bs-popover-bottom .arrow::before {
+        top                 : -11px !important;
+        border-bottom-color : rgba(0, 0, 0, .25) !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=bottom] .arrow::after {
+        top                 : -10px !important;
+        border-bottom-color : #fff !important;
+    }
+
+    .popover.bs-popover-bottom .arrow::after {
+        top                 : -10px !important;
+        border-bottom-color : #fff !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=bottom] .popover-header::before {
+        position      : absolute !important;
+        top           : 0 !important;
+        left          : 50% !important;
+        display       : block !important;
+        width         : 20px !important;
+        margin-left   : -10px !important;
+        content       : "" !important;
+        border-bottom : 1px solid #f7f7f7 !important;
+    }
+
+    .popover.bs-popover-bottom .popover-header::before {
+        position      : absolute !important;
+        top           : 0 !important;
+        left          : 50% !important;
+        display       : block !important;
+        width         : 20px !important;
+        margin-left   : -10px !important;
+        content       : "" !important;
+        border-bottom : 1px solid #f7f7f7 !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=left] .arrow::after {
+        margin-top         : -8px !important;
+        border-right-width : 0 !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=left] .arrow::before {
+        margin-top         : -8px !important;
+        border-right-width : 0 !important;
+    }
+
+    .popover.bs-popover-left .arrow::after {
+        margin-top         : -8px !important;
+        border-right-width : 0 !important;
+    }
+
+    .popover.bs-popover-left .arrow::before {
+        margin-top         : -8px !important;
+        border-right-width : 0 !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=left] .arrow::before {
+        right             : -11px !important;
+        border-left-color : rgba(0, 0, 0, .25) !important;
+    }
+
+    .popover.bs-popover-left .arrow::before {
+        right             : -11px !important;
+        border-left-color : rgba(0, 0, 0, .25) !important;
+    }
+
+    .popover.bs-popover-auto[x-placement^=left] .arrow::after {
+        right             : -10px !important;
+        border-left-color : #fff !important;
+    }
+
+    .popover.bs-popover-left .arrow::after {
+        right             : -10px !important;
+        border-left-color : #fff !important;
+    }
+
+    @supports ((-webkit-transform-style:preserve-3d) or (transform-style:preserve-3d)) {
+    }
+
+    @supports ((-webkit-transform-style:preserve-3d) or (transform-style:preserve-3d)) {
+    }
+
+    @supports ((-webkit-transform-style:preserve-3d) or (transform-style:preserve-3d)) {
+    }
+
+    .carousel-control-next:focus {
+        color           : #fff !important;
+        text-decoration : none !important;
+        outline         : 0 !important;
+        opacity         : .9 !important;
+    }
+
+    .carousel-control-next:hover {
+        color           : #fff !important;
+        text-decoration : none !important;
+        outline         : 0 !important;
+        opacity         : .9 !important;
+    }
+
+    .carousel-control-prev:focus {
+        color           : #fff !important;
+        text-decoration : none !important;
+        outline         : 0 !important;
+        opacity         : .9 !important;
+    }
+
+    .carousel-control-prev:hover {
+        color           : #fff !important;
+        text-decoration : none !important;
+        outline         : 0 !important;
+        opacity         : .9 !important;
+    }
+
+    .carousel-indicators li::before {
+        position : absolute !important;
+        top      : -10px !important;
+        left     : 0 !important;
+        display  : inline-block !important;
+        width    : 100% !important;
+        height   : 10px !important;
+        content  : "" !important;
+    }
+
+    .carousel-indicators li::after {
+        position : absolute !important;
+        bottom   : -10px !important;
+        left     : 0 !important;
+        display  : inline-block !important;
+        width    : 100% !important;
+        height   : 10px !important;
+        content  : "" !important;
+    }
+
+    a.bg-primary:focus {
+        background-color : #0062cc !important;
+    }
+
+    a.bg-primary:hover {
+        background-color : #0062cc !important;
+    }
+
+    a.bg-secondary:focus {
+        background-color : #6c757d !important;
+    }
+
+    a.bg-secondary:hover {
+        background-color : #6c757d !important;
+    }
+
+    a.bg-success:focus {
+        background-color : #1e7e34 !important;
+    }
+
+    a.bg-success:hover {
+        background-color : #1e7e34 !important;
+    }
+
+    a.bg-info:focus {
+        background-color : #117a8b !important;
+    }
+
+    a.bg-info:hover {
+        background-color : #117a8b !important;
+    }
+
+    a.bg-warning:focus {
+        background-color : #d39e00 !important;
+    }
+
+    a.bg-warning:hover {
+        background-color : #d39e00 !important;
+    }
+
+    a.bg-danger:focus {
+        background-color : #bd2130 !important;
+    }
+
+    a.bg-danger:hover {
+        background-color : #bd2130 !important;
+    }
+
+    a.bg-light:focus {
+        background-color : #dae0e5 !important;
+    }
+
+    a.bg-light:hover {
+        background-color : #dae0e5 !important;
+    }
+
+    a.bg-dark:focus {
+        background-color : #1d2124 !important;
+    }
+
+    a.bg-dark:hover {
+        background-color : #1d2124 !important;
+    }
+
+    .clearfix::after {
+        display : block !important;
+        clear   : both !important;
+        content : "" !important;
+    }
+
+    .embed-responsive::before {
+        display : block !important;
+        content : "" !important;
+    }
+
+    .embed-responsive-21by9::before {
+        padding-top : 42.857143% !important;
+    }
+
+    .embed-responsive-16by9::before {
+        padding-top : 56.25% !important;
+    }
+
+    .embed-responsive-4by3::before {
+        padding-top : 75% !important;
+    }
+
+    .embed-responsive-1by1::before {
+        padding-top : 100% !important;
+    }
+
+    @supports ((position:-webkit-sticky) or (position:sticky)) {
+    }
+
+    .sr-only-focusable:active {
+        position          : static !important;
+        width             : auto !important;
+        height            : auto !important;
+        overflow          : visible !important;
+        clip              : auto !important;
+        white-space       : normal !important;
+        -webkit-clip-path : none !important;
+        clip-path         : none !important;
+    }
+
+    .sr-only-focusable:focus {
+        position          : static !important;
+        width             : auto !important;
+        height            : auto !important;
+        overflow          : visible !important;
+        clip              : auto !important;
+        white-space       : normal !important;
+        -webkit-clip-path : none !important;
+        clip-path         : none !important;
+    }
+
+    a.text-primary:focus {
+        color : #0062cc !important;
+    }
+
+    a.text-primary:hover {
+        color : #0062cc !important;
+    }
+
+    a.text-secondary:focus {
+        color : #6c757d !important;
+    }
+
+    a.text-secondary:hover {
+        color : #6c757d !important;
+    }
+
+    a.text-success:focus {
+        color : #1e7e34 !important;
+    }
+
+    a.text-success:hover {
+        color : #1e7e34 !important;
+    }
+
+    a.text-info:focus {
+        color : #117a8b !important;
+    }
+
+    a.text-info:hover {
+        color : #117a8b !important;
+    }
+
+    a.text-warning:focus {
+        color : #d39e00 !important;
+    }
+
+    a.text-warning:hover {
+        color : #d39e00 !important;
+    }
+
+    a.text-danger:focus {
+        color : #bd2130 !important;
+    }
+
+    a.text-danger:hover {
+        color : #bd2130 !important;
+    }
+
+    a.text-light:focus {
+        color : #dae0e5 !important;
+    }
+
+    a.text-light:hover {
+        color : #dae0e5 !important;
+    }
+
+    a.text-dark:focus {
+        color : #1d2124 !important;
+    }
+
+    a.text-dark:hover {
+        color : #1d2124 !important;
+    }
+
+    ></style>
+
+<div style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-right: auto; margin-left: auto; width: 100%; position: relative; min-height: 1px; -ms-flex: 0 0 58.333333%; flex: 0 0 58.333333%; max-width: 58.333333%; padding: 1.5rem;">
+    <b style="letter-spacing: 0.1rem; text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; font-weight: 700; margin-right: 1rem; margin-left: auto; width: 100%; max-width: 1140px; display: inline-block; font-size: 1.25rem; line-height: inherit; white-space: nowrap; text-transform: uppercase !important; color: #fff !important; padding: .3125rem 15px;">Strings
+        Manila</b>
+</div>
+
+<div style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-right: auto; margin-left: auto; width: 100%; position: relative; min-height: 1px; -ms-flex: 0 0 58.333333%; flex: 0 0 58.333333%; max-width: 58.333333%; background-color: #f8f9fa !important; padding: 3rem;">
+    <div style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit;">
+        <h4 style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-top: 0; margin-bottom: 1rem !important; font-family: inherit; font-weight: 500; line-height: 1.1; color: inherit; font-size: 1.5rem;">
+            Dear {{ order.contact.customer.first_name }},</h4>
+
+        {% if order.status == 'U' %}
+
+            <p style="text-shadow: none !important; box-shadow: none !important; orphans: 3; widows: 3; box-sizing: inherit; margin-top: 0; margin-bottom: 1rem;">
+                Thank you for shopping with us at Strings Manila. This is a reminder that this order is not yet paid.
+                This order will be cancelled automatically by
+                <strong style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; font-weight: bolder;">{{ order.expiration_date }}</strong>
+                if payment
+                has not been received by then.
+                To submit payment, deposit
+                <b style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; font-weight: bolder;">&#8369;{{ order.total_price }}</b>
+                to the following bank account
+                and then upload the deposit slip.</p>
+
+            <table style="text-shadow: none !important; box-shadow: none !important; border-collapse: collapse !important; box-sizing: inherit; width: 100%; max-width: 100%; margin-bottom: 3rem !important; margin-top: 1.5rem !important; background-color: transparent; border: 1px solid #e9ecef;"
+                   bgcolor="transparent">
+                <tr style="text-shadow: none !important; box-shadow: none !important; page-break-inside: avoid; box-sizing: inherit;">
+                    <th style="width: 200px; text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: top; padding: .75rem; border: 1px solid #ddd;"
+                        align="left"
+                        bgcolor="#fff !important"
+                        valign="top">Account Number
+                    </th>
+                    <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; padding: .75rem; border: 1px solid #ddd;"
+                        bgcolor="#fff !important"
+                        valign="top">0000000000
+                    </td>
+                </tr>
+                <tr style="text-shadow: none !important; box-shadow: none !important; page-break-inside: avoid; box-sizing: inherit;">
+                    <th style="width: 200px; text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: top; padding: .75rem; border: 1px solid #ddd;"
+                        align="left"
+                        bgcolor="#fff !important"
+                        valign="top">Account Name
+                    </th>
+                    <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; padding: .75rem; border: 1px solid #ddd;"
+                        bgcolor="#fff !important"
+                        valign="top">Strings Manila
+                    </td>
+                </tr>
+
+            </table>
+        {% endif %}
+
+        {% if order.status == 'C' %}
+            <p style="text-shadow: none !important; box-shadow: none !important; orphans: 3; widows: 3; box-sizing: inherit; margin-top: 0; margin-bottom: 3rem !important;">
+                Unfortunately, your order has been cancelled. If you believe that this cancellation was made
+                in error, please contact us at 000000000.</p>
+        {% endif %}
+
+        {% if order.status == 'P' %}
+            <p style="text-shadow: none !important; box-shadow: none !important; orphans: 3; widows: 3; box-sizing: inherit; margin-top: 0; margin-bottom: 3rem !important;">
+                We've confirmed your payment and your order is now processing.</p>
+        {% endif %}
+
+        {% if order.status == 'S' %}
+            <p style="text-shadow: none !important; box-shadow: none !important; orphans: 3; widows: 3; box-sizing: inherit; margin-top: 0; margin-bottom: 3rem !important;">
+                Your order has just finished processing and is now shipped. Thank you for shopping with us.</p>
+
+            {% if order.store_notes %}
+                <div role="alert"
+                     style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-bottom: 3rem !important; border-radius: .25rem; color: #155724; background-color: #d4edda; padding: 1.5rem; border: 1px solid #c3e6cb;">
+                    <h4 style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-top: 0; margin-bottom: .5rem; font-family: inherit; font-weight: 500; line-height: 1.1; color: inherit; font-size: 1.5rem;">
+                        Store Notes</h4>
+                    <p style="text-shadow: none !important; box-shadow: none !important; orphans: 3; widows: 3; box-sizing: inherit; margin-top: 0; margin-bottom: 0 !important;">{{ order.store_notes }}</p>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <h4 style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-top: 0; margin-bottom: .5rem; font-family: inherit; font-weight: 500; line-height: 1.1; color: inherit; font-size: 1.5rem;">
+            Order #{{ order.id }}</h4>
+        <p style="text-shadow: none !important; box-shadow: none !important; orphans: 3; widows: 3; box-sizing: inherit; margin-top: 0; margin-bottom: 0 !important; display: block !important; color: #868e96 !important;">
+            Order placed {{ order.date_ordered }}</p>
+        <p style="text-shadow: none !important; box-shadow: none !important; orphans: 3; widows: 3; box-sizing: inherit; margin-top: 0; margin-bottom: 1.5rem !important; color: #868e96 !important;">
+            Status:
+            <span style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit;">{{ order.get_status_display }}</span>
+        </p>
+
+        <table style="text-shadow: none !important; box-shadow: none !important; border-collapse: collapse !important; box-sizing: inherit; width: 100%; max-width: 100%; margin-bottom: 1rem; background-color: transparent;"
+               bgcolor="transparent">
+            <thead style="text-shadow: none !important; box-shadow: none !important; display: table-header-group; box-sizing: inherit;">
+            <tr style="text-shadow: none !important; box-shadow: none !important; page-break-inside: avoid; box-sizing: inherit;">
+                <th style="width: 80px; text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: bottom; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; border-bottom-color: #e9ecef; border-bottom-width: 2px; border-bottom-style: solid; color: #495057; padding: .75rem;"
+                    align="left"
+                    bgcolor="#fff !important"
+                    valign="bottom"></th>
+                <th style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: bottom; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; border-bottom-color: #e9ecef; border-bottom-width: 2px; border-bottom-style: solid; color: #495057; padding: .75rem;"
+                    align="left"
+                    bgcolor="#fff !important"
+                    valign="bottom">Product name
+                </th>
+                <th style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: bottom; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; border-bottom-color: #e9ecef; border-bottom-width: 2px; border-bottom-style: solid; color: #495057; padding: .75rem;"
+                    align="left"
+                    bgcolor="#fff !important"
+                    valign="bottom">Option
+                </th>
+                <th style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: bottom; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; border-bottom-color: #e9ecef; border-bottom-width: 2px; border-bottom-style: solid; color: #495057; padding: .75rem;"
+                    align="left"
+                    bgcolor="#fff !important"
+                    valign="bottom">Unit Price
+                </th>
+                <th style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: bottom; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; border-bottom-color: #e9ecef; border-bottom-width: 2px; border-bottom-style: solid; color: #495057; padding: .75rem;"
+                    align="left"
+                    bgcolor="#fff !important"
+                    valign="bottom">Quantity
+                </th>
+            </tr>
+            </thead>
+            <tbody style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit;">
+            {% for line_item in order.orderlineitem_set.all %}
+                <tr style="text-shadow: none !important; box-shadow: none !important; page-break-inside: avoid; box-sizing: inherit;">
+                    <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
+                        bgcolor="#fff !important"
+                        valign="top"><img src="{{ line_item.tier.product_description.image }}"
+                                          style="width: 50px; height: 50px; border-radius: 50px; object-fit: cover; text-shadow: none !important; box-shadow: none !important; page-break-inside: avoid; box-sizing: inherit; vertical-align: middle; border: none;">
+                    </td>
+                    <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
+                        bgcolor="#fff !important"
+                        valign="top">{{ line_item.tier.product_description.name }}</td>
+                    <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
+                        bgcolor="#fff !important"
+                        valign="top">
+                        {% if line_item.tier.product_description.is_singular %}
+                            <small style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; font-size: 80%; font-weight: 400; color: #868e96 !important;">
+                                N/A
+                            </small>
+                        {% else %}
+                            {{ line_item.tier.name }}
+                        {% endif %}
+                    </td>
+                    <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
+                        bgcolor="#fff !important"
+                        valign="top">&#8369;{{ line_item.unit_price }}</td>
+                    <th style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
+                        align="left"
+                        bgcolor="#fff !important"
+                        valign="top">{{ line_item.quantity }}</th>
+                </tr>
+            {% endfor %}
+            <tr style="text-shadow: none !important; box-shadow: none !important; page-break-inside: avoid; box-sizing: inherit;">
+                <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
+                    bgcolor="#fff !important"
+                    valign="top"></td>
+                <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
+                    bgcolor="#fff !important"
+                    valign="top">
+                    <h4 style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-top: 0; margin-bottom: .5rem; font-family: inherit; font-weight: 500; line-height: 1.1; color: inherit; font-size: 1.5rem;">
+                        Total Price</h4></td>
+                <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
+                    bgcolor="#fff !important"
+                    valign="top"></td>
+                <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
+                    bgcolor="#fff !important"
+                    valign="top">
+                    <h4 style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-top: 0; margin-bottom: .5rem; font-family: inherit; font-weight: 500; line-height: 1.1; color: inherit; font-size: 1.5rem;">
+                        &#8369;{{ order.total_price }}</h4></td>
+                <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
+                    bgcolor="#fff !important"
+                    valign="top"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

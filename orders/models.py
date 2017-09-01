@@ -50,6 +50,11 @@ class Order(Model):
 
     def cancel(self):
         self.status = 'C'
+
+        for line_item in self.orderlineitem_set.all():
+            line_item.tier.quantity += line_item.quantity
+            line_item.tier.save()
+
         self.save()
 
     def __str__(self):

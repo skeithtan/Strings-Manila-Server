@@ -9,7 +9,7 @@ from orders.models import Order
 
 
 def set_order_to_expire(order):
-    print(f"Order {order} is set to expire in a second.")
+    # Execute expire_order in three days after calling this function
     expire_order.apply_async(args=(order.id,), eta=datetime.utcnow() + timedelta(days=3), task_id=order.id)
 
 

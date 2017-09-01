@@ -25,6 +25,10 @@
     object-fit : cover;
 }
 
+#product-modal-content {
+    min-height : 720px;
+}
+
 #mini-cards .card {
     max-width : 200px
 }

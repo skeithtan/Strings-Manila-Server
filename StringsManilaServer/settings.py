@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+
+    'django_celery_results',
+    'django_celery_beat',
 ]
 
 SITE_ID = 1
@@ -155,3 +158,10 @@ AUTHENTICATION_BACKENDS = (
 
 LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "/"
+
+# Celery
+CELERY_RESULT_BACKEND = 'django-db'
+
+CELERY_IMPORTS = (
+    'orders.tasks',
+)

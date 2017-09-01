@@ -20,10 +20,11 @@ from django.contrib import admin
 from django.conf.urls import url, include
 from django.views.decorators.csrf import csrf_exempt
 
-from orders.urls import order_api_urls, order_pages_urls
-from entity_management.urls import entity_management_urls
-from products_catalog.urls import products_catalog_urls
-from customer_profile.urls import customer_profile_urls
+from orders.urls import api_urls as order_api_urls, pages_urls as order_pages_urls
+from entity_management.urls import urls as entity_management_urls
+from products_catalog.urls import urls as products_catalog_urls
+from customer_profile.urls import urls as customer_profile_urls
+
 from admin_auth.views import SignInView
 
 urlpatterns = [

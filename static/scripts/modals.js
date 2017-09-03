@@ -50,12 +50,12 @@ function tierInCart(tier) {
 
 function onProductCardClick(product, addToCart, getProduct) {
     $('#product-modal-product-name').text(product.name);
-    $('#product-modal-product-price').text("₱" + product.producttierSet[0].currentPrice); //TODO
+    $('#product-modal-product-price').text("₱" + product.producttierSet[0].currentPrice);
     $('#product-modal-product-description').text(product.description);
 
     $('#main-image-container')
         .html('') // Clear out old images
-        .append(product.image); 
+        .append(product.image);
 
     if (product.isSingular) {
         const tier = product.producttierSet[0];
@@ -101,14 +101,12 @@ function onProductCardClick(product, addToCart, getProduct) {
 
             $(clone.find('.recommended-product-name')[0]).text(recommendation.name);
 
-            //TODO: Onclick
             clone.show();
-            $('#mini-cards').append(clone);
-
             clone.click(() => {
                 const product = getProduct(recommendation.id);
                 onProductCardClick(product, addToCart, getProduct);
-            })
+            });
+            $('#mini-cards').append(clone);
         });
     }
 

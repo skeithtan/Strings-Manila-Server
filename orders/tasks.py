@@ -9,6 +9,7 @@ from django.template.loader import render_to_string
 
 from StringsManilaServer.celery import app
 from orders.models import Order
+from recommendations.calculation import calculate_recommendations
 
 
 def set_order_to_expire(order):
@@ -21,9 +22,8 @@ def mail_customer_now(order):
 
 
 @periodic_task(run_every=(crontab(minute=0, hour=0)), name="calculate_recommendations")
-def calculate_recommendations():
-    # TODO: Make this work
-    print("Hello, World")
+def execute_calculation():
+    calculate_recommendations()
 
 
 @app.task(name="mail_customer")

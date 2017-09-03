@@ -1,9 +1,12 @@
+from collections import namedtuple
+
 from rest_framework.generics import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 
+from entity_management.models import Stall, ProductDescription
 from orders.models import Order
 from admin_auth.permissions import IsSuperuser
 from customer_profile.serializers import ProfileSerializer
@@ -83,3 +86,119 @@ class MarkOrderAsShippedView(APIView):
         mail_customer_now(order)
 
         return Response(status=200)
+
+
+class SalesGenerator:
+    def __init__(self, orders):
+        line_items = []
+        for order in orders:
+            line_items += order.orderlineitem_set.all()
+
+        self.line_items = line_items
+
+    def get_sales(self):
+        stalls = Stall.objects.filter(is_active=True)
+
+        sales_per_stall = []
+        total_sales = 0
+        total_quantity = 0
+
+        for stall in stalls:
+            stall_sales = self.get_stall_sales(stall)
+
+            sales_per_stall.append({
+                "id": stall.id,
+                "name": stall.name,
+                "sales": stall_sales.sales,
+                "quantity": stall_sales.quantity,
+                "product_sales": stall_sales.sales_per_product
+            })
+
+            total_sales += stall_sales.sales
+            total_quantity += stall_sales.quantity
+
+        return {
+            "total_sales": total_sales,
+            "total_quantity": total_quantity,
+            "stall_sales": sales_per_stall
+        }
+
+    def get_stall_sales(self, stall):
+        products = stall.productdescription_set.filter(is_active=True)
+
+        sales_per_product = []
+        total_stall_sales = 0
+        total_stall_quantity = 0
+
+        for product in products:
+            product_sales = self.get_product_sales(product)
+            sales_per_product.append({
+                "id": product.id,
+                "name": product.name,
+                "is_singular": product.is_singular,
+                "quantity": product_sales.quantity,
+                "sales": product_sales.sales,
+                "tier_sales": product_sales.tier_sales
+            })
+
+            total_stall_sales += product_sales.sales
+            total_stall_quantity += product_sales.quantity
+
+        StallSales = namedtuple('StallSales', ['sales_per_product', 'quantity', 'sales'])
+        return StallSales(sales_per_product=sales_per_product, quantity=total_stall_quantity, sales=total_stall_sales)
+
+    def get_product_sales(self, product):
+        tiers = product.producttier_set.all()
+
+        tier_sales_dict = {}
+        total_product_quantity = 0
+        total_product_sales = 0
+
+        for tier in tiers:
+            tier_sales_dict[tier.id] = {
+                "name": tier.name,
+                "quantity": 0,
+                "sales": 0
+            }
+
+        for line_item in self.line_items:
+            if line_item.tier in tiers:
+                tier = line_item.tier
+                line_price = line_item.line_price
+                line_quantity = line_item.quantity
+
+                tier_sales_dict[tier.id]["sales"] += line_price
+                tier_sales_dict[tier.id]["quantity"] += line_quantity
+
+                total_product_quantity += line_quantity
+                total_product_sales += line_price
+
+        tier_sales = []
+
+        for tier_id, sales in tier_sales_dict.items():
+            tier_sale = sales
+            tier_sale["id"] = tier_id
+            tier_sales.append(tier_sale)
+
+        ProductSales = namedtuple('ProductSales', ['tier_sales', 'quantity', 'sales'])
+        return ProductSales(tier_sales=tier_sales, quantity=total_product_quantity, sales=total_product_sales)
+
+
+class SalesView(APIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated, IsSuperuser)
+
+    @staticmethod
+    def get(request):
+        start_date = request.GET.get('start-date', None)
+        end_date = request.GET.get('end-date', None)
+
+        if start_date is None and end_date is None:
+            return Response(data={
+                "error": '"start-date" and "end-date" required'
+            }, status=400)
+
+        orders = Order.objects.filter(date_ordered__gte=start_date, date_ordered__lte=end_date, status='S')
+        sales = SalesGenerator(orders).get_sales()
+        return Response(data=sales, status=200)
+

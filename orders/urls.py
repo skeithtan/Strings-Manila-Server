@@ -13,7 +13,7 @@ from .admin_views import (
     OrderDetail,
     MarkOrderAsShippedView,
     MarkOrderAsProcessingView,
-)
+    SalesView)
 
 api_urls = [
     url(r'^api/orders/$', OrderList.as_view()),
@@ -21,6 +21,7 @@ api_urls = [
     url(r'^api/orders/(?P<order_id>(\d+))/cancel/$', CancelOrderView.as_view()),
     url(r'^api/orders/(?P<order_id>(\d+))/verify/$', MarkOrderAsProcessingView.as_view()),
     url(r'^api/orders/(?P<order_id>(\d+))/ship/$', MarkOrderAsShippedView.as_view()),
+    url(r'^api/sales/$', SalesView.as_view()),
 ]
 
 pages_urls = [

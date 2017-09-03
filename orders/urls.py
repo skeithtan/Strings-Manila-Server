@@ -6,7 +6,6 @@ from .customer_views import (
     OrdersView,
     OrderDetailView,
     SubmitPaymentView,
-    Mail
 )
 
 from .admin_views import (
@@ -28,5 +27,4 @@ pages_urls = [
     url(r'^orders/$', OrdersView.as_view()),
     url(r'^orders/(?P<order_id>(\d+))/$', OrderDetailView.as_view()),
     url(r'^orders/(?P<order_id>(\d+))/submit-payment/$', SubmitPaymentView.as_view()),
-    url(r'^test/', Mail.as_view())
 ]

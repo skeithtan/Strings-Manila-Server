@@ -1642,12 +1642,12 @@
 
     ></style>
 
-<div style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-right: auto; margin-left: auto; width: 100%; position: relative; min-height: 1px; -ms-flex: 0 0 58.333333%; flex: 0 0 58.333333%; max-width: 58.333333%; padding: 1.5rem;">
+<div style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-right: auto; margin-left: auto; position: relative; min-height: 1px; width: 80%; min-width: 500px; padding: 1.5rem;">
     <b style="letter-spacing: 0.1rem; text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; font-weight: 700; margin-right: 1rem; margin-left: auto; width: 100%; max-width: 1140px; display: inline-block; font-size: 1.25rem; line-height: inherit; white-space: nowrap; text-transform: uppercase !important; color: #fff !important; padding: .3125rem 15px;">Strings
         Manila</b>
 </div>
 
-<div style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-right: auto; margin-left: auto; width: 100%; position: relative; min-height: 1px; -ms-flex: 0 0 58.333333%; flex: 0 0 58.333333%; max-width: 58.333333%; background-color: #f8f9fa !important; padding: 3rem;">
+<div style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-right: auto; margin-left: auto; width: 80%; min-width: 500px; position: relative; min-height: 1px; background-color: #f8f9fa !important; padding: 3rem;">
     <div style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit;">
         <h4 style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-top: 0; margin-bottom: 1rem !important; font-family: inherit; font-weight: 500; line-height: 1.1; color: inherit; font-size: 1.5rem;">
             Dear {{ order.contact.customer.first_name }},</h4>
@@ -1668,24 +1668,20 @@
             <table style="text-shadow: none !important; box-shadow: none !important; border-collapse: collapse !important; box-sizing: inherit; width: 100%; max-width: 100%; margin-bottom: 3rem !important; margin-top: 1.5rem !important; background-color: transparent; border: 1px solid #e9ecef;"
                    bgcolor="transparent">
                 <tr style="text-shadow: none !important; box-shadow: none !important; page-break-inside: avoid; box-sizing: inherit;">
-                    <th style="width: 200px; text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: top; padding: .75rem; border: 1px solid #ddd;"
+                    <th style="width: 200px; text-shadow: none !important; box-shadow: none !important; background-color: transparent !important; box-sizing: inherit; text-align: left; vertical-align: top; padding: .75rem; border: 1px solid #ddd;"
                         align="left"
-                        bgcolor="#fff !important"
                         valign="top">Account Number
                     </th>
-                    <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; padding: .75rem; border: 1px solid #ddd;"
-                        bgcolor="#fff !important"
+                    <td style="text-shadow: none !important; box-shadow: none !important; background-color: transparent !important; box-sizing: inherit; vertical-align: top; padding: .75rem; border: 1px solid #ddd;"
                         valign="top">0000000000
                     </td>
                 </tr>
                 <tr style="text-shadow: none !important; box-shadow: none !important; page-break-inside: avoid; box-sizing: inherit;">
-                    <th style="width: 200px; text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: top; padding: .75rem; border: 1px solid #ddd;"
+                    <th style="width: 200px; text-shadow: none !important; box-shadow: none !important; background-color: transparent !important; box-sizing: inherit; text-align: left; vertical-align: top; padding: .75rem; border: 1px solid #ddd;"
                         align="left"
-                        bgcolor="#fff !important"
                         valign="top">Account Name
                     </th>
-                    <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; padding: .75rem; border: 1px solid #ddd;"
-                        bgcolor="#fff !important"
+                    <td style="text-shadow: none !important; box-shadow: none !important; background-color: transparent !important; box-sizing: inherit; vertical-align: top; padding: .75rem; border: 1px solid #ddd;"
                         valign="top">Strings Manila
                     </td>
                 </tr>
@@ -1718,7 +1714,7 @@
             {% endif %}
         {% endif %}
 
-        <h4 style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-top: 0; margin-bottom: .5rem; font-family: inherit; font-weight: 500; line-height: 1.1; color: inherit; font-size: 1.5rem;">
+        <h4 style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-top: 0; margin-bottom: .5rem; font-family: inherit; font-weight: 500; line-height: 1.1; color: #212529; font-size: 1.5rem;">
             Order #{{ order.id }}</h4>
         <p style="text-shadow: none !important; box-shadow: none !important; orphans: 3; widows: 3; box-sizing: inherit; margin-top: 0; margin-bottom: 0 !important; display: block !important; color: #868e96 !important;">
             Order placed {{ order.date_ordered }}</p>
@@ -1731,45 +1727,37 @@
                bgcolor="transparent">
             <thead style="text-shadow: none !important; box-shadow: none !important; display: table-header-group; box-sizing: inherit;">
             <tr style="text-shadow: none !important; box-shadow: none !important; page-break-inside: avoid; box-sizing: inherit;">
-                <th style="width: 80px; text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: bottom; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; border-bottom-color: #e9ecef; border-bottom-width: 2px; border-bottom-style: solid; color: #495057; padding: .75rem;"
+                <th style="background-color: #e9ecef !important; width: 80px; text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; text-align: left; vertical-align: bottom; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; border-bottom-color: #e9ecef; border-bottom-width: 2px; border-bottom-style: solid; color: #495057; padding: .75rem;"
                     align="left"
-                    bgcolor="#fff !important"
                     valign="bottom"></th>
-                <th style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: bottom; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; border-bottom-color: #e9ecef; border-bottom-width: 2px; border-bottom-style: solid; color: #495057; padding: .75rem;"
+                <th style="background-color: #e9ecef !important; text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; text-align: left; vertical-align: bottom; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; border-bottom-color: #e9ecef; border-bottom-width: 2px; border-bottom-style: solid; color: #495057; padding: .75rem;"
                     align="left"
-                    bgcolor="#fff !important"
                     valign="bottom">Product name
                 </th>
-                <th style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: bottom; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; border-bottom-color: #e9ecef; border-bottom-width: 2px; border-bottom-style: solid; color: #495057; padding: .75rem;"
+                <th style="background-color: #e9ecef !important; text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; text-align: left; vertical-align: bottom; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; border-bottom-color: #e9ecef; border-bottom-width: 2px; border-bottom-style: solid; color: #495057; padding: .75rem;"
                     align="left"
-                    bgcolor="#fff !important"
                     valign="bottom">Option
                 </th>
-                <th style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: bottom; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; border-bottom-color: #e9ecef; border-bottom-width: 2px; border-bottom-style: solid; color: #495057; padding: .75rem;"
+                <th style="background-color: #e9ecef !important; text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; text-align: left; vertical-align: bottom; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; border-bottom-color: #e9ecef; border-bottom-width: 2px; border-bottom-style: solid; color: #495057; padding: .75rem;"
                     align="left"
-                    bgcolor="#fff !important"
                     valign="bottom">Unit Price
                 </th>
-                <th style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: bottom; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; border-bottom-color: #e9ecef; border-bottom-width: 2px; border-bottom-style: solid; color: #495057; padding: .75rem;"
+                <th style="background-color: #e9ecef !important; text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; text-align: left; vertical-align: bottom; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; border-bottom-color: #e9ecef; border-bottom-width: 2px; border-bottom-style: solid; color: #495057; padding: .75rem;"
                     align="left"
-                    bgcolor="#fff !important"
                     valign="bottom">Quantity
                 </th>
             </tr>
             </thead>
             <tbody style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit;">
             {% for line_item in order.orderlineitem_set.all %}
-                <tr style="text-shadow: none !important; box-shadow: none !important; page-break-inside: avoid; box-sizing: inherit;">
-                    <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
-                        bgcolor="#fff !important"
+                <tr style="color: #212529; text-shadow: none !important; box-shadow: none !important; page-break-inside: avoid; box-sizing: inherit;">
+                    <td style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
                         valign="top"><img src="{{ line_item.tier.product_description.image }}"
                                           style="width: 50px; height: 50px; border-radius: 50px; object-fit: cover; text-shadow: none !important; box-shadow: none !important; page-break-inside: avoid; box-sizing: inherit; vertical-align: middle; border: none;">
                     </td>
-                    <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
-                        bgcolor="#fff !important"
+                    <td style="color: #212529; text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
                         valign="top">{{ line_item.tier.product_description.name }}</td>
-                    <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
-                        bgcolor="#fff !important"
+                    <td style="color: #212529; text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
                         valign="top">
                         {% if line_item.tier.product_description.is_singular %}
                             <small style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; font-size: 80%; font-weight: 400; color: #868e96 !important;">
@@ -1779,34 +1767,27 @@
                             {{ line_item.tier.name }}
                         {% endif %}
                     </td>
-                    <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
-                        bgcolor="#fff !important"
+                    <td style="color: #212529; text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
                         valign="top">&#8369;{{ line_item.unit_price }}</td>
-                    <th style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; text-align: left; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
+                    <th style="color: #212529; text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; text-align: left; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
                         align="left"
-                        bgcolor="#fff !important"
                         valign="top">{{ line_item.quantity }}</th>
                 </tr>
             {% endfor %}
             <tr style="text-shadow: none !important; box-shadow: none !important; page-break-inside: avoid; box-sizing: inherit;">
-                <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
-                    bgcolor="#fff !important"
+                <td style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
                     valign="top"></td>
-                <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
-                    bgcolor="#fff !important"
+                <td style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
                     valign="top">
                     <h4 style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-top: 0; margin-bottom: .5rem; font-family: inherit; font-weight: 500; line-height: 1.1; color: inherit; font-size: 1.5rem;">
                         Total Price</h4></td>
-                <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
-                    bgcolor="#fff !important"
+                <td style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
                     valign="top"></td>
-                <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
-                    bgcolor="#fff !important"
+                <td style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
                     valign="top">
                     <h4 style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; margin-top: 0; margin-bottom: .5rem; font-family: inherit; font-weight: 500; line-height: 1.1; color: inherit; font-size: 1.5rem;">
                         &#8369;{{ order.total_price }}</h4></td>
-                <td style="text-shadow: none !important; box-shadow: none !important; background-color: #fff !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
-                    bgcolor="#fff !important"
+                <td style="text-shadow: none !important; box-shadow: none !important; box-sizing: inherit; vertical-align: top; border-top-width: 1px; border-top-color: #e9ecef; border-top-style: solid; padding: .75rem;"
                     valign="top"></td>
             </tr>
             </tbody>

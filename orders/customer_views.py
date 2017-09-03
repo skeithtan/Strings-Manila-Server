@@ -94,18 +94,3 @@ class SubmitPaymentView(APIView):
         order.set_payment(deposit_photo_link)
 
         return Response(status=200)
-
-
-class Mail(View):
-    @staticmethod
-    def get(request):
-        from django.core.mail import send_mail
-        from django.template.loader import render_to_string
-
-        order = Order.objects.get(id=60)
-
-        mail_title = f"Order Confirmation {order.id}"
-
-        return render(request, 'mail/order_update_email.html', {
-            "order": order
-        })

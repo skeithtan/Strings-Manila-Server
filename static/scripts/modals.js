@@ -3,6 +3,8 @@ $(() => {
     $('#product-card-modal').on('hidden.bs.modal', () => {
         $('#product-modal-quantity-selection').val('1');
     });
+
+    $('#recommended-product-card-clone').hide();
 });
 
 function onSignOutButtonClick() {
@@ -46,11 +48,14 @@ function tierInCart(tier) {
     return tierInCart;
 }
 
-function onProductCardClick(product, addToCart) {
+function onProductCardClick(product, addToCart, getProduct) {
     $('#product-modal-product-name').text(product.name);
     $('#product-modal-product-price').text("₱" + product.producttierSet[0].currentPrice); //TODO
     $('#product-modal-product-description').text(product.description);
-    $('#product-modal-main-product-img').attr('src', product.image);
+
+    $('#main-image-container')
+        .html('') // Clear out old images
+        .append(product.image); 
 
     if (product.isSingular) {
         const tier = product.producttierSet[0];
@@ -76,6 +81,38 @@ function onProductCardClick(product, addToCart) {
         addToCart(tierID, quantity);
         $('#product-modal-in-cart-message').show();
     });
+
+
+    //Recommended products
+    if (product.recommendations.length === 0) {
+        $('#recommended-products').hide();
+    } else {
+        $('#recommended-products').show();
+
+        $('#mini-cards').html(''); // Clear out old recommendations
+
+        product.recommendations.forEach(recommendation => {
+            const clone = $('#recommended-product-card-clone').clone();
+            clone.removeAttr('id');
+
+            $(clone.find('.recommended-product-image')[0])
+                .replaceWith(recommendation.image)
+                .addClass('card-img-top recommended-product-image bg-light');
+
+            $(clone.find('.recommended-product-name')[0]).text(recommendation.name);
+
+            //TODO: Onclick
+            clone.show();
+            $('#mini-cards').append(clone);
+
+            clone.click(() => {
+                const product = getProduct(recommendation.id);
+                onProductCardClick(product, addToCart, getProduct);
+            })
+        });
+    }
+
+
 }
 
 function showAddToCart(tier) {

@@ -25,12 +25,36 @@
     object-fit : cover;
 }
 
+#product-modal #main-image-container {
+    position : relative;
+}
+
+#main-image-container img {
+    width      : 100%;
+    max-height : 100%;
+    object-fit : cover;
+}
+
+#loading-placeholder {
+    opacity    : 0.7;
+    background : black;
+    position   : absolute;
+}
+
 #product-modal-content {
     min-height : 720px;
 }
 
 #mini-cards .card {
-    max-width : 200px
+    max-width : 200px;
+    cursor    : pointer;
+}
+
+#mini-cards .card img {
+    height           : 180px;
+    width            : 100%;
+    object-fit       : cover;
+    background-color : #f8f9fa;
 }
 
 .bg-dark .text-muted {

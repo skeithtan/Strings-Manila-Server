@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'entity_management',
     'customer_profile',
     'orders',
+    'recommendations',
 
     'allauth',
     'allauth.account',

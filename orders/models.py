@@ -2,6 +2,7 @@ from datetime import timedelta
 
 from customer_profile.models import Profile
 from entity_management.models import ProductTier
+from recommendations.models import ProductOccurrence, ProductPairOccurrence
 
 from django.db.models import (
     Model,
@@ -43,6 +44,7 @@ class Order(Model):
     def mark_as_shipped(self, store_notes):
         self.status = 'S'
         self.store_notes = store_notes
+        self.mark_occurrence()
         self.save()
 
     def mark_as_processing(self):
@@ -62,6 +64,22 @@ class Order(Model):
             line_item.tier.save()
 
         self.save()
+
+    def mark_occurrence(self):
+        line_items = self.orderlineitem_set.all()
+
+        for line_item in line_items:
+            ProductOccurrence.increment_for_product(line_item.tier.product_description)
+
+        # Create Combination Permutation List
+        for index, line_item in enumerate(line_items):
+            product_1 = line_item.tier.product_description
+
+            # + 1 because you shouldn't count self. Indexes start with 0.
+            for line_item_2 in line_items[index + 1:]:
+                product_2 = line_item_2.tier.product_description
+
+                ProductPairOccurrence.increment_for_pair(product_1, product_2)
 
     def __str__(self):
         return f"Order {self.id} / {self.date_ordered} / {self.contact}"

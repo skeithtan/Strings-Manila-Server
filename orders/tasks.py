@@ -47,3 +47,4 @@ def expire_order(order_id):
         return  # We don't have to expire an order that's already paid/in verification
 
     order.cancel()
+    mail_customer_now(order)

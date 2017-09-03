@@ -13,7 +13,8 @@ class ProductsBrowser extends React.Component {
                     <Products products={this.props.showingProducts}
                               activeStall={this.props.activeStall}
                               searchQuery={this.props.searchQuery}
-                              addToCart={this.props.addToCart}/>
+                              addToCart={this.props.addToCart}
+                              getProduct={this.props.getProduct}/>
                 </div>
             </div>
         )
@@ -140,7 +141,8 @@ class Products extends React.Component {
         const productCards = this.props.products.map(product => {
             return <ProductCard key={product.id}
                                 product={product}
-                                addToCart={this.props.addToCart}/>
+                                addToCart={this.props.addToCart}
+                                getProduct={this.props.getProduct}/>
         });
 
         return (
@@ -164,6 +166,12 @@ class Products extends React.Component {
 class ProductCard extends React.Component {
     constructor(props) {
         super(props);
+        this.image = this.image.bind(this);
+    }
+
+    image() {
+        const image = this.props.product.image;
+        return <img src={image.src} className="card-img-top bg-light"/>;
     }
 
     render() {
@@ -171,10 +179,8 @@ class ProductCard extends React.Component {
             <div className="card bg-dark text-light mb-3"
                  data-toggle="modal"
                  data-target="#product-card-modal"
-                 onClick={() => onProductCardClick(this.props.product, this.props.addToCart)}>
-                <img className="card-img-top bg-light"
-                     src={this.props.product.image}
-                     alt={this.props.product.name}/>
+                 onClick={() => onProductCardClick(this.props.product, this.props.addToCart, this.props.getProduct)}>
+                {this.image()}
                 <div className="card-body">
                     <h4 className="card-title">{this.props.product.name}</h4>
                     <p className="card-text text-muted">{this.props.product.description}</p>

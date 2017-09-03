@@ -1,3 +1,4 @@
+from recommendations.models import Recommendation
 from .models import Stall, ProductDescription, ProductTier
 
 from graphene_django.types import DjangoObjectType
@@ -22,9 +23,14 @@ class ProductTierType(DjangoObjectType):
 class ProductDescriptionType(DjangoObjectType):
     tiers = List(ProductTierType)
     is_singular = Boolean(source='is_singular')
+    recommendations = List(Int)
 
     def resolve_tiers(self, args, context, info):
         return ProductDescription.objects.get(id=self.id).producttier_set.all()
+
+    def resolve_recommendations(self, args, context, info):
+        root_product = ProductDescription.objects.get(id=self.id)
+        return [product.id for product in Recommendation.recommendation_for_product(root_product)]
 
     class Meta:
         model = ProductDescription

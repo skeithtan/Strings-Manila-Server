@@ -11,7 +11,7 @@ from customer_profile.models import Profile
 from orders.models import Order, OrderLineItem
 from entity_management.models import ProductTier
 
-from orders.tasks import set_order_to_expire
+from orders.tasks import set_order_to_expire, mail_customer_now
 
 
 class ProductCatalogView(View):
@@ -195,7 +195,7 @@ class FinalizeOrderView(View):
             order = to_order(cart, profile)
             set_order_to_expire(order)
 
-
+            mail_customer_now(order)
 
             return render(request, 'finalized_purchase.html', {
                 "order": order

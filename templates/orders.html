@@ -26,7 +26,7 @@
 
     <div class="cards">
         {% for order in orders %}
-            <div class="card mb-5 w-100 order-card" onclick="window.location='/orders/{{ order.id }}/'">
+            <div class="card mb-5 w-100 order-card border-0" onclick="window.location='/orders/{{ order.id }}/'">
                 <div class="card-header">
                     <div class="d-flex flex-row align-items-center">
                         <h5 class="mb-0 mr-5">Order #{{ order.id }}</h5>

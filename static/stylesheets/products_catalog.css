@@ -31,7 +31,7 @@
 
 #main-image-container img {
     width      : 100%;
-    max-height : 100%;
+    m-height : 100%;
     object-fit : cover;
 }
 

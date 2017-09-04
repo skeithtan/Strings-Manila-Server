@@ -176,7 +176,7 @@ class ProductCard extends React.Component {
 
     render() {
         return (
-            <div className="card bg-dark text-light mb-3"
+            <div className="card bg-white mb-3 border-0"
                  data-toggle="modal"
                  data-target="#product-card-modal"
                  onClick={() => onProductCardClick(this.props.product, this.props.addToCart, this.props.getProduct)}>

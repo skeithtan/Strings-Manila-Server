@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from customer_profile.models import Profile
 from orders.models import Order, OrderLineItem
 from entity_management.models import ProductTier
+from store_settings.user_settings import StoreStatus
 
 from orders.tasks import set_order_to_expire, mail_customer_now
 
@@ -17,12 +18,17 @@ from orders.tasks import set_order_to_expire, mail_customer_now
 class ProductCatalogView(View):
     @staticmethod
     def get(request):
-        return render(request, 'products_catalog.html')
+        return render(request, 'products_catalog.html', {
+            "on_maintenance": StoreStatus.on_maintenance,
+        })
 
 
 class CartView(View):
     @staticmethod
     def get(request):
+        if StoreStatus.on_maintenance:
+            return redirect('/')
+
         return render(request, 'cart_page.html')
 
     @staticmethod
@@ -40,6 +46,7 @@ class CartView(View):
 
             tier = get_object_or_404(ProductTier, id=tier_id)
             response.append({
+                "on_maintenance": StoreStatus.on_maintenance,
                 "id": tier.id,
                 "name": tier.product_description.name,
                 "isSingular": tier.product_description.is_singular,
@@ -81,7 +88,7 @@ class ReviewOrderView(View):
             "quantity": item["quantity"]
         } for item in context["cart"]]
 
-        context["local_storage_cart"] = local_storage_cart
+        context["local_storage_cart"] = json.dumps(local_storage_cart)
         context["profile"] = profile
 
         return render(request, 'checkout.html', context)
@@ -188,15 +195,14 @@ class FinalizeOrderView(View):
 
             context = validated_cart
             context["profile"] = profile
-            context["local_storage_cart"] = local_storage_cart
+            context["local_storage_cart"] = json.dumps(local_storage_cart)
+            print("Returned")
 
             return render(request, 'checkout.html', context)
         else:
             order = to_order(cart, profile)
             set_order_to_expire(order)
-
             mail_customer_now(order)
-
             return render(request, 'finalized_purchase.html', {
                 "order": order
             })

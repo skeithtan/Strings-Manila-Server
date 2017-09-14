@@ -1,9 +1,8 @@
 {% load static %}
 <body class="bg-light">
-<script src="{% static "scripts/checkout.js" %}"></script>
 <script>
     {% if local_storage_cart %}
-        localStorage.cart = '{{ local_storage_cart | safe }}';
+        localStorage.cart = `{{ local_storage_cart | safe }}`;
     {% endif %}
 </script>
 

@@ -40,7 +40,7 @@ $(() => {
         $(row.find('.product-name')[0]).text(item.name);
         $(row.find('.product-price')[0]).text("₱" + item.price);
 
-        if(item.isSingular) {
+        if (item.isSingular) {
             $(row.find('.product-tier')[0]).html("<small>N/A</small>");
         } else {
             $(row.find('.product-tier')[0]).text(item.tierName);
@@ -90,10 +90,22 @@ $(() => {
             url: '/cart/review/',
             beforeSend: authorizeXHR,
             data: localStorage.cart,
-            success: response => $('body').html(response),
+            success: response => {
+                $('body').html(response);
+                $('#finalize-button').click(() => {
+                    $.post({
+                        url: '/cart/finalize/',
+                        beforeSend: authorizeXHR,
+                        data: localStorage.cart,
+                        success: response => $('body').html(response),
+                        error: response => console.log(response),
+                    });
+                });
+            },
             error: response => console.log(response),
         });
     });
+
 
     function calculateTotal() {
         const cart = JSON.parse(localStorage.cart);
@@ -112,4 +124,5 @@ $(() => {
     function authorizeXHR(xhr) {
         xhr.setRequestHeader('X-CSRFToken', getCSRF());
     }
-});
+})
+;

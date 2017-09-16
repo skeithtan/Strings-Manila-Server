@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'customer_profile',
     'orders',
     'recommendations',
+    'store_settings',
 
     'allauth',
     'allauth.account',

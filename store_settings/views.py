@@ -1,5 +1,6 @@
 import json
 
+from rest_framework.generics import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -8,6 +9,8 @@ from rest_framework.authentication import TokenAuthentication
 from admin_auth.permissions import IsSuperuser
 
 from store_settings.user_settings import StoreStatus
+from store_settings.models import BankDepositAccount
+from store_settings.serializers import BankDepositAccountSerializer
 
 
 class SettingsOverview(APIView):
@@ -16,11 +19,13 @@ class SettingsOverview(APIView):
 
     @staticmethod
     def get(request):
+        # TODO: Bank accounts
         overview = {
             "on_maintenance": StoreStatus.on_maintenance,
+            "accounts": BankDepositAccount.objects.all(),
             "current_user": request.user.get_full_name()
         }
-        return Response(data=json.dumps(overview), status=200)
+        return Response(data=overview, status=200)
 
 
 class EnableMaintenanceMode(APIView):
@@ -41,3 +46,41 @@ class DisableMaintenanceMode(APIView):
     def post(request):
         StoreStatus.disable_maintenance()
         return Response(200)
+
+
+class BankAccountList(APIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated, IsSuperuser)
+
+    @staticmethod
+    def post(request):
+        serializer = BankDepositAccountSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.create(serializer.validated_data)
+            return Response(status=200)
+        else:
+            return Response(serializer.errors, 400)
+
+
+class BankAccountDetail(APIView):
+    @staticmethod
+    def put(request, bank_account_id):
+        account = get_object_or_404(BankDepositAccount, id=bank_account_id)
+        serializer = BankDepositAccountSerializer(data=request.data)
+
+        if serializer.is_valid():
+            new_data = serializer.validated_data
+            account.bank_name = new_data["bank_name"]
+            account.account_holder_name = new_data["account_holder_name"]
+            account.account_number = new_data["account_number"]
+            account.save()
+            return Response(status=200)
+        else:
+            return Response(serializer.errors, 400)
+
+    @staticmethod
+    def delete(request, bank_account_id):
+        account = get_object_or_404(BankDepositAccount, id=bank_account_id)
+        account.delete()
+        return Response(status=200)

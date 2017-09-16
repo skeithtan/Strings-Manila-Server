@@ -31,10 +31,10 @@ class StallDetail(APIView):
 
     @staticmethod
     def put(request, stall_id):
+        stall = get_object_or_404(Stall, id=stall_id)
         serializer = StallSerializer(data=request.data)
 
         if serializer.is_valid():
-            stall = get_object_or_404(Stall, id=stall_id)
             stall.name = serializer.validated_data["name"]
             stall.save()
             return Response(status=200)

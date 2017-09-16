@@ -1,5 +1,5 @@
 class StoreStatus:
-    on_maintenance = False
+    on_maintenance = True
 
     @staticmethod
     def enable_maintenance():

@@ -19,10 +19,13 @@ class SettingsOverview(APIView):
 
     @staticmethod
     def get(request):
-        # TODO: Bank accounts
+
+        bank_accounts = BankDepositAccount.objects.all()
+        bank_account_serializer = BankDepositAccountSerializer(bank_accounts, many=True)
+
         overview = {
             "on_maintenance": StoreStatus.on_maintenance,
-            "accounts": BankDepositAccount.objects.all(),
+            "accounts": bank_account_serializer.data,
             "current_user": request.user.get_full_name()
         }
         return Response(data=overview, status=200)
@@ -44,6 +47,11 @@ class DisableMaintenanceMode(APIView):
 
     @staticmethod
     def post(request):
+        if BankDepositAccount.objects.all().count() == 0:
+            return Response(data={
+                "error": "Cannot take out of maintenance mode when there are no bank accounts."
+            }, status=400)
+
         StoreStatus.disable_maintenance()
         return Response(200)
 
@@ -83,4 +91,9 @@ class BankAccountDetail(APIView):
     def delete(request, bank_account_id):
         account = get_object_or_404(BankDepositAccount, id=bank_account_id)
         account.delete()
+
+        # Cannot sell items if the customers cannot pay.
+        if BankDepositAccount.objects.all().count() == 0:
+            StoreStatus.enable_maintenance()
+
         return Response(status=200)

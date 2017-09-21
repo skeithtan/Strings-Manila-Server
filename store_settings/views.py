@@ -8,9 +8,8 @@ from rest_framework.authentication import TokenAuthentication
 
 from admin_auth.permissions import IsSuperuser
 
-from store_settings.user_settings import StoreStatus
-from store_settings.models import BankDepositAccount
 from store_settings.serializers import BankDepositAccountSerializer
+from store_settings.models import BankDepositAccount, SiteConfiguration
 
 
 class SettingsOverview(APIView):
@@ -19,12 +18,13 @@ class SettingsOverview(APIView):
 
     @staticmethod
     def get(request):
-
         bank_accounts = BankDepositAccount.objects.all()
         bank_account_serializer = BankDepositAccountSerializer(bank_accounts, many=True)
 
+        site_config = SiteConfiguration.objects.get()
+
         overview = {
-            "on_maintenance": StoreStatus.on_maintenance,
+            "on_maintenance": site_config.maintenance_mode,
             "accounts": bank_account_serializer.data,
             "current_user": request.user.get_full_name()
         }
@@ -37,7 +37,9 @@ class EnableMaintenanceMode(APIView):
 
     @staticmethod
     def post(request):
-        StoreStatus.enable_maintenance()
+        site_config = SiteConfiguration.objects.get()
+        site_config.maintenance_mode = True
+        site_config.save()
         return Response(200)
 
 
@@ -52,7 +54,10 @@ class DisableMaintenanceMode(APIView):
                 "error": "Cannot take out of maintenance mode when there are no bank accounts."
             }, status=400)
 
-        StoreStatus.disable_maintenance()
+        site_config = SiteConfiguration.objects.get()
+        site_config.maintenance_mode = False
+        site_config.save()
+
         return Response(200)
 
 
@@ -94,6 +99,8 @@ class BankAccountDetail(APIView):
 
         # Cannot sell items if the customers cannot pay.
         if BankDepositAccount.objects.all().count() == 0:
-            StoreStatus.enable_maintenance()
+            site_config = SiteConfiguration.objects.get()
+            site_config.maintenance_mode = True
+            site_config.save()
 
         return Response(status=200)

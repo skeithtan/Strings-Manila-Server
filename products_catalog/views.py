@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from customer_profile.models import Profile
 from orders.models import Order, OrderLineItem
 from entity_management.models import ProductTier
-from store_settings.user_settings import StoreStatus
+from store_settings.models import SiteConfiguration
 
 from orders.tasks import set_order_to_expire, mail_customer_now
 
@@ -18,15 +18,14 @@ from orders.tasks import set_order_to_expire, mail_customer_now
 class ProductCatalogView(View):
     @staticmethod
     def get(request):
-        return render(request, 'products_catalog.html', {
-            "on_maintenance": StoreStatus.on_maintenance,
-        })
+        return render(request, 'products_catalog.html')
 
 
 class CartView(View):
     @staticmethod
     def get(request):
-        if StoreStatus.on_maintenance:
+        site_config = SiteConfiguration.objects.get()
+        if site_config.maintenance_mode:
             return redirect('/')
 
         return render(request, 'cart_page.html')
@@ -46,7 +45,6 @@ class CartView(View):
 
             tier = get_object_or_404(ProductTier, id=tier_id)
             response.append({
-                "on_maintenance": StoreStatus.on_maintenance,
                 "id": tier.id,
                 "name": tier.product_description.name,
                 "isSingular": tier.product_description.is_singular,

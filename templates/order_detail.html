@@ -72,28 +72,63 @@
             <div class="alert alert-info p-4 mb-4"
                  role="alert">
                 <h4 class="alert-heading">This order has not yet been paid.</h4>
-                <p>This order will be cancelled automatically by <strong>{{ order.expiration_date }}</strong> if payment has not been received by then.
-                    To submit payment, deposit <b>₱{{ order.total_price }}</b> to the following bank account
+                <p>This order will be cancelled automatically by <strong>{{ order.expiration_date }}</strong> if payment
+                    has not been received by then.
+                    To submit payment, deposit <b>₱{{ order.total_price }}</b> to the a bank account below
                     and then upload the deposit slip.</p>
-                <table class="table table-bordered mt-4 mb-4">
-                    <tr>
-                        <th class="border-info"
-                            style="width:200px">Account Number
-                        </th>
-                        <td class="border-info">0000000000</td>
-                    </tr>
-                    <tr>
-                        <th class="border-info"
-                            style="width:200px">Account Name
-                        </th>
-                        <td class="border-info">Strings Manila</td>
-                    </tr>
 
-                </table>
                 <button class="btn btn-info"
                         data-toggle="modal"
                         data-target="#submit-payment-modal">Upload deposit slip
                 </button>
+
+                <hr class="mt-4 mb-4">
+
+
+                <div class="mb-4">
+                    <h5 class="mb-0">Bank Accounts</h5>
+                    <p>Select a preferred bank account below to see its details</p>
+                </div>
+
+                <div id="bank-accounts-accordion"
+                     role="tablist"
+                     class="mb-4 col-8 mr-auto p-0">
+                    {% for account in accounts %}
+                        <div class="card bg-info">
+                            <div class="card-header"
+                                 role="tab">
+                                <h5 class="mb-0">
+                                    <a class="text-white"
+                                       data-toggle="collapse"
+                                       href="#account-{{ account.id }}"
+                                       aria-controls="account-{{ account.id }}">
+                                        {{ account.bank_name }}
+                                    </a>
+                                </h5>
+                            </div>
+
+                            <div id="account-{{ account.id }}"
+                                 class="collapse"
+                                 role="tabpanel"
+                                 data-parent="#bank-accounts-accordion">
+                                <div class="card-body">
+                                    <table class="table table-bordered text-white">
+                                        <tbody>
+                                        <tr>
+                                            <th>Account Holder</th>
+                                            <td>{{ account.account_holder_name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Account Number</th>
+                                            <td>{{ account.account_number }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         {% endif %}
 

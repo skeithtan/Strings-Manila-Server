@@ -8,6 +8,7 @@ from rest_framework.response import Response
 
 from orders.models import Order
 from customer_profile.models import Profile
+from store_settings.models import BankDepositAccount
 
 
 class OrdersView(View):
@@ -63,7 +64,8 @@ class OrderDetailView(View):
 
         order = orders[0]
         return render(request, 'order_detail.html', {
-            "order": order
+            "order": order,
+            "accounts": BankDepositAccount.objects.all()
         })
 
 

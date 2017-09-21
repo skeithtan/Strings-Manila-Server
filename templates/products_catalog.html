@@ -24,9 +24,11 @@
     <!--Scripts-->
     <script src="{% static "dist/static/scripts/csrf.js" %}"></script>
 
+    {% load solo_tags %}
+    {% get_solo 'store_settings.SiteConfiguration' as site_config %}
 </head>
 <body
-        {% if on_maintenance %}
+        {% if site_config.maintenance_mode %}
             class="bg-dark"
         {% else %}
             class="bg-light"
@@ -44,7 +46,7 @@
 
 </script>
 
-{% if on_maintenance %}
+{% if site_config.maintenance_mode %}
     {% include 'navbar.html' %}
 
     <div class="text-white container d-flex flex-column justify-content-center align-items-center text-center"

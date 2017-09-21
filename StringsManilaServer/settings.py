@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'recommendations',
     'store_settings',
 
+    'solo',
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',

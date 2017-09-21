@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 
-from entity_management.models import Stall, ProductDescription
+from entity_management.models import Collection, ProductDescription
 from orders.models import Order
 from admin_auth.permissions import IsSuperuser
 from customer_profile.serializers import ProfileSerializer
@@ -97,38 +97,38 @@ class SalesGenerator:
         self.line_items = line_items
 
     def get_sales(self):
-        stalls = Stall.objects.filter(is_active=True)
+        collections = Collection.objects.filter(is_active=True)
 
-        sales_per_stall = []
+        sales_per_collection = []
         total_sales = 0
         total_quantity = 0
 
-        for stall in stalls:
-            stall_sales = self.get_stall_sales(stall)
+        for collection in collections:
+            collection_sales = self.get_collection_sales(collection)
 
-            sales_per_stall.append({
-                "id": stall.id,
-                "name": stall.name,
-                "sales": stall_sales.sales,
-                "quantity": stall_sales.quantity,
-                "product_sales": stall_sales.sales_per_product
+            sales_per_collection.append({
+                "id": collection.id,
+                "name": collection.name,
+                "sales": collection_sales.sales,
+                "quantity": collection_sales.quantity,
+                "product_sales": collection_sales.sales_per_product
             })
 
-            total_sales += stall_sales.sales
-            total_quantity += stall_sales.quantity
+            total_sales += collection_sales.sales
+            total_quantity += collection_sales.quantity
 
         return {
             "total_sales": total_sales,
             "total_quantity": total_quantity,
-            "stall_sales": sales_per_stall
+            "collection_sales": sales_per_collection
         }
 
-    def get_stall_sales(self, stall):
-        products = stall.productdescription_set.filter(is_active=True)
+    def get_collection_sales(self, collection):
+        products = collection.productdescription_set.filter(is_active=True)
 
         sales_per_product = []
-        total_stall_sales = 0
-        total_stall_quantity = 0
+        total_collection_sales = 0
+        total_collection_quantity = 0
 
         for product in products:
             product_sales = self.get_product_sales(product)
@@ -141,11 +141,11 @@ class SalesGenerator:
                 "tier_sales": product_sales.tier_sales
             })
 
-            total_stall_sales += product_sales.sales
-            total_stall_quantity += product_sales.quantity
+            total_collection_sales += product_sales.sales
+            total_collection_quantity += product_sales.quantity
 
-        StallSales = namedtuple('StallSales', ['sales_per_product', 'quantity', 'sales'])
-        return StallSales(sales_per_product=sales_per_product, quantity=total_stall_quantity, sales=total_stall_sales)
+        CollectionSales = namedtuple('CollectionSales', ['sales_per_product', 'quantity', 'sales'])
+        return CollectionSales(sales_per_product=sales_per_product, quantity=total_collection_quantity, sales=total_collection_sales)
 
     def get_product_sales(self, product):
         tiers = product.producttier_set.all()

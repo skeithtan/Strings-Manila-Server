@@ -11,13 +11,13 @@ from django.db.models import (
 )
 
 
-class Stall(Model):
+class Collection(Model):
     name = CharField(max_length=64)
     is_active = BooleanField(default=True)
 
     @staticmethod
     def all_active():
-        return Stall.objects.filter(is_active=True)
+        return Collection.objects.filter(is_active=True)
 
     @property
     def active_products(self):
@@ -38,7 +38,7 @@ class ProductDescription(Model):
     name = CharField(max_length=64)
     description = CharField(max_length=256)
     image = CharField(max_length=256, default="http://i.imgur.com/a0HmrDW.png")
-    stall = ForeignKey(Stall, on_delete=CASCADE)
+    collection = ForeignKey(Collection, on_delete=CASCADE)
     is_active = BooleanField(default=True)
 
     @staticmethod

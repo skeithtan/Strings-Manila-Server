@@ -7,11 +7,11 @@ class ProductsBrowser extends React.Component {
         return (
             <div className="container site-margin mt-3">
                 <div className="row">
-                    <Stalls stalls={this.props.stalls}
-                            activeStall={this.props.activeStall}
-                            setActiveStall={this.props.setActiveStall}/>
+                    <Collections collections={this.props.collections}
+                            activeCollection={this.props.activeCollection}
+                            setActiveCollection={this.props.setActiveCollection}/>
                     <Products products={this.props.showingProducts}
-                              activeStall={this.props.activeStall}
+                              activeCollection={this.props.activeCollection}
                               searchQuery={this.props.searchQuery}
                               addToCart={this.props.addToCart}
                               getProduct={this.props.getProduct}/>
@@ -21,32 +21,32 @@ class ProductsBrowser extends React.Component {
     }
 }
 
-class Stalls extends React.Component {
+class Collections extends React.Component {
     constructor(props) {
         super(props);
 
-        this.stallItems = this.stallItems.bind(this);
+        this.collectionItems = this.collectionItems.bind(this);
     }
 
-    stallItems() {
-        if (this.props.stalls === null) {
+    collectionItems() {
+        if (this.props.collections === null) {
             return null;
         }
 
-        const activeStall = this.props.activeStall;
+        const activeCollection = this.props.activeCollection;
 
-        const stalls = this.props.stalls.map(stall => {
-            const isActive = activeStall === null ? false : stall.id === activeStall.id;
+        const collections = this.props.collections.map(collection => {
+            const isActive = activeCollection === null ? false : collection.id === activeCollection.id;
 
-            return <StallItem key={stall.id}
-                              stall={stall}
+            return <CollectionItem key={collection.id}
+                              collection={collection}
                               isActive={isActive}
-                              setActiveStall={this.props.setActiveStall}/>
+                              setActiveCollection={this.props.setActiveCollection}/>
         });
 
         return (
             <li className="list-group">
-                {stalls}
+                {collections}
             </li>
         )
     }
@@ -54,14 +54,14 @@ class Stalls extends React.Component {
     render() {
         return (
             <div className="col-lg-3">
-                <h2 className="mb-3 mt-3">Stalls</h2>
-                {this.stallItems()}
+                <h2 className="mb-3 mt-3">Collections</h2>
+                {this.collectionItems()}
             </div>
         )
     }
 }
 
-class StallItem extends React.Component {
+class CollectionItem extends React.Component {
     constructor(props) {
         super(props);
         this.activeItem = this.activeItem.bind(this);
@@ -70,7 +70,7 @@ class StallItem extends React.Component {
 
     activeItem() {
         return (
-            <li className="list-group-item bg-dark text-light">{this.props.stall.name}</li>
+            <li className="list-group-item bg-dark text-light">{this.props.collection.name}</li>
         )
     }
 
@@ -78,8 +78,8 @@ class StallItem extends React.Component {
         return (
             <li className="list-group-item"
                 onClick={() => {
-                    this.props.setActiveStall(this.props.stall);
-                }}>{this.props.stall.name}</li>
+                    this.props.setActiveCollection(this.props.collection);
+                }}>{this.props.collection.name}</li>
         )
     }
 
@@ -97,12 +97,12 @@ class Products extends React.Component {
 
     header() {
         if (this.props.searchQuery) {
-            if (this.props.activeStall) {
+            if (this.props.activeCollection) {
                 return (
                     <h2 className="mt-5 text-center">Searching for
                         <span className="text-muted"> {this.props.searchQuery} </span>
                         in
-                        <span className="text-muted"> {this.props.activeStall.name} </span>
+                        <span className="text-muted"> {this.props.activeCollection.name} </span>
                     </h2>
                 )
             } else {
@@ -114,12 +114,12 @@ class Products extends React.Component {
             }
         }
 
-        if (this.props.activeStall === null) {
+        if (this.props.activeCollection === null) {
             return null;
         }
 
         return (
-            <h2 className="mt-5 text-center">{this.props.activeStall.name}</h2>
+            <h2 className="mt-5 text-center">{this.props.activeCollection.name}</h2>
         )
     }
 

@@ -1,5 +1,5 @@
 from recommendations.models import Recommendation
-from .models import Stall, ProductDescription, ProductTier
+from .models import Collection, ProductDescription, ProductTier
 
 from graphene_django.types import DjangoObjectType
 from graphene import (
@@ -36,28 +36,28 @@ class ProductDescriptionType(DjangoObjectType):
         model = ProductDescription
 
 
-class StallType(DjangoObjectType):
+class CollectionType(DjangoObjectType):
     active_products = List(ProductDescriptionType)
 
     def resolve_active_products(self, args, context, info):
-        return Stall.objects.get(id=self.id).active_products
+        return Collection.objects.get(id=self.id).active_products
 
     class Meta:
-        model = Stall
+        model = Collection
 
 
 class Query(AbstractType):
     # Plural
-    stalls = List(StallType)
+    collections = List(CollectionType)
     products = List(ProductDescriptionType)
     tiers = List(ProductTierType)
     # Singular
-    stall = Field(StallType, id=Int())
+    collection = Field(CollectionType, id=Int())
     product = Field(ProductDescriptionType, id=Int())
     tier = Field(ProductTierType, id=Int())
 
-    def resolve_stall(self, args, context, info):
-        return Stall.all_active().get(pk=args.get('id'))
+    def resolve_collection(self, args, context, info):
+        return Collection.all_active().get(pk=args.get('id'))
 
     def resolve_product(self, args, context, info):
         return ProductDescription.all_active().get(pk=args.get('id'))
@@ -65,8 +65,8 @@ class Query(AbstractType):
     def resolve_tier(self, args, context, info):
         return ProductTier.objects.get(pk=args.get('id'))
 
-    def resolve_stalls(self, args, context, info):
-        return Stall.all_active()
+    def resolve_collections(self, args, context, info):
+        return Collection.all_active()
 
     def resolve_products(self, args, context, info):
         return ProductDescription.all_active()

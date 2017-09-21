@@ -19,11 +19,11 @@ class App extends React.Component {
         this.showingProducts = this.showingProducts.bind(this);
 
         this.state = {
-            stalls: null,
+            collections: null,
             products: null, // General list of all products
             cart: App.setUpCart(),
             search: null,
-            activeStall: null,
+            activeCollection: null,
             showingProducts: null
         };
 
@@ -60,7 +60,7 @@ class App extends React.Component {
     fetchData() {
         query(`
         {
-          stalls {
+          collections {
             id
             name
             activeProducts {
@@ -81,10 +81,10 @@ class App extends React.Component {
         }
         `, result => {
 
-            function processProducts(stall) {
-                stall.activeProducts.forEach(product => {
-                    // Add stall name to products
-                    product.stall = stall.name;
+            function processProducts(collection) {
+                collection.activeProducts.forEach(product => {
+                    // Add collection name to products
+                    product.collection = collection.name;
 
                     // Transform product links to image objects
                     const link = product.image;
@@ -93,16 +93,16 @@ class App extends React.Component {
                     product.image.src = link;
                 });
 
-                return stall;
+                return collection;
             }
 
-            const stalls = result.stalls.map(stall => {
-                return processProducts(stall)
+            const collections = result.collections.map(collection => {
+                return processProducts(collection)
             });
 
             // Collects all products
-            let products = stalls.map(stall => {
-                return stall.activeProducts
+            let products = collections.map(collection => {
+                return collection.activeProducts
             }).reduce((a, b) => {
                 return a.concat(b);
             });
@@ -126,7 +126,7 @@ class App extends React.Component {
             });
 
             this.setState({
-                stalls: stalls,
+                collections: collections,
                 products: products
             });
 
@@ -167,15 +167,15 @@ class App extends React.Component {
     }
 
     showingProducts() {
-        if (this.state.stalls === null) {
+        if (this.state.collections === null) {
             //TODO: Show loading state
             return null;
         }
 
         let products = this.state.products;
 
-        if (this.state.activeStall) {
-            products = this.state.activeStall.activeProducts;
+        if (this.state.activeCollection) {
+            products = this.state.activeCollection.activeProducts;
         }
 
         if (this.state.search) {
@@ -185,9 +185,9 @@ class App extends React.Component {
             products = products.filter(product => {
                 const productName = product.name.toLowerCase();
                 const productDescription = product.description.toLowerCase();
-                const stall = product.stall.toLowerCase();
+                const collection = product.collection.toLowerCase();
 
-                return productName.includes(searchQuery) || productDescription.includes(searchQuery) || stall.includes(searchQuery);
+                return productName.includes(searchQuery) || productDescription.includes(searchQuery) || collection.includes(searchQuery);
             })
         }
 
@@ -196,15 +196,15 @@ class App extends React.Component {
     }
 
     render() {
-        const setActiveStall = stall => {
+        const setActiveCollection = collection => {
             this.setState({
-                activeStall: stall
+                activeCollection: collection
             })
         };
 
         const resetState = () => {
             this.setState({
-                activeStall: null,
+                activeCollection: null,
             });
         };
 
@@ -219,9 +219,9 @@ class App extends React.Component {
                 <Navbar resetState={resetState}
                         search={search}
                         cartCount={this.state.cart.length}/>
-                <ProductsBrowser stalls={this.state.stalls}
-                                 activeStall={this.state.activeStall}
-                                 setActiveStall={setActiveStall}
+                <ProductsBrowser collections={this.state.collections}
+                                 activeCollection={this.state.activeCollection}
+                                 setActiveCollection={setActiveCollection}
                                  showingProducts={this.showingProducts()}
                                  searchQuery={this.state.search}
                                  addToCart={this.addToCart}

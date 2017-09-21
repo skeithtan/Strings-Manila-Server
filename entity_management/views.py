@@ -10,13 +10,13 @@ from .serializers import *
 from admin_auth.permissions import IsSuperuser
 
 
-class StallList(APIView):
+class CollectionList(APIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated, IsSuperuser)
 
     @staticmethod
     def post(request):
-        serializer = StallSerializer(data=request.data)
+        serializer = CollectionSerializer(data=request.data)
 
         if serializer.is_valid():
             serializer.create(serializer.validated_data)
@@ -25,26 +25,26 @@ class StallList(APIView):
             return Response(serializer.errors, 400)
 
 
-class StallDetail(APIView):
+class CollectionDetail(APIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated, IsSuperuser)
 
     @staticmethod
-    def put(request, stall_id):
-        stall = get_object_or_404(Stall, id=stall_id)
-        serializer = StallSerializer(data=request.data)
+    def put(request, collection_id):
+        collection = get_object_or_404(Collection, id=collection_id)
+        serializer = CollectionSerializer(data=request.data)
 
         if serializer.is_valid():
-            stall.name = serializer.validated_data["name"]
-            stall.save()
+            collection.name = serializer.validated_data["name"]
+            collection.save()
             return Response(status=200)
         else:
             return Response(serializer.errors, 400)
 
     @staticmethod
-    def delete(request, stall_id):
-        stall = get_object_or_404(Stall, id=stall_id)
-        stall.discontinue()
+    def delete(request, collection_id):
+        collection = get_object_or_404(Collection, id=collection_id)
+        collection.discontinue()
         return Response(status=200)
 
 
@@ -53,10 +53,10 @@ class ProductList(APIView):
     permission_classes = (IsAuthenticated, IsSuperuser)
 
     @staticmethod
-    def post(request, stall_id):
-        stall = get_object_or_404(Stall, id=stall_id)
+    def post(request, collection_id):
+        collection = get_object_or_404(Collection, id=collection_id)
         product_serializer = ProductSerializer(data=json.loads(request.body.decode("utf-8")))
-        product_serializer.stall = stall
+        product_serializer.collection = collection
 
         if product_serializer.is_valid():
             product_serializer.create(product_serializer.validated_data)

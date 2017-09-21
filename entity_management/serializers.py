@@ -1,4 +1,4 @@
-from .models import Stall, ProductDescription, ProductTier
+from .models import Collection, ProductDescription, ProductTier
 from rest_framework.serializers import (
     ModelSerializer,
     Serializer,
@@ -8,9 +8,9 @@ from rest_framework.serializers import (
 )
 
 
-class StallSerializer(ModelSerializer):
+class CollectionSerializer(ModelSerializer):
     class Meta:
-        model = Stall
+        model = Collection
         fields = ('name', 'id', 'is_active')
         read_only_fields = ('id', 'is_active')
 
@@ -33,18 +33,18 @@ class ProductSerializer(Serializer):
     description = CharField(max_length=256)
     image = CharField(max_length=256, required=False)
     tiers = ProductTierSerializer(many=True)
-    stall = None
+    collection = None
 
     def create(self, validated_data):
         if "image" in validated_data:
             product_description = ProductDescription.objects.create(name=validated_data["name"],
                                                                     description=validated_data["description"],
                                                                     image=validated_data["image"],
-                                                                    stall=self.stall)
+                                                                    collection=self.collection)
         else:
             product_description = ProductDescription.objects.create(name=validated_data["name"],
                                                                     description=validated_data["description"],
-                                                                    stall=self.stall)
+                                                                    collection=self.collection)
 
         for tier in validated_data["tiers"]:
             product_tier = ProductTier.objects.create(name=tier["name"],

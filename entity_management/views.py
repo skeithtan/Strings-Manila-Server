@@ -22,7 +22,7 @@ class CollectionList(APIView):
             serializer.create(serializer.validated_data)
             return Response(status=200)
         else:
-            return Response(serializer.errors, 400)
+            return Response(data=serializer.errors, status=400)
 
 
 class CollectionDetail(APIView):
@@ -39,7 +39,7 @@ class CollectionDetail(APIView):
             collection.save()
             return Response(status=200)
         else:
-            return Response(serializer.errors, 400)
+            return Response(data=serializer.errors, status=400)
 
     @staticmethod
     def delete(request, collection_id):
@@ -63,7 +63,7 @@ class ProductList(APIView):
             return Response(status=200)
 
         else:
-            return Response(product_serializer.errors, 400)
+            return Response(data=product_serializer.errors, status=400)
 
 
 class ProductDetail(APIView):
@@ -79,7 +79,7 @@ class ProductDetail(APIView):
             serializer.update(instance=product_description, validated_data=serializer.validated_data)
             return Response(status=200)
         else:
-            return Response(serializer.errors, 400)
+            return Response(data=serializer.errors, status=400)
 
     @staticmethod
     def delete(request, product_id):

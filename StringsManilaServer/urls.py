@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^graphiql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^api/settings/', include('store_settings.urls')),
+    url(r'^api/materials/', include('materials.urls')),
 ]
 
 urlpatterns += entity_management_urls

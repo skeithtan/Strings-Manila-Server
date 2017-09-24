@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'orders',
     'recommendations',
     'store_settings',
+    'materials',
 
     'solo',
 

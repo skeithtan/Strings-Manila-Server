@@ -6,18 +6,14 @@ from django.db.models import (
     ForeignKey,
     PositiveIntegerField,
     CASCADE,
-    BooleanField,
     DateTimeField
 )
 
+from StringsManilaServer.models import DiscontinueableModel
 
-class Collection(Model):
+
+class Collection(DiscontinueableModel):
     name = CharField(max_length=64)
-    is_active = BooleanField(default=True)
-
-    @staticmethod
-    def all_active():
-        return Collection.objects.filter(is_active=True)
 
     @property
     def active_products(self):
@@ -34,30 +30,21 @@ class Collection(Model):
         return self.name if self.is_active else f"DEACTIVATED - {self.name}"
 
 
-class ProductDescription(Model):
+class ProductDescription(DiscontinueableModel):
     name = CharField(max_length=64)
     description = CharField(max_length=256)
     image = CharField(max_length=256, default="http://i.imgur.com/a0HmrDW.png")
     collection = ForeignKey(Collection, on_delete=CASCADE)
-    is_active = BooleanField(default=True)
-
-    @staticmethod
-    def all_active():
-        return ProductDescription.objects.filter(is_active=True)
 
     @property
     def is_singular(self):
         return self.producttier_set.count() == 1
 
-    def discontinue(self):
-        if self.is_active:
-            self.is_active = False
-            self.save()
-
     def __str__(self):
         return f"{self.name}" if self.is_active else f"DEACTIVATED - {self.name}"
 
 
+# TODO: Remove
 class ProductTier(Model):
     name = CharField(max_length=32)
     product_description = ForeignKey(ProductDescription, on_delete=CASCADE)
